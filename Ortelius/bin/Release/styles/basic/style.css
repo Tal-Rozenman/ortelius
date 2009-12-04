@@ -1,0 +1,143 @@
+.classDetails{
+
+}
+
+#content{
+	border: 1px solid #999999;
+	overflow: auto;
+	position: absolute;
+	left: 320px;
+	top: 32px;
+	right: 10px;
+	bottom: 10px;
+	padding: 10px;
+	padding-top: 15px;
+	scrollbar-arrow-color: #C50023;
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-highlight-color: #999999;
+	scrollbar-shadow-color:#999999;
+	scrollbar-3dlight-color:  #FFFFFF;
+	scrollbar-darkshadow-color: #FFFFFF;
+}
+
+#classList{
+	background-color: #F7F8F9;
+	overflow: auto;
+	position: absolute;
+	visibility: visible;
+	width: 280px;
+	left: 10px;
+	top: 32px;
+	bottom: 10px;
+	border: 1px solid #999999;
+	padding: 10px;
+	padding-top: 15px;
+	scrollbar-arrow-color: #C50023;
+	scrollbar-face-color: #F7F8F9;
+	scrollbar-track-color: #F7F8F9;
+	scrollbar-highlight-color: #999999;
+	scrollbar-shadow-color:#999999;
+	scrollbar-3dlight-color:  #F7F8F9;
+	scrollbar-darkshadow-color: #F7F8F9;
+	
+}
+
+#topBar{
+	color: #000000;
+	background-color:#bbbbbb;
+position: absolute;
+top:5px;
+left: 10px;
+right: 10px;
+	border: 1px solid #999999;
+	height:20px;
+	padding:0px;
+	background-image:url(topbg.gif);
+	overflow:hidden;
+}
+
+#createdText{
+top:3px;
+position: absolute;
+	right:10px;
+	height:17px;
+}
+
+#topNavigation{
+top:3px;
+position: absolute;
+	left: 10px;
+	height:17px;
+	}
+
+.packageTree{
+	padding: 0px;
+	padding-left: 10px;
+	padding-bottom: 8px;
+}
+
+.treeBranch{
+	
+	font-size: 11px;
+	color: #000000;
+	padding: 0px;
+}
+.nonChoosen{
+font-weight:normal;
+
+}
+
+
+.choosen{
+font-weight:bold;
+
+}
+
+.elementTitle{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+
+.classTitle{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+code{
+	font-family: "Courier New", Courier, monospace;
+	font-size: 11px;
+	color: #000000;
+}
+
+.codeLine{
+	font-family: "Courier New", Courier, monospace;
+	font-size: 11px;
+	color: #000000;
+}
+.backButton{
+
+	margin-top: 30px;
+}
+
+.summary{
+	font-style: italic;
+}
+
+body{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	background-color: #FFFFFF;
+}
+
+
+a{
+	cursor: hand;
+	color: #333333;
+	
+}
