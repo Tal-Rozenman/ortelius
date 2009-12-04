@@ -1,0 +1,60 @@
+.classDetails{
+	border: 1px solid #CCCCCC;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+
+
+.elementTitle{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+
+.classTitle{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+code{
+	font-family: "Courier New", Courier, monospace;
+	font-size: 11px;
+	color: #000000;
+}
+
+.codeLine{
+	font-family: "Courier New", Courier, monospace;
+	font-size: 11px;
+	color: #000000;
+}
+.backButton{
+
+	margin-top: 30px;
+}
+
+.summary{
+	font-style: italic;
+}
+
+body{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	background-color: #FFFFFF;
+}
+
+.orteliusRemark{
+text-align:center;
+
+left: 10px;
+right: 10px;
+}
+a{
+	cursor: hand;
+}
