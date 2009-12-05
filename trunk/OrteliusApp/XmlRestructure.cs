@@ -245,6 +245,7 @@ namespace Ortelius
 			if(blokke.Count == 0){
 				packageNode = documentationXml.CreateElement("packagelevel");
 				packageNode.SetAttribute("name",topLevel);
+				packageNode.SetAttribute("fullname",name);
 				xmlElement.AppendChild(packageNode);				
 			}else {
 				packageNode = (XmlElement) blokke[0];

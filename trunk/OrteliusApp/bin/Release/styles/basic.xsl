@@ -99,7 +99,7 @@
 </xsl:if>
 
 
-<xsl:if test="example"><code><xsl:value-of disable-output-escaping="yes" select="example"/></code><br /></xsl:if>
+<xsl:if test="example"><b>Example code:</b><br /><code><xsl:value-of disable-output-escaping="yes" select="example"/></code><br /></xsl:if>
 
 </div>
 <br />
@@ -409,10 +409,12 @@
 
 <xsl:template match="packagelevel">
 
-<a><xsl:attribute name="onmousedown">toggleTreeElement(this.id);</xsl:attribute><div class="treeBranch"><xsl:value-of disable-output-escaping="yes" select="@name"/></div></a>
 
-<div class="packageTree" >
 
+<div class="treeBranch"><a><xsl:attribute name="onmousedown">toggleTreeElement(<xsl:value-of select="@fullname"/>);</xsl:attribute><xsl:value-of disable-output-escaping="yes" select="@name"/></a>
+</div>
+<div class="packageTreeVissible">
+<xsl:attribute name="ID"><xsl:value-of select="@fullname"/></xsl:attribute>
 <xsl:for-each select="packageClass">
 <xsl:sort select="@package"/>
 <xsl:sort select="@class"/>

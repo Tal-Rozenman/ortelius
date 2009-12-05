@@ -308,16 +308,22 @@ namespace Ortelius
 				if(fileLine.IndexOf("abstract ") != -1) result += "<modifier>dynamic</modifier>\r\n";
 				return result;
 		}
-		///<summary><![CDATA[
-		///
-		///</summary
+		///<summary>
+		///Getting the clas summary - getSummery, getDescription & getMultiLineDescription looks very alike
+		///</summary>
 		private string getSummery(string[] asFileLines,int elementIndex)
-		{			
+		{	
+			
+			char[] trimChar = {'\n','\r'};
 			string tag = "/*";
 			string resultText = "";
 			int decIndex = elementIndex-1;
 			int tagIndex = elementIndex;
-			
+						//skip empty line
+			while(decIndex>0 && asFileLines[decIndex].TrimEnd(trimChar)=="" ){				
+				decIndex --;
+			}
+						
 			while(decIndex>=0 && (asFileLines[decIndex].IndexOf(delimeter) == 0 || asFileLines[decIndex].IndexOf("/*") == 0)){
 				if(asFileLines[decIndex].IndexOf(tag)!= -1){
 					tagIndex = decIndex+1;
@@ -343,13 +349,21 @@ namespace Ortelius
 		}
 		
 		
+		///<summary>
+		///getSummery, getDescription & getMultiDescription looks very alike
+		///</summary>
 		private string getDescription(string[] asFileLines,int elementIndex,string tag)
 		{
+			
+			char[] trimChar = {'\n','\r'};
 			string resultText = "";
 			int decIndex = elementIndex-1;
 			int tagIndex = elementIndex;
 			try{
-			
+						//skip empty line
+			while(decIndex>0 && asFileLines[decIndex].TrimEnd(trimChar)=="" ){				
+				decIndex --;
+			}
 				while(decIndex>=0 && (asFileLines[decIndex].IndexOf(delimeter) == 0 || asFileLines[decIndex]=="")){
 				if(asFileLines[decIndex].IndexOf(tag)!= -1){
 					tagIndex = decIndex;
@@ -386,8 +400,10 @@ namespace Ortelius
 			return resultText;
 		}
 		
-		private string[] getMultiDescription(string[] asFileLines,int elementIndex,string tag)
-		{
+		///<summary>
+		///Gets the description of more than one occurence of a tag - getSummery, getDescription & getMultiDescription looks very alike
+		///</summary>
+		private string[] getMultiDescription(string[] asFileLines,int elementIndex,string tag){
 			
 			if(elementIndex<=0) return new string[]{};
 			string resultText="";
@@ -397,30 +413,35 @@ namespace Ortelius
 			int index = elementIndex-1;
 			int tagIndex = elementIndex;
 			
+			//skip empty line
+			while(index>0 && asFileLines[index].TrimEnd(trimChar)=="" ){				
+				index --;
+			}
 			//find line where doc starts
 			while(index>0 && asFileLines[index].IndexOf(delimeter) == 0 ){
 				index --;
 			}
+			
 			try{
 			bool recordFlag = false;
 			while(index <= elementIndex){
 				string asLine = removeCommentChars(asFileLines[index]);
-				if((asLine.IndexOf("*@")== 0 || index == elementIndex) && recordFlag){
+				if((asFileLines[index].IndexOf("*/")== 0 ||  asLine.IndexOf("@")== 0 || index == elementIndex) && recordFlag){
 					//stop recording
 					resultText = resultText.TrimEnd(trimChar);
 					allResults.Add(resultText);
 					recordFlag = false;
 				}
-				if(asFileLines[index].IndexOf(tag)!= -1){
+				if(asLine.IndexOf("@"+tag)== 0){
 					//start recording
 					string text = removeCommentChars(asFileLines[index]);
 					
-					text = text.Substring(tag.Length);
+					text = text.Substring(tag.Length+1);
 					
 					resultText =  text.TrimStart(' ') +"<br/>";
 					recordFlag = true;
-				} else if(recordFlag){
-					resultText +=asLine;					
+				} else if(recordFlag){					
+					resultText +=asLine+"<br/>";					
 				}			
 				index ++;
 			}
@@ -436,9 +457,9 @@ namespace Ortelius
 			string[] tags = {"see","version","author","todo","langversion","keyword","playerversion","langversion","throws","sends","example"};
 			string resultText = "";
 			foreach(string tag in tags){
-				string[] tagDoc = getMultiDescription(asFileLines, elementIndex, "@"+tag);
+				string[] tagDoc = getMultiDescription(asFileLines, elementIndex, tag);
 				foreach(string docString in tagDoc){
-					resultText += "<"+tag+">"+docString+"</"+tag+">\r\n";
+					resultText += "<"+tag+"><![CDATA["+docString+"]]></"+tag+">\r\n";
 				}
 			}
 			
@@ -482,7 +503,8 @@ namespace Ortelius
 				Regex emptyStartChars = new Regex(@"^[\t| ]*");
 				asFileLines[i] =  emptyStartChars.Replace(asFileLines[i], "");
 				
-				asFileLines[i] = asFileLines[i].Replace("* @","*@");
+				Regex astAddSpace = new Regex(@"\*\s*@");
+				asFileLines[i] =  astAddSpace.Replace(asFileLines[i], "*@");
 		
 				
 				//I the function uses parameter in more than one line
