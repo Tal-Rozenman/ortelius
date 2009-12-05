@@ -1,0 +1,7 @@
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\ADoc.MainForm.resources
+obj\Debug\ADoc.csproj.GenerateResource.Cache
+bin\Debug\ADoc.exe
+bin\Debug\ADoc.pdb
+obj\Debug\ADoc.exe
+obj\Debug\ADoc.pdb
