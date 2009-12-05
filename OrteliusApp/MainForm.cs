@@ -285,7 +285,7 @@ namespace Ortelius
 			Files=Directory.GetFileSystemEntries(Src);
 			foreach(string Element in Files){
 				// Sub directories
-				if(Directory.Exists(Element))
+				if(Directory.Exists(Element) && Element.IndexOf(".svn")==-1)
 				copyDirectory(Element,Dst+Path.GetFileName(Element));
 				// Files in directory
 				else
@@ -570,12 +570,19 @@ namespace Ortelius
 		//remove class
 		void RemoveClass(object sender, System.EventArgs e)
 		{
-			int selectInd = listBox1.SelectedIndex;
-			if( selectInd > -1){	projSettings.RemoveAsFile(listBox1.SelectedItem.ToString());
-			renderList();
-			if(selectInd>=listBox1.Items.Count) selectInd = listBox1.Items.Count-1;
-			if(selectInd > 0) listBox1.SelectedIndex = selectInd;
+			int lowInd = listBox1.Items.Count-1;
+			ListBox.SelectedIndexCollection allSIndices = listBox1.SelectedIndices;
+			foreach(int selectInd in allSIndices){
+				//int selectInd = listBox1.SelectedIndex;
+				if( selectInd > -1){	
+					projSettings.RemoveAsFile(listBox1.Items[selectInd].ToString());
+					if(lowInd > selectInd) lowInd =selectInd;
+				
+				}
 			}
+			renderList();
+			if(lowInd>=listBox1.Items.Count) lowInd = listBox1.Items.Count-1;
+			if(lowInd > 0) listBox1.SelectedIndex = lowInd;
 		}
 		
 		//add folder

@@ -26,8 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="saxon9he-api">
-      <HintPath>..\Saxon\bin\Release\saxon9he-api.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Saxon\bin\Release\saxon9he-api.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -47,6 +46,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="settings.cs" />
+    <Content Include="Ortelius.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

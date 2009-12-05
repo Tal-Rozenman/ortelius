@@ -130,7 +130,7 @@ namespace Ortelius
 			// 
 			this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
 			this.newProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.newProjectToolStripMenuItem.Text = "New project";
 			this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProjectToolStripMenuItemClick);
 			// 
@@ -138,14 +138,14 @@ namespace Ortelius
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
 			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
 			// 
 			// saveProjectToolStripMenuItem
 			// 
 			this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-			this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.saveProjectToolStripMenuItem.Text = "Save project as...";
 			this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItemClick);
 			// 
@@ -153,7 +153,7 @@ namespace Ortelius
 			// 
 			this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
 			this.loadProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.loadProjectToolStripMenuItem.Text = "Open project";
 			this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProjectToolStripMenuItemClick);
 			// 
@@ -161,7 +161,7 @@ namespace Ortelius
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
 			this.closeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.closeToolStripMenuItem.Text = "Exit";
 			this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItemClick);
 			// 
@@ -180,21 +180,21 @@ namespace Ortelius
 			// addClassFileToolStripMenuItem
 			// 
 			this.addClassFileToolStripMenuItem.Name = "addClassFileToolStripMenuItem";
-			this.addClassFileToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.addClassFileToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.addClassFileToolStripMenuItem.Text = "Add Class file";
 			this.addClassFileToolStripMenuItem.Click += new System.EventHandler(this.AddASFile);
 			// 
 			// addFolderToolStripMenuItem
 			// 
 			this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.addFolderToolStripMenuItem.Text = "Add folder with class files";
 			this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.AddFolder);
 			// 
 			// chooseDestinationToolStripMenuItem
 			// 
 			this.chooseDestinationToolStripMenuItem.Name = "chooseDestinationToolStripMenuItem";
-			this.chooseDestinationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.chooseDestinationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.chooseDestinationToolStripMenuItem.Text = "Choose destination";
 			this.chooseDestinationToolStripMenuItem.Click += new System.EventHandler(this.ChooseDestination);
 			// 
@@ -202,14 +202,14 @@ namespace Ortelius
 			// 
 			this.buildDocumentationToolStripMenuItem.Name = "buildDocumentationToolStripMenuItem";
 			this.buildDocumentationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-			this.buildDocumentationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.buildDocumentationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.buildDocumentationToolStripMenuItem.Text = "Build documentation";
 			this.buildDocumentationToolStripMenuItem.Click += new System.EventHandler(this.BuildDocumentationToolStripMenuItemClick);
 			// 
 			// goToDocumentationToolStripMenuItem
 			// 
 			this.goToDocumentationToolStripMenuItem.Name = "goToDocumentationToolStripMenuItem";
-			this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.goToDocumentationToolStripMenuItem.Text = "Go to documentation";
 			this.goToDocumentationToolStripMenuItem.Click += new System.EventHandler(this.GoToDocumentationToolStripMenuItemClick);
 			// 
@@ -232,6 +232,7 @@ namespace Ortelius
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.Location = new System.Drawing.Point(74, 235);
 			this.listBox1.Name = "listBox1";
+			this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
 			this.listBox1.Size = new System.Drawing.Size(404, 329);
 			this.listBox1.TabIndex = 7;
 			// 
