@@ -24,8 +24,9 @@ function tjekUrl(){
 
 
 function toggleTreeElement(elementId){
-	alert(elementId)
-	document.getElementById(elementId).className = "packageTreeHidden";
+	//alert(elementId)
+	if(elementId.className == "packageTreeVisible")	elementId.className = "packageTreeHidden";
+	else elementId.className = "packageTreeVisible";
 	}
 	
 function showHideAllTreeElement(doShow){

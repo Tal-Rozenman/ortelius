@@ -413,7 +413,7 @@
 
 <div class="treeBranch"><a><xsl:attribute name="onmousedown">toggleTreeElement(<xsl:value-of select="@fullname"/>);</xsl:attribute><xsl:value-of disable-output-escaping="yes" select="@name"/></a>
 </div>
-<div class="packageTreeVissible">
+<div class="packageTreeVisible">
 <xsl:attribute name="ID"><xsl:value-of select="@fullname"/></xsl:attribute>
 <xsl:for-each select="packageClass">
 <xsl:sort select="@package"/>
