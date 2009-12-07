@@ -227,8 +227,6 @@ namespace Ortelius
 			foreach(string packageName in allPackages){
 				addPackageLevel(allPackagesNode,packageName,"");
 			}
-			
-			
 		}
 		private int apIndex = 0;
 		/// <summary>
@@ -248,14 +246,18 @@ namespace Ortelius
 			if(blokke.Count == 0){
 				packageNode = documentationXml.CreateElement("packagelevel");
 				packageNode.SetAttribute("name",topLevel);
-				packageNode.SetAttribute("fullname",supername.Replace(".","")+topLevel);
+				packageNode.SetAttribute("fullname",supername.Replace(".","_")+topLevel);
 				xmlElement.AppendChild(packageNode);				
 			}else {
 				packageNode = (XmlElement) blokke[0];
 			}
+			string nextName = "";
+			firstDot = name.IndexOf(".");
+			if(firstDot!=-1){
+				nextName = name.Substring(firstDot,name.Length-firstDot);
+				nextName = nextName.TrimStart('.');
+			}
 			
-			string nextName = name.Replace(topLevel,"");
-			nextName = nextName.TrimStart('.');
 			if(supername!="") supername += ".";
 			supername += topLevel;
 			addPackageLevel(packageNode,nextName,supername);
