@@ -29,7 +29,7 @@ namespace Ortelius
 			}
 		}
 		
-		private string styleName = "basic";
+		private string styleName = "OrteliusAjax";
 		public string StyleName {
 			get{
 				return styleName;
@@ -47,7 +47,7 @@ namespace Ortelius
 				docXmlFileName=value;
 			}
 		}
-		private string docHtmlFileName = "/documentation.htm";
+		private string docHtmlFileName = "/index.html";
 		public string DocHtmlFileName {
 			get{
 				return docHtmlFileName;
@@ -152,9 +152,9 @@ namespace Ortelius
 			AllASFiles.Clear();
 			
 			destinationPath="";
-			styleName = "basic";
+			styleName = "OrteliusAjax";
 			docXmlFileName = "/ortelius.xml";
-			docHtmlFileName = "/documentation.htm";
+			docHtmlFileName = "/index.html";
 			introText = "";
 			introHeader = "";
 			showAfterBuild = false;
