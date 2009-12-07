@@ -22,11 +22,12 @@
 }
 
 #classList{
-	background-color: #F7F8F9;
-	overflow: auto;
 	position: absolute;
+	background-color: #F7F8F9;
+	overflow:auto;
 	visibility: visible;
 	width: 280px;
+	min-height:100px;
 	left: 10px;
 	top: 32px;
 	bottom: 10px;
@@ -75,7 +76,7 @@ position: absolute;
 	padding: 0px;
 	padding-left: 10px;
 	padding-bottom: 8px;
-	display:block;
+	display:inline-block;
 }
 .packageTreeHidden{
 	display:none;
