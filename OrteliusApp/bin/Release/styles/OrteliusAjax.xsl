@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
 <xsl:output method="html" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" encoding="UTF-8"  indent="yes"/>
 <xsl:output method="html" name="text"  encoding="UTF-8"  indent="yes"/>
@@ -10,8 +10,8 @@
 <html>
 <head>
 <title><xsl:value-of disable-output-escaping="yes" select="introHeader"/></title>
-<script language="JavaScript" type="text/javascript" src="basic/script.js"></script>
-<link rel="stylesheet" href="basic/style.css" type="text/css" media="screen"/>
+<script language="JavaScript" type="text/javascript" src="OrteliusAjax/script.js"></script>
+<link rel="stylesheet" href="OrteliusAjax/style.css" type="text/css" media="screen"/>
 </head>
 <body>
 
@@ -25,7 +25,7 @@
 </div>
 </xsl:result-document>
 
-<div id="topBar"><div id="topNavigation"><a><xsl:attribute name="onmousedown">goBack();</xsl:attribute><xsl:value-of select="@inheritedFrom"/><img src="basic/arrowleft.gif" border="0" height="8" width="18"/>  Back</a></div><div id="createdText"><a><xsl:attribute name="onmousedown">showElement('introText');</xsl:attribute><b><xsl:value-of disable-output-escaping="yes" select="introHeader"/></b></a> was created with Ortelius - <a href="http://ortelius.marten.dk" target="_blank">ortelius.marten.dk</a></div></div>
+<div id="topBar"><div id="topNavigation"><a><xsl:attribute name="onmousedown">goBack();</xsl:attribute><xsl:value-of select="@inheritedFrom"/><img src="OrteliusAjax/arrowleft.gif" border="0" height="8" width="18"/>  Back</a></div><div id="createdText"><a><xsl:attribute name="onmousedown">showElement('introText');</xsl:attribute><b><xsl:value-of disable-output-escaping="yes" select="introHeader"/></b></a> was created with Ortelius - <a href="http://ortelius.marten.dk" target="_blank">ortelius.marten.dk</a></div></div>
 
 <xsl:apply-templates select="allpackages"/>
 
@@ -132,7 +132,7 @@
 
 
 <xsl:if test="method[name = $className]">
-<img src="basic/arrowright.gif" border="0" height="8" width="18"/> <a>
+<img src="OrteliusAjax/arrowright.gif" border="0" height="8" width="18"/> <a>
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>');return false;</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="method[name = $className]/name"/>
 <img border="0"><xsl:attribute name="src">basic/<xsl:value-of disable-output-escaping="yes" select="modifiers/modifier"/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="modifiers/modifier"/></xsl:attribute></img>
@@ -142,7 +142,7 @@
 
 <xsl:for-each select="method[name != $className and @access = 'public']">
 <xsl:sort select="name"/>
-<img src="basic/arrowright.gif" border="0" height="8" width="18"/> <a>
+<img src="OrteliusAjax/arrowright.gif" border="0" height="8" width="18"/> <a>
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>');return false;</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/>
 
@@ -163,7 +163,7 @@
 <xsl:for-each select="method[name != $className and @access = 'protected']">
 
 <xsl:sort select="name"/>
-<img src="basic/arrowright.gif" border="0" height="8" width="18"/> <a>
+<img src="OrteliusAjax/arrowright.gif" border="0" height="8" width="18"/> <a>
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>');return false;</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/>
 
@@ -181,7 +181,7 @@
 <div class="elementTitle">Public properties:</div>
 <xsl:for-each select="property[@access = 'public']">
 <xsl:sort select="name"/>
-<img src="basic/arrowright.gif" border="0" height="8" width="18"/> <a>
+<img src="OrteliusAjax/arrowright.gif" border="0" height="8" width="18"/> <a>
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>');return false;</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/>
 
@@ -199,7 +199,7 @@
 <div class="elementTitle">Protected properties:</div>
 <xsl:for-each select="property[@access = 'protected']">
 <xsl:sort select="name"/>
-<img src="basic/arrowright.gif" border="0" height="8" width="18"/> <a>
+<img src="OrteliusAjax/arrowright.gif" border="0" height="8" width="18"/> <a>
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>');return false;</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/>
 
@@ -216,7 +216,7 @@
 <div class="elementTitle">Events:</div>
 <xsl:for-each select="event">
 <xsl:sort select="name"/>
-<img src="basic/arrowright.gif" border="0" height="8" width="18"/> <a>
+<img src="OrteliusAjax/arrowright.gif" border="0" height="8" width="18"/> <a>
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>');return false;</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/>
 </a><br/>
@@ -300,7 +300,7 @@
 </xsl:if>
 
 
-<div class="backButton"><img src="basic/arrowleft.gif" border="0" height="8" width="18"/> <a onmousedown="goBack()">Back</a></div>
+<div class="backButton"><img src="OrteliusAjax/arrowleft.gif" border="0" height="8" width="18"/> <a onmousedown="goBack()">Back</a></div>
 
 </div>
 
@@ -346,7 +346,7 @@
 <div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></div>
 <div class="elementTitle">Default value:</div>
 <xsl:value-of disable-output-escaping="yes" select="defaultValue"/>
-<div class="backButton"><img src="basic/arrowleft.gif" border="0" height="8" width="18"/> <a onmousedown="goBack()">Back</a></div>
+<div class="backButton"><img src="OrteliusAjax/arrowleft.gif" border="0" height="8" width="18"/> <a onmousedown="goBack()">Back</a></div>
 
 </div>
 
@@ -387,7 +387,7 @@
 <xsl:with-param name="text" select="summary"/>
 </xsl:call-template>
 </div>
-<div class="backButton"><img src="basic/arrowleft.gif" border="0" height="8" width="18"/> <a onmousedown="goBack()">Back</a></div>
+<div class="backButton"><img src="OrteliusAjax/arrowleft.gif" border="0" height="8" width="18"/> <a onmousedown="goBack()">Back</a></div>
 
 </div>
 </xsl:result-document>
@@ -423,7 +423,7 @@
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>');return false;</xsl:attribute>
 <span class="nonChoosen">
 <xsl:attribute name="ID"><xsl:value-of select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>Button</xsl:attribute>
-<img src="basic/arrowright.gif" border="0" height="8" width="18"/> 
+<img src="OrteliusAjax/arrowright.gif" border="0" height="8" width="18"/> 
 <xsl:value-of disable-output-escaping="yes" select="@class"/>
 </span>
 </a><br/>
