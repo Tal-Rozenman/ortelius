@@ -87,11 +87,15 @@
 <div class="summary">
 <xsl:call-template name="PreserveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
-</xsl:call-template><br /><br />
+</xsl:call-template><br />
+<xsl:if test="see"><b>See: </b><xsl:value-of disable-output-escaping="yes" select="see"/><br /></xsl:if>
+<br />
     
-<xsl:if test="version"><b>Version: </b> <xsl:value-of disable-output-escaping="yes" select="version"/><br /></xsl:if>
 <xsl:if test="author"><b>Author: </b> <xsl:value-of disable-output-escaping="yes" select="author"/><br /></xsl:if>
 <xsl:if test="copyright"><b>Copyright: </b> <xsl:value-of disable-output-escaping="yes" select="copyright"/><br /></xsl:if>
+<xsl:if test="version"><b>Version: </b> <xsl:value-of disable-output-escaping="yes" select="version"/><br /></xsl:if>
+<xsl:if test="playerversion"><b>Playerversion: </b> <xsl:value-of disable-output-escaping="yes" select="playerversion"/><br /></xsl:if>
+<xsl:if test="langversion"><b>Langversion: </b> <xsl:value-of disable-output-escaping="yes" select="langversion"/><br /></xsl:if>
 <xsl:if test="todo"><br />
 <b>To be done: </b><xsl:for-each select="todo">
 <xsl:value-of disable-output-escaping="yes" select="."/><br />
@@ -103,19 +107,14 @@
 
 </div>
 <br />
-<xsl:if test="extends">
-<b>Extends/inherit: </b>
-<xsl:value-of disable-output-escaping="yes" select="extends"/><br />
-</xsl:if>
 
 <xsl:if test="inheritanceHierarchy/*">
 <br />
-<b>Inheritance hierarchy: </b> 
+<b>Inheritance: </b> <xsl:value-of select="$className"/>
 <xsl:for-each select="inheritanceHierarchy/inheritanceClass">
-<xsl:sort order="descending"/>
-<a><xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@fullPath" />');return false;</xsl:attribute><xsl:value-of select="."/></a> → 
+→<a><xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@fullPath" />');return false;</xsl:attribute><xsl:value-of select="."/></a>
 </xsl:for-each>
-<xsl:value-of select="$className"/>
+
 </xsl:if>
 
 <xsl:if test="import">
@@ -269,18 +268,19 @@
 <xsl:if test="param">
 <div class="elementTitle">Parameters:</div>
 <xsl:for-each select="param">
-<div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="name"/> : <xsl:value-of disable-output-escaping="yes" select="type"/></div>
 <div class="summary">
 <xsl:call-template name="PreserveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
 </xsl:call-template>
 </div>
+<div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="name"/> : <xsl:value-of disable-output-escaping="yes" select="type"/></div>
+
 <br />
 </xsl:for-each>
 </xsl:if>
 
 <xsl:if test="see">
-<div class="elementTitle">See also:</div>
+<div class="elementTitle"><b>See: </b></div>
 <xsl:for-each select="see">
 <div class="summary"><xsl:copy-of select="."/></div>
 </xsl:for-each>

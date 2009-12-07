@@ -90,16 +90,19 @@ namespace Ortelius
 				}
 			}
 				
-				
+			XmlNode inherHieraElement = classNode.SelectSingleNode("inheritanceHierarchy");
+			XmlElement inHieraNode = documentationXml.CreateElement("inheritanceClass");
+			
 			if(!succes){
+				inHieraNode.SetAttribute("fullPath","@"+superClassName);
+				inHieraNode.InnerText = superClassName.Substring(superClassName.LastIndexOf(".")+1);
+				inherHieraElement.AppendChild(inHieraNode);
 				//the extended class dosent exist in the in the documentation
 				return;
 			}
 			
 			XmlNodeList elements = superClassNode.SelectNodes("method | property");
 			
-			XmlNode inherHieraElement = classNode.SelectSingleNode("inheritanceHierarchy");
-			XmlElement inHieraNode = documentationXml.CreateElement("inheritanceClass");
 			inHieraNode.SetAttribute("fullPath",superClassName);
 			inHieraNode.InnerText = superClassName.Substring(superClassName.LastIndexOf(".")+1);
 			inherHieraElement.AppendChild(inHieraNode);
