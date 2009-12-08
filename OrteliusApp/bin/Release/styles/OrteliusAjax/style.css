@@ -43,7 +43,13 @@
 	scrollbar-darkshadow-color: #F7F8F9;
 	
 }
-
+.pakageTreeName{	
+	font-weight:normal;
+	}
+.pakageTreeNameCurrent{	
+	font-weight:bold;
+	}
+	
 #topBar{
 	color: #000000;
 	background-color:#bbbbbb;
