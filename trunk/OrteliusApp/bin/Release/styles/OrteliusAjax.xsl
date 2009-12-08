@@ -135,7 +135,7 @@
 <img src="OrteliusAjax/arrowright.gif" border="0" height="8" width="18"/> <a>
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>');return false;</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="method[name = $className]/name"/>
-<img border="0"><xsl:attribute name="src">basic/<xsl:value-of disable-output-escaping="yes" select="modifiers/modifier"/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="modifiers/modifier"/></xsl:attribute></img>
+<img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="modifiers/modifier"/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="modifiers/modifier"/></xsl:attribute></img>
 </a><br/>
 </xsl:if>
 
@@ -149,7 +149,7 @@
 
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
-<img border="0"><xsl:attribute name="src">basic/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
+<img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each>
 
 </a><br/>
@@ -169,7 +169,7 @@
 
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
-<img border="0"><xsl:attribute name="src">basic/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
+<img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each>
 
 </a><br/>
@@ -187,7 +187,7 @@
 
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
-<img border="0"><xsl:attribute name="src">basic/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
+<img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each>
 
 </a><br/>
@@ -205,7 +205,7 @@
 
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
-<img border="0"><xsl:attribute name="src">basic/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
+<img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each>
 
 </a><br/>
