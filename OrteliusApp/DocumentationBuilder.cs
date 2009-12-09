@@ -110,7 +110,9 @@ namespace Ortelius
 				string fileLine = asFileLines[i];
 				if(packageTest.IsMatch(fileLine)) packageName = stripElement(fileLine,@"package *",@" +|{ *");
 				//lav også som regexp
-				if(accessPublicTest.IsMatch(fileLine) && fileLine.IndexOf("class ") != -1 && fileLine.IndexOf("*")==-1){
+				Regex publicClassTest = new Regex(@"[^\*/]*public[^\*/]class");
+					
+				if(publicClassTest.IsMatch(fileLine)){
 					resultText += "<inheritanceHierarchy/>\r\n";
 					if(fileLine.IndexOf(" extends ") != -1) resultText += "<extends>"+stripElement(fileLine,@"(.*extends +)",@"([ +|{].*)")+"</extends>\r\n";
 					if(fileLine.IndexOf(" implements ") != -1) resultText += "<implements>"+stripElement(fileLine,@"(.*implements +)",@"([ +|{].*)")+"</implements>\r\n";
