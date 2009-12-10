@@ -33,8 +33,8 @@ namespace Ortelius
 		private Regex packageTest = new Regex(@"^[\t| ]*package");
 		
 		
-		private	Regex publicClassTest = new Regex(@"^[^\*/]*public[^\*/]*class");
-		private	Regex interfaceTest = new Regex(@"^[^\*/]*public[^\*/]*interface");
+		private	Regex publicClassTest = new Regex(@"^[^\*/]*public[ |\t][^\*/]*class[ |\t]");
+		private	Regex interfaceTest = new Regex(@"^[^\*/]*public[ |\t][^\*/]*interface[ |\t]");
 		
 		private Regex funcTest = new Regex(@"^[^\*/]*function +");
 		private Regex funcGetTest = new Regex("function +get +");
