@@ -239,12 +239,16 @@ namespace Ortelius
 			else topLevel = name.Substring(0,firstDot);
 			if(topLevel == "" || topLevel==null)return;
 			
+			if(supername!="") supername += ".";
+			supername += topLevel;
+			
 			XmlElement packageNode;
 			XmlNodeList blokke = xmlElement.SelectNodes("packagelevel[@name ='"+topLevel+"']");
 			if(blokke.Count == 0){
 				packageNode = documentationXml.CreateElement("packagelevel");
 				packageNode.SetAttribute("name",topLevel);
-				packageNode.SetAttribute("fullname",supername.Replace(".","_")+topLevel);
+				packageNode.SetAttribute("fullname",supername.Replace(".","_"));
+				
 				xmlElement.AppendChild(packageNode);				
 			}else {
 				packageNode = (XmlElement) blokke[0];
@@ -256,8 +260,6 @@ namespace Ortelius
 				nextName = nextName.TrimStart('.');
 			}
 			
-			if(supername!="") supername += ".";
-			supername += topLevel;
 			addPackageLevel(packageNode,nextName,supername);
 			
 			populatePackageTree(packageNode,supername);
