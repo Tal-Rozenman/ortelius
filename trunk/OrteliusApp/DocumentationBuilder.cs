@@ -33,7 +33,10 @@ namespace Ortelius
 		private Regex packageTest = new Regex(@"^[\t| ]*package");
 		
 		
-		private Regex funcTest = new Regex("function +");
+		private	Regex publicClassTest = new Regex(@"^[^\*/]*public[^\*/]*class");
+		private	Regex interfaceTest = new Regex(@"^[^\*/]*public[^\*/]*interface");
+		
+		private Regex funcTest = new Regex(@"^[^\*/]*function +");
 		private Regex funcGetTest = new Regex("function +get +");
 		private Regex funcSetTest = new Regex("function +set +");
 		
@@ -101,17 +104,17 @@ namespace Ortelius
 		///
 		///</summary
 		private string getClassInfo(string[] asFileLines)
-		{	
+		{
 			string packageName = "";
-			string resultText = "";				
-							
-					
+			string resultText = "";
+
+			
 			for(int i = 0; i<asFileLines.Length;i++ ){
 				string fileLine = asFileLines[i];
 				if(packageTest.IsMatch(fileLine)) packageName = stripElement(fileLine,@"package *",@" +|{ *");
 				//lav også som regexp
-				Regex publicClassTest = new Regex(@"[^\*/]*public[^\*/]class");
-					
+				//interfaceTest.IsMatch(fileLine)
+				
 				if(publicClassTest.IsMatch(fileLine)){
 					resultText += "<inheritanceHierarchy/>\r\n";
 					if(fileLine.IndexOf(" extends ") != -1) resultText += "<extends>"+stripElement(fileLine,@"(.*extends +)",@"([ +|{].*)")+"</extends>\r\n";
@@ -131,7 +134,7 @@ namespace Ortelius
 					resultText += getEventTags(asFileLines,i);
 					classType= "class";
 					
-				}else if(fileLine.IndexOf("interface ") != -1 && fileLine.IndexOf("*")==-1){
+				}else if(interfaceTest.IsMatch(fileLine)){
 					resultText += "<package>"+packageName+"</package>\r\n";
 					
 					resultText += "<name>"+stripElement(fileLine,@" *((public|internal) +)?(interface +)",@"( +extends)?( +\S*)? *{? *")+"</name>\r\n";
@@ -511,7 +514,7 @@ namespace Ortelius
 				
 				//I the function uses parameter in more than one line
 				int ekstraIndex = 1;
-				while(asFileLines[i].IndexOf("function")!=-1 && asFileLines[i].IndexOf(")")==-1){
+				while(funcTest.IsMatch(asFileLines[i]) && asFileLines[i].IndexOf(")")==-1){
 					asFileLines[i] += asFileLines[i+ekstraIndex];
 					ekstraIndex++;
 					if(ekstraIndex>20){
