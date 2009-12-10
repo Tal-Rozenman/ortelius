@@ -414,7 +414,8 @@
 <div class="treeBranch">
 <a class="nonChoosen"><xsl:attribute name="onmousedown">toggleTreeElement('div|<xsl:value-of select="@fullname"/>');</xsl:attribute>
 <xsl:attribute name="ID">a|<xsl:value-of select="@fullname"/></xsl:attribute>
-<img src="OrteliusAjax/foldind.gif" border="0" height="10" width="10"><xsl:attribute name="ID">img|<xsl:value-of select="@fullname"/></xsl:attribute></img> <xsl:value-of disable-output-escaping="yes" select="@name"/></a>
+<img src="OrteliusAjax/foldind.gif" border="0" height="9" width="9"><xsl:attribute name="ID">img|<xsl:value-of select="@fullname"/></xsl:attribute></img><xsl:text> </xsl:text>
+<xsl:value-of disable-output-escaping="yes" select="@name"/></a>
 </div>
 <div class="packageTreeVisible">
 <xsl:attribute name="ID">div|<xsl:value-of select="@fullname"/></xsl:attribute>
