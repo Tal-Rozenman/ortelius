@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
-<xsl:output method="html" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" encoding="UTF-8"  indent="yes"/>
+<xsl:output method="html" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" encoding="UTF-8" indent="yes"/>
 <xsl:output method="html" name="text"  encoding="UTF-8"  indent="yes"/>
 <xsl:variable name="basePath" select="docElements/basePath"/>
 
@@ -411,10 +411,13 @@
 
 
 
-<div class="treeBranch"><a><xsl:attribute name="onmousedown">toggleTreeElement(<xsl:value-of select="@fullname"/>);</xsl:attribute><xsl:value-of disable-output-escaping="yes" select="@name"/></a>
+<div class="treeBranch">
+<a class="nonChoosen"><xsl:attribute name="onmousedown">toggleTreeElement('div|<xsl:value-of select="@fullname"/>');</xsl:attribute>
+<xsl:attribute name="ID">a|<xsl:value-of select="@fullname"/></xsl:attribute>
+<img src="OrteliusAjax/foldind.gif" border="0" height="10" width="10"><xsl:attribute name="ID">img|<xsl:value-of select="@fullname"/></xsl:attribute></img> <xsl:value-of disable-output-escaping="yes" select="@name"/></a>
 </div>
 <div class="packageTreeVisible">
-<xsl:attribute name="ID"><xsl:value-of select="@fullname"/></xsl:attribute>
+<xsl:attribute name="ID">div|<xsl:value-of select="@fullname"/></xsl:attribute>
 <xsl:for-each select="packageClass">
 <xsl:sort select="@package"/>
 <xsl:sort select="@class"/>
