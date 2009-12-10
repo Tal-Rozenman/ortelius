@@ -1,6 +1,7 @@
 var allClasses = new Array();
 
 var currentElement;
+var currentPath= new Array();
 
 var winLoc = window.location;
 
@@ -24,9 +25,20 @@ function tjekUrl(){
 
 
 function toggleTreeElement(elementId){
-	//alert(elementId)
-	if(elementId.className == "packageTreeVisible")	elementId.className = "packageTreeHidden";
-	else elementId.className = "packageTreeVisible";
+	
+	//change open / close ikon
+
+	var imgElement = document.getElementById(elementId.replace("div|","img|"));
+	
+	element = document.getElementById(elementId);
+	if(element.className == "packageTreeVisible"){
+		element.className = "packageTreeHidden";
+		imgElement.src = "OrteliusAjax/foldud.gif";
+	}
+	else{
+		imgElement.src = "OrteliusAjax/foldind.gif";
+		element.className = "packageTreeVisible";
+	}
 	}
 	
 function showHideAllTreeElement(doShow){
@@ -39,6 +51,28 @@ function showElement(elementId){
 		window.open("http://www.google.com/search?q="+url+"+Actionscript");
 		return;
 	}
+	
+	
+	//remove highlights
+	for(var i=0;i<currentPath.length;i++){
+		document.getElementById(currentPath[i]).className = "nonChoosen";
+	}
+	currentPath= new Array();
+	
+	//highlight packagepath
+	var elementParts = elementId.split(".");
+	var elementIdTemp = "a|";
+	for(var i=0;i<elementParts.length-1;i++){
+		elementIdTemp+=elementParts[i];
+		
+		if(document.getElementById(elementIdTemp)){
+			document.getElementById(elementIdTemp).className = "choosen";
+			currentPath.push(elementIdTemp);	
+		}
+		
+		elementIdTemp+="_"
+	}
+	
 	//document.body.innerHTML += "<a name=\""+elementId+"\"></a>";
 	
 	winLoc.hash = "#"+elementId
@@ -68,22 +102,14 @@ function showElement(elementId){
 	
 	function goBack(){	
 	//history.back();
-	doBack();
-	}
-	
-	function doBack(){	
-	
 	elementId = layerHistory.pop();	
-		if(elementId!=null){
-		winLoc.hash = "#"+elementId
-	
-	getElement(elementId)
-	
-currentElement = elementId;
-		}
-	
-	
+	showElement(elementId);
+	layerHistory.pop();	
 	}
+	
+
+	
+
 	
 //AJAX stuff ////////////////////////////////	
 function getElement(elementId)
