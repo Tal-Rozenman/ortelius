@@ -110,8 +110,7 @@ namespace Ortelius
 				//dont copy constructor of super class
 				string elementNodeName = elementNode.SelectSingleNode("name").InnerText;
 				
-				if(superClassNode.SelectSingleNode("name").InnerText != elementNodeName){
-					
+				if(superClassNode.SelectSingleNode("name").InnerText != elementNodeName){				
 					
 					elementNode.SetAttribute("inherited","true");
 					elementNode.SetAttribute("inheritedFrom",superClassName);
@@ -295,15 +294,17 @@ namespace Ortelius
 			updateSetterGetters("protected");
 		}
 		
-		private void updateSetterGetters(string access){				
+		private void updateSetterGetters(string access){
+			//[name=""]
 			XmlNodeList readProperties = documentationXml.DocumentElement.SelectNodes("/docElements/class/property[@access='"+access+"' and  @readWrite ='Read']");
 			
 			
 			foreach(XmlElement readNode in readProperties){
 				string readName = readNode.SelectSingleNode("name").InnerText;
-				XmlNodeList writeProperties = documentationXml.DocumentElement.SelectNodes("/docElements/class/property[@access='"+access+"' and @readWrite ='Write']");
+				string readClassName = readNode.ParentNode.SelectSingleNode("name").InnerText;
 			
 				
+				XmlNodeList writeProperties = documentationXml.DocumentElement.SelectNodes("/docElements/class[name='"+readClassName+"']/property[@access='"+access+"' and @readWrite !='Read']");
 				foreach(XmlElement writeNode in writeProperties){
 					string writeName = writeNode.SelectSingleNode("name").InnerText;
 					if(writeName == readName){

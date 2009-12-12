@@ -249,8 +249,8 @@ namespace Ortelius
 		private void SaveXml()
 		{
 			XmlRestructure docXmlRestructure = new XmlRestructure(allDocXml);
-			docXmlRestructure.CreateInheritedElements();
 			docXmlRestructure.UpdateSetterGetters();
+			docXmlRestructure.CreateInheritedElements();
 			docXmlRestructure.CreateNestedPackages();
 			
 			systemSvar +=docXmlRestructure.Errors;

@@ -66,7 +66,7 @@ namespace Ortelius
 			string classXml = "";
 			asFileLines = cleanUpLines(asFileLines);
 			classXml += getImportInfo(asFileLines);
-			classXml += getClassInfo(asFileLines);				
+			classXml += getClassInfo(asFileLines);
 			classXml += getOtherInfo(asFileLines);
 			return classXml;
 		}
@@ -459,7 +459,7 @@ namespace Ortelius
 		
 		private string getStandAloneTags(string[] asFileLines,int elementIndex)
 		{
-			string[] tags = {"see","version","author","todo","langversion","keyword","playerversion","langversion","throws","sends","example"};
+			string[] tags = {"see","version","author","todo","langversion","keyword","playerversion","throws","sends","example","since"};
 			string resultText = "";
 			foreach(string tag in tags){
 				string[] tagDoc = getMultiDescription(asFileLines, elementIndex, tag);
@@ -497,32 +497,104 @@ namespace Ortelius
 		
 		#region Generel methods
 		
+		
 		//
 		private string[] cleanUpLines(string[] asFileLines)
 		{	
+			int curlyBracketCounter = 0;
+			bool removeTheRest = false;
+			bool multiLineComment = false;
+			bool javaDocComment = false;
+			
 			for(int i = 0; i<asFileLines.Length;i++ ){
 				asFileLines[i] = removeIndent(asFileLines[i]);
-				asFileLines[i] = asFileLines[i].Replace("<br>","<br />");
-				asFileLines[i] = asFileLines[i].Replace("\t"," ");
 				
-				Regex emptyStartChars = new Regex(@"^[\t| ]*");
-				asFileLines[i] =  emptyStartChars.Replace(asFileLines[i], "");
-				
-				Regex astAddSpace = new Regex(@"\*\s*@");
-				asFileLines[i] =  astAddSpace.Replace(asFileLines[i], "*@");
-		
-				
-				//I the function uses parameter in more than one line
-				int ekstraIndex = 1;
-				while(funcTest.IsMatch(asFileLines[i]) && asFileLines[i].IndexOf(")")==-1){
-					asFileLines[i] += asFileLines[i+ekstraIndex];
-					ekstraIndex++;
-					if(ekstraIndex>20){
-						break;
-					}
+				//ignore if javadoc comments
+				int javadocCommentIndex = asFileLines[i].IndexOf("/**");
+				if(!javaDocComment && javadocCommentIndex!=-1 && 
+				   (javadocCommentIndex<=asFileLines[i].IndexOf("/*")) && 
+				   (asFileLines[i].IndexOf("//")==-1 || javadocCommentIndex<asFileLines[i].IndexOf("//"))  ){
+					javaDocComment = true;
 				}
-			}
+				
+				int javadocCommentIndexEnd = asFileLines[i].IndexOf("*/");
+				if(javaDocComment && javadocCommentIndexEnd!=-1){
+					javaDocComment = false;
+				}
+				
+				
+				if(!javaDocComment){
+					
+					//remove multiline comments
+					int multiLineCommentIndexStart = asFileLines[i].IndexOf("/*");
+					if(!multiLineComment && multiLineCommentIndexStart!=-1 && 
+					   asFileLines[i].IndexOf("/**")==-1 && 
+					   (asFileLines[i].IndexOf("//")==-1 || multiLineCommentIndexStart<asFileLines[i].IndexOf("//"))){
+						multiLineComment = true;
+					}
+					 
+					int multiLineCommentIndexEnd = asFileLines[i].IndexOf("*/");
+					if(multiLineComment && multiLineCommentIndexEnd!=-1){
+						if(multiLineCommentIndexStart==-1) multiLineCommentIndexStart=0;
+						asFileLines[i] = asFileLines[i].Substring(multiLineCommentIndexStart,(asFileLines[i].Length - multiLineCommentIndexEnd));
+						multiLineComment = false;
+					} 
+					if(javaDocComment && multiLineCommentIndexEnd!=-1){
+						javaDocComment = false;
+					}
+					
+					//remove single line comments
+					int commentIndex = asFileLines[i].IndexOf("//");
+					if(commentIndex!=-1){
+						asFileLines[i] = asFileLines[i].Substring(0,(asFileLines[i].Length - commentIndex));
+					}
+					
+					//keep count on when the class is ending to avoid package with more than one class
+					//This situation occurs in some singleton implementations
+					if(!multiLineComment){
+						int bracketPos = asFileLines[i].IndexOf("{");
+						while(bracketPos != -1){
+							curlyBracketCounter++;
+							bracketPos++;
+							if(bracketPos<asFileLines[i].Length) bracketPos = asFileLines[i].IndexOf("{",bracketPos);
+							else bracketPos = -1;
+						}
+						bracketPos = asFileLines[i].IndexOf("}");
+						while(bracketPos != -1){
+							curlyBracketCounter--;
+							if(curlyBracketCounter<=1) removeTheRest = true;
+							bracketPos++;
+							if(bracketPos<asFileLines[i].Length) bracketPos = asFileLines[i].IndexOf("}",bracketPos);
+							else bracketPos = -1;
+						}
+					}
+					
+				}
+				
+				if(removeTheRest || multiLineComment){
+					asFileLines[i] = "";
+				}else{
+					asFileLines[i] = asFileLines[i].Replace("<br>","<br />");
+					asFileLines[i] = asFileLines[i].Replace("\t"," ");
+					
+					Regex emptyStartChars = new Regex(@"^[\t| ]*");
+					asFileLines[i] =  emptyStartChars.Replace(asFileLines[i], "");
+					
+					Regex lastAddSpace = new Regex(@"\*\s*@");
+					asFileLines[i] =  lastAddSpace.Replace(asFileLines[i], "*@");
 			
+					
+					//I the function uses parameter in more than one line
+					int ekstraIndex = 1;
+					while(funcTest.IsMatch(asFileLines[i]) && asFileLines[i].IndexOf(")")==-1){
+						asFileLines[i] += asFileLines[i+ekstraIndex];
+						ekstraIndex++;
+						if(ekstraIndex>20){
+							break;
+						}
+					}
+			}
+				}
 			
 			return asFileLines;
 		}

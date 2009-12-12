@@ -73,7 +73,7 @@
 <xsl:template match="class" mode="DoClasses">
 
 <xsl:for-each select=".">
-
+<xsl:if test="name">
 <xsl:variable name="className" select="name"/>
 <xsl:variable name="packageName"><xsl:if test="package"><xsl:if test="string-length(package)!=0"><xsl:value-of disable-output-escaping="yes" select="package"/>.</xsl:if></xsl:if></xsl:variable>
 <xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.html</xsl:variable>
@@ -225,6 +225,8 @@
 </div>
 
 </xsl:result-document>
+
+</xsl:if>
 </xsl:for-each>
 
 
@@ -238,6 +240,8 @@
 <xsl:template match="class" mode="DoMethod">
 
 <xsl:for-each select=".">
+		
+<xsl:if test="name">
 <xsl:variable name="className" select="name"/>
 <xsl:variable name="packageName"><xsl:if test="string-length(package)!=0"><xsl:value-of select="package"/>.</xsl:if></xsl:variable>
 
@@ -306,6 +310,8 @@
 
 </xsl:result-document>
 </xsl:for-each>
+
+</xsl:if>
 </xsl:for-each>
 </xsl:template>
 
@@ -315,6 +321,7 @@
 
 <xsl:for-each select=".">
 
+<xsl:if test="name">
 <xsl:variable name="className" select="name"/>
 <xsl:variable name="packageName"><xsl:if test="package"><xsl:if test="string-length(package)!=0"><xsl:value-of disable-output-escaping="yes" select="package"/>.</xsl:if></xsl:if></xsl:variable>
 
@@ -356,6 +363,7 @@
 </xsl:for-each>
 
 
+</xsl:if>
 </xsl:for-each>
 </xsl:template>
 
