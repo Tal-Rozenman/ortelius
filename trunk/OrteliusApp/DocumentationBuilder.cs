@@ -126,7 +126,7 @@ namespace Ortelius
 					
 					resultText += "<package>"+packageName+"</package>\r\n";
 					
-					resultText += "<name>"+stripElement(fileLine,@" *(dynamic +)?(final +)?((public|internal) +)?(dynamic +)?(final +)?(class +)",@"( +extends)?( +\S*)?( +implements)?( +\S*)? *{? *")+"</name>\r\n";
+					resultText += "<name>"+stripElement(fileLine,@" *(\[.*\] +)?(dynamic +)?(final +)?((public|internal) +)?(dynamic +)?(final +)?(class +)",@"( +extends)?( +\S*)?( +implements)?( +\S*)? *{? *")+"</name>\r\n";
 					
 					resultText += "<summary><![CDATA["+getSummery(asFileLines,i)+"]]></summary>\r\n";
 					//tjek for events
