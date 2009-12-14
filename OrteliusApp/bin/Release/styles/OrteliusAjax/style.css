@@ -1,5 +1,10 @@
 .classDetails{
-
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 30px;
+	padding: 10px;
+	padding-top: 15px;
 }
 
 #content{
@@ -10,8 +15,6 @@
 	top: 32px;
 	right: 10px;
 	bottom: 10px;
-	padding: 10px;
-	padding-top: 15px;
 	scrollbar-arrow-color: #C50023;
 	scrollbar-face-color: #FFFFFF;
 	scrollbar-track-color: #FFFFFF;
@@ -67,7 +70,7 @@ right: 10px;
 #createdText{
 top:3px;
 position: absolute;
-	right:10px;
+	right:20px;
 	height:17px;
 }
 
@@ -80,12 +83,36 @@ position: absolute;
 
 .packageTreeVisible{
 	padding: 0px;
-	padding-left: 10px;
+	padding-left: 15px;
 	padding-bottom: 8px;
 	display:inline-block;
 }
-.packageTreeHidden{
+.hiddenElement{
 	display:none;
+}
+
+.detailsVisible{
+	display:block;
+	margin:0px;
+	margin-bottom:30px;
+	padding: 0px;
+	display:block;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #666;
+}
+.detailHeader{
+	margin-top:10px;
+	font-size:13px;
+	font-weight:bold;
+}
+.detailElement{
+	
+	font-size:11px;
+	font-weight:normal;
 }
 
 .treeBranch{
@@ -110,8 +137,35 @@ font-weight:bold;
 	font-weight: bold;
 	margin-top: 20px;
 }
-
-
+.methodPropertyTabel{
+	width:100%;
+}
+.methodPropertyModifiers{
+	padding-right:5px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #ccc;
+	vertical-align:top;
+}
+.methodPropertySummary {
+	font-style:italic;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #ccc;
+	vertical-align:top;
+	color:#999;	
+}
+.methodPropertyTitle{
+	padding-right:5px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #ccc;
+	vertical-align:top;
+}
+.methodPropertyLine{
+	padding-bottom:3px;
+	padding-top:3px;
+}
 .classTitle{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 16px;

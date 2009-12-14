@@ -23,6 +23,17 @@ function tjekUrl(){
 	}
 }
 
+function toggleDetails(elementId){
+	var imgElement = document.getElementById(elementId.replace("div|","img|"));
+	var element = document.getElementById(elementId);
+	if(element.className == "detailsVisible"){
+		element.className = "hiddenElement";
+		imgElement.src = "OrteliusAjax/foldud.gif";
+	}else{
+		element.className = "detailsVisible";
+		imgElement.src = "OrteliusAjax/foldind.gif";
+	}
+}
 
 function toggleTreeElement(elementId){
 	
@@ -32,7 +43,7 @@ function toggleTreeElement(elementId){
 	
 	element = document.getElementById(elementId);
 	if(element.className == "packageTreeVisible"){
-		element.className = "packageTreeHidden";
+		element.className = "hiddenElement";
 		imgElement.src = "OrteliusAjax/foldud.gif";
 	}
 	else{
