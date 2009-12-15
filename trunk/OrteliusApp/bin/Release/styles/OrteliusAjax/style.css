@@ -1,4 +1,4 @@
-.classDetails{
+.classDetails {
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -6,8 +6,7 @@
 	padding: 10px;
 	padding-top: 15px;
 }
-
-#content{
+#content {
 	border: 1px solid #999999;
 	overflow: auto;
 	position: absolute;
@@ -23,8 +22,7 @@
 	scrollbar-3dlight-color:  #FFFFFF;
 	scrollbar-darkshadow-color: #FFFFFF;
 }
-
-#classList{
+#classList {
 	position: absolute;
 	background-color: #F7F8F9;
 	overflow:auto;
@@ -44,54 +42,48 @@
 	scrollbar-shadow-color:#999999;
 	scrollbar-3dlight-color:  #F7F8F9;
 	scrollbar-darkshadow-color: #F7F8F9;
-	
 }
-.pakageTreeName{	
+.pakageTreeName {
 	font-weight:normal;
-	}
-.pakageTreeNameCurrent{	
+}
+.pakageTreeNameCurrent {
 	font-weight:bold;
-	}
-	
-#topBar{
+}
+#topBar {
 	color: #000000;
 	background-color:#bbbbbb;
-position: absolute;
-top:5px;
-left: 10px;
-right: 10px;
+	position: absolute;
+	top:5px;
+	left: 10px;
+	right: 10px;
 	border: 1px solid #999999;
 	height:20px;
 	padding:0px;
 	background-image:url(topbg.gif);
 	overflow:hidden;
 }
-
-#createdText{
-top:3px;
-position: absolute;
+#createdText {
+	top:3px;
+	position: absolute;
 	right:20px;
 	height:17px;
 }
-
-#topNavigation{
-top:3px;
-position: absolute;
+#topNavigation {
+	top:3px;
+	position: absolute;
 	left: 10px;
 	height:17px;
-	}
-
-.packageTreeVisible{
+}
+.packageTreeVisible {
 	padding: 0px;
 	padding-left: 15px;
 	padding-bottom: 8px;
 	display:inline-block;
 }
-.hiddenElement{
+.hiddenElement {
 	display:none;
 }
-
-.detailsVisible{
+.detailsVisible {
 	display:block;
 	margin:0px;
 	margin-bottom:30px;
@@ -104,43 +96,37 @@ position: absolute;
 	border-left-style: none;
 	border-top-color: #666;
 }
-.detailHeader{
+.detailHeader {
 	margin-top:10px;
 	font-size:13px;
 	font-weight:bold;
 }
-.detailElement{
-	
+.detailElement {
 	font-size:11px;
 	font-weight:normal;
 }
-
-.treeBranch{
+.treeBranch {
 	font-size: 11px;
 	color: #000000;
 	padding: 0px;
 }
-.nonChoosen{
-font-weight:normal;
-
+.nonChoosen {
+	font-weight:normal;
 }
-
-
-.choosen{
-font-weight:bold;
-
+.choosen {
+	font-weight:bold;
 }
-
-.elementTitle{
+.elementTitle {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	font-weight: bold;
 	margin-top: 20px;
 }
-.methodPropertyTabel{
+.methodPropertyTabel {
 	width:100%;
 }
-.methodPropertyModifiers{
+.methodPropertyModifiers {
+	width:5%;
 	padding-right:5px;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
@@ -153,60 +139,51 @@ font-weight:bold;
 	border-bottom-style: solid;
 	border-bottom-color: #ccc;
 	vertical-align:top;
-	color:#999;	
+	color:#999;
 }
-.methodPropertyTitle{
+.methodPropertyTitle {
+	width:5%;
 	padding-right:5px;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #ccc;
 	vertical-align:top;
 }
-.methodPropertyLine{
+.methodPropertyLine {
 	padding-bottom:3px;
 	padding-top:3px;
 }
-.classTitle{
+.classTitle {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	font-weight: bold;
 }
-
-code{
+code {
 	font-family: "Courier New", Courier, monospace;
 	font-size: 11px;
 	color: #000000;
 	font-style:normal;
 }
-
-.codeLine{
+.codeLine {
 	font-family: "Courier New", Courier, monospace;
 	font-size: 11px;
 	color: #000000;
 }
-.backButton{
-
+.backButton {
 	margin-top: 30px;
 }
-
-.summary{
+.summary {
 	font-style: italic;
 }
-
-body{
+body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	color: #333333;
 	background-color: #FFFFFF;
 }
-
-
-a{
+a {
 	cursor: hand;
 	color: #333333;
 }
-
-img{
-	
-	}
-
+img {
+}
