@@ -49,25 +49,30 @@
 </xsl:template>
 
 
-      <xsl:template name="PreserveLineBreaks">
-        <xsl:param name="text"/>
-        <xsl:choose>
-            <xsl:when test="contains($text,'&#xA;')">
-                <xsl:value-of disable-output-escaping="yes" select="substring-before($text,'&#xA;')"/>
-                <br/>
-                <xsl:call-template name="PreserveLineBreaks">
-                    <xsl:with-param name="text">
-                        <xsl:value-of disable-output-escaping="yes" select="substring-after($text,'&#xA;')"/>
-                    </xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of disable-output-escaping="yes" select="$text"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
+<xsl:template name="PreserveLineBreaks">
+    <xsl:param name="text"/>
+    <xsl:choose>
+        <xsl:when test="contains($text,'&#xA;')">
+            <xsl:value-of disable-output-escaping="yes" select="substring-before($text,'&#xA;')"/>
+            <br/>
+            <xsl:call-template name="PreserveLineBreaks">
+                <xsl:with-param name="text">
+                    <xsl:value-of disable-output-escaping="yes" select="substring-after($text,'&#xA;')"/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of disable-output-escaping="yes" select="$text"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
 
+<xsl:template name="Explanation">
+<div class="modifierExplanation"><img src="OrteliusAjax/staticmodifier.gif"/>=static | <img src="OrteliusAjax/overridemodifier.gif"/>=overridden | <img src="OrteliusAjax/dynamicmodifier.gif"/>=dynamic</div>
+</xsl:template>
 	
+   
+
 	
 	
 <xsl:template match="class" mode="DoClasses">
@@ -159,7 +164,9 @@
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
-</xsl:for-each></table></div>
+</xsl:for-each></table>
+<xsl:call-template name="Explanation"/>
+</div>
 </xsl:if>
 
 <xsl:if test="method[@access = 'protected']">
@@ -179,7 +186,9 @@
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
-</xsl:for-each></table></div>
+</xsl:for-each></table>
+<xsl:call-template name="Explanation"/>
+</div>
 </xsl:if>
 
 
@@ -202,6 +211,7 @@
 </xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
 </xsl:for-each>
 </table>
+<xsl:call-template name="Explanation"/>
 </div>
 </xsl:if>
 
@@ -222,7 +232,9 @@
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each> </td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
-</xsl:for-each></table></div>
+</xsl:for-each></table>
+<xsl:call-template name="Explanation"/>
+</div>
 </xsl:if>
 
 
