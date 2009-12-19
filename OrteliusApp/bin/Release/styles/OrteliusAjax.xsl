@@ -290,13 +290,54 @@
 <div class="codeLine"><xsl:value-of select="codeLine"/></div>
 <br />
 
+
+
+
+
+<div class="detailHeader"><a onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
+
+<div id="div|details" class="hiddenElement">
+
 <xsl:if test="@inheritedFrom">
-<b>Inherited from: </b> <a><xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@inheritedFrom"/>');return false;</xsl:attribute><xsl:value-of select="@inheritedFrom"/></a>
-<br />
+<div class="detailElement"><b>Inherited from: </b> <a><xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@inheritedFrom"/>');return false;</xsl:attribute><xsl:value-of select="@inheritedFrom"/></a></div>
 </xsl:if>
 
+<xsl:if test="see">
+<div class="detailElement"><b>See: </b>
+<xsl:for-each select="see">
+<xsl:copy-of select="."/>
+</xsl:for-each>
+</div>
+</xsl:if>
+
+<xsl:if test="todo">
+<div class="detailElement"><b>To be done: </b><br />
+<xsl:for-each select="todo">
+<xsl:value-of disable-output-escaping="yes" select="."/>
+</xsl:for-each>
+</div>
+</xsl:if>
+
+
+<xsl:if test="since">
+<div class="detailElement"><b>Since: </b><xsl:value-of select="since"/></div>
+</xsl:if>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <xsl:if test="param">
-<div class="elementTitle">Parameters:</div>
+<div class="detailHeader">Parameters</div>
+<div id="div|parameters" class="detailsVisible">
+
 <xsl:for-each select="param">
 <div class="summary">
 <xsl:call-template name="PreserveLineBreaks">
@@ -304,31 +345,21 @@
 </xsl:call-template>
 </div>
 <div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="name"/> : <xsl:value-of disable-output-escaping="yes" select="type"/></div>
-
 <br />
 </xsl:for-each>
+
+</div>
 </xsl:if>
 
-<xsl:if test="see">
-<div class="elementTitle"><b>See: </b></div>
-<xsl:for-each select="see">
-<div class="summary"><xsl:copy-of select="."/></div>
-</xsl:for-each>
-</xsl:if>
+
 
 <xsl:if test="returns">
-<div class="elementTitle">Return value:</div>
+<div class="detailHeader">Return value</div>
+<div id="div|parameters" class="detailsVisible">
 <div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="returns/type"/></div>
 <div class="summary"><xsl:value-of disable-output-escaping="yes" select="returns/summary"/></div>
+</div>
 </xsl:if>
-
-<xsl:if test="todo">
-<div class="elementTitle">To be done:</div>
-<xsl:for-each select="todo">
-<div class="todo"><xsl:value-of disable-output-escaping="yes" select="."/></div>
-</xsl:for-each>
-</xsl:if>
-
 
 <div class="backButton"><img src="OrteliusAjax/arrowleft.gif" border="0" height="9" width="15"/> <a onmousedown="goBack()">Back</a></div>
 
@@ -340,6 +371,13 @@
 </xsl:if>
 </xsl:for-each>
 </xsl:template>
+
+
+
+
+
+
+
 
 
 
@@ -367,9 +405,39 @@
 </div>
 <div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="codeLine"/></div><br />
 
+
+
+<div class="detailHeader"><a onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
+
+<div id="div|details" class="hiddenElement">
 <xsl:if test="@inheritedFrom">
-<b>Inherited from: </b> <xsl:value-of select="@inheritedFrom"/><br />
+<div class="detailElement"><b>Inherited from: </b> <a><xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@inheritedFrom"/>');return false;</xsl:attribute><xsl:value-of select="@inheritedFrom"/></a></div>
 </xsl:if>
+
+<xsl:if test="see">
+<div class="detailElement"><b>See: </b>
+<xsl:for-each select="see">
+<xsl:copy-of select="."/>
+</xsl:for-each>
+</div>
+</xsl:if>
+
+<xsl:if test="todo">
+<div class="detailElement"><b>To be done: </b><br />
+<xsl:for-each select="todo">
+<xsl:value-of disable-output-escaping="yes" select="."/>
+</xsl:for-each>
+</div>
+</xsl:if>
+
+
+<xsl:if test="since">
+<div class="detailElement"><b>Since: </b><xsl:value-of select="since"/></div>
+</xsl:if>
+</div>
+
+
+
 
 <xsl:if test="@readWrite!='ReadWrite'">
 <div class="summary"><xsl:value-of select="@readWrite"/> only</div>
@@ -392,6 +460,8 @@
 </xsl:if>
 </xsl:for-each>
 </xsl:template>
+
+
 
 
 
