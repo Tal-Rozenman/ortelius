@@ -206,7 +206,7 @@
 
 <xsl:if test="property[@access = 'public']">
 
-<div class="detailHeader"><a onclick="toggleDetails('div|publicproperties')"><img src="../OrteliusFrame/foldind.gif" ID="img|publicproperties" border="0" height="9" width="15"/>Public properties</a></div>
+<div class="detailHeader">Public properties</div>
 
 <div id="div|publicproperties" class="detailsVisible">
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
@@ -229,7 +229,7 @@
 
 
 <xsl:if test="property[@access = 'protected']">
-<div class="detailHeader"><a onclick="toggleDetails('div|protectedproperty')"><img src="../OrteliusFrame/foldud.gif" ID="img|protectedproperty" border="0" height="9" width="15"/>Protected properties</a></div>
+<div class="detailHeader">Protected properties</div>
 
 <div id="div|protectedproperty" class="detailsVisible">
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
