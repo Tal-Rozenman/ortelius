@@ -184,6 +184,13 @@ body {
 	font-size: 11px;
 	color: #333333;
 	background-color: #FFFFFF;
+	scrollbar-arrow-color: #C50023;
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-highlight-color: #999999;
+	scrollbar-shadow-color:#999999;
+	scrollbar-3dlight-color:  #FFFFFF;
+	scrollbar-darkshadow-color: #FFFFFF;
 }
 a {
 	cursor: hand;

@@ -197,7 +197,7 @@
 </td><td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"/>
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
-<img border="0"><xsl:attribute name="src">OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
+<img border="0"><xsl:attribute name="src">../OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
 </xsl:for-each></table>
 <xsl:call-template name="Explanation"/>
@@ -219,7 +219,7 @@
 </td><td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"/>
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
-<img border="0"><xsl:attribute name="src">OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
+<img border="0"><xsl:attribute name="src">../OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
 </xsl:for-each>
 </table>
@@ -242,7 +242,7 @@
 </td><td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"/>
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
-<img border="0"><xsl:attribute name="src">OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
+<img border="0"><xsl:attribute name="src">../OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
 </xsl:for-each> </td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
 </xsl:for-each></table>
 <xsl:call-template name="Explanation"/>
