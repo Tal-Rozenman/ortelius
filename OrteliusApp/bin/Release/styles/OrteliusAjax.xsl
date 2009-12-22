@@ -541,11 +541,13 @@
 </xsl:template>
 
 <xsl:template match="packageClass">
-<script language="JavaScript">allClasses.push('<xsl:value-of disable-output-escaping="yes" select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>')</script>
+<xsl:variable name="packageNameVar"><xsl:if test="@package"><xsl:if test="string-length(@package)!=0"><xsl:value-of disable-output-escaping="yes" select="@package"/>.</xsl:if></xsl:if></xsl:variable>
+
+<script language="JavaScript">allClasses.push('<xsl:value-of disable-output-escaping="yes" select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>')</script>
 <a>
-<xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>');return false;</xsl:attribute>
+<xsl:attribute name="onmousedown">showElement('<xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>');return false;</xsl:attribute>
 <span class="nonChoosen">
-<xsl:attribute name="ID"><xsl:value-of select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>Button</xsl:attribute>
+<xsl:attribute name="ID"><xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>Button</xsl:attribute>
 <img src="OrteliusAjax/arrowright.gif" border="0" height="9" width="15"/> 
 <xsl:value-of disable-output-escaping="yes" select="@class"/>
 </span>

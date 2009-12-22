@@ -205,6 +205,7 @@ namespace Ortelius
 		/// </summary
 		private void makePackageTree(){
 			ArrayList allPackages = new ArrayList();
+			allPackages.Add("");
 			XmlNodeList blokke = documentationXml.GetElementsByTagName("class");
 			foreach(XmlElement node in blokke){				
 				XmlNode pNode = node.SelectSingleNode("package");				
@@ -220,6 +221,8 @@ namespace Ortelius
 			
 			XmlElement allPackagesNode = documentationXml.CreateElement("allpackages");			
 			documentationXml.DocumentElement.AppendChild(allPackagesNode);
+			
+			populatePackageTree(allPackagesNode,"");
 			
 			foreach(string packageName in allPackages){
 				addPackageLevel(allPackagesNode,packageName,"");
