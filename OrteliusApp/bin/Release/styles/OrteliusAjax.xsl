@@ -503,6 +503,11 @@
 <xsl:template match="allpackages">
 <div id="classList" >
 
+<xsl:apply-templates select="packageClass">
+<xsl:sort select="@package"/>
+<xsl:sort select="@class"/>
+</xsl:apply-templates>
+
 <xsl:apply-templates select="packagelevel">
 <xsl:sort select="@name"/>
 </xsl:apply-templates>
@@ -523,9 +528,19 @@
 </div>
 <div class="packageTreeVisible">
 <xsl:attribute name="ID">div|<xsl:value-of select="@fullname"/></xsl:attribute>
-<xsl:for-each select="packageClass">
+
+<xsl:apply-templates select="packageClass">
 <xsl:sort select="@package"/>
 <xsl:sort select="@class"/>
+</xsl:apply-templates>
+
+<xsl:apply-templates select="packagelevel">
+<xsl:sort select="@name"/>
+</xsl:apply-templates>
+</div>
+</xsl:template>
+
+<xsl:template match="packageClass">
 <script language="JavaScript">allClasses.push('<xsl:value-of disable-output-escaping="yes" select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>')</script>
 <a>
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>');return false;</xsl:attribute>
@@ -535,13 +550,7 @@
 <xsl:value-of disable-output-escaping="yes" select="@class"/>
 </span>
 </a><br/>
-</xsl:for-each>
-<xsl:apply-templates select="packagelevel">
-<xsl:sort select="@name"/>
-</xsl:apply-templates>
-</div>
 </xsl:template>
-
 
 
 </xsl:stylesheet>
