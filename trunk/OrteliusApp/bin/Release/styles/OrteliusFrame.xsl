@@ -567,11 +567,15 @@
 </xsl:template>
 
 
+
 <xsl:template match="packageClass">
+
+<xsl:variable name="packageNameVar"><xsl:if test="@package"><xsl:if test="string-length(@package)!=0"><xsl:value-of disable-output-escaping="yes" select="@package"/>.</xsl:if></xsl:if></xsl:variable>
+
 <a target="contentFrame">
-<xsl:attribute name="href">ortfiles/<xsl:value-of select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>.html</xsl:attribute>
+<xsl:attribute name="href">ortfiles/<xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>.html</xsl:attribute>
 <span class="nonChoosen">
-<xsl:attribute name="ID"><xsl:value-of select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>Button</xsl:attribute>
+<xsl:attribute name="ID"><xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>Button</xsl:attribute>
 <img src="OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/> 
 <xsl:value-of disable-output-escaping="yes" select="@class"/>
 </span>
