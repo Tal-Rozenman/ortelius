@@ -534,6 +534,11 @@
 
 <xsl:template match="allpackages">
 <div id="classList" >
+<xsl:apply-templates select="packageClass">
+<xsl:sort select="@package"/>
+<xsl:sort select="@class"/>
+</xsl:apply-templates>
+
 
 <xsl:apply-templates select="packagelevel">
 <xsl:sort select="@name"/>
@@ -545,16 +550,24 @@
 
 <xsl:template match="packagelevel">
 
-
-
 <div class="treeBranch">
 <xsl:value-of disable-output-escaping="yes" select="@name"/></div>
 <div class="packageTreeVisible">
 <xsl:attribute name="ID">div|<xsl:value-of select="@fullname"/></xsl:attribute>
-<xsl:for-each select="packageClass">
+
+<xsl:apply-templates select="packageClass">
 <xsl:sort select="@package"/>
 <xsl:sort select="@class"/>
+</xsl:apply-templates>
 
+<xsl:apply-templates select="packagelevel">
+<xsl:sort select="@name"/>
+</xsl:apply-templates>
+</div>
+</xsl:template>
+
+
+<xsl:template match="packageClass">
 <a target="contentFrame">
 <xsl:attribute name="href">ortfiles/<xsl:value-of select="@package"/>.<xsl:value-of disable-output-escaping="yes" select="@class"/>.html</xsl:attribute>
 <span class="nonChoosen">
@@ -563,13 +576,7 @@
 <xsl:value-of disable-output-escaping="yes" select="@class"/>
 </span>
 </a><br/>
-</xsl:for-each>
-<xsl:apply-templates select="packagelevel">
-<xsl:sort select="@name"/>
-</xsl:apply-templates>
-</div>
 </xsl:template>
-
 
 
 </xsl:stylesheet>
