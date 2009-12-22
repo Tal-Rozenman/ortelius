@@ -195,10 +195,10 @@ namespace Ortelius
 				if(accessProtectedTest.IsMatch(fileLine))accesString = "protected";
 				resultText += "<method access=\""+accesString+"\">\r\n";
 				
-				resultText += "<name>"+stripElement(fileLine,@" *(static +)?(override +)?((protected|public|internal) +)?(override +)?(static +)?(function +)",@"\(.*")+"</name>\r\n";
+				resultText += "<name>"+stripElement(fileLine,@" *(static +)?(override +)?(virtual +)?((protected|public|internal) +)?(override +)?(static +)?(virtual +)?(function +)",@"\(.*")+"</name>\r\n";
 				resultText += "<summary><![CDATA["+getSummery(asFileLines,lineIndex)+"]]></summary>\r\n";
 				
-				resultText += "<codeLine>"+fileLine.Replace("{","")+"</codeLine>\r\n";
+				resultText += formatCodeline(fileLine);
 				resultText += "<modifiers>\r\n"+getModifiers(fileLine)+"</modifiers>\r\n";	
 				
 				try{
@@ -211,9 +211,11 @@ namespace Ortelius
 						int colonIndex = param.IndexOf(":");
 						
 						if(colonIndex == -1) colonIndex = param.Length-1;
-						else resultText += "<type>" +param.Substring((colonIndex+1),(param.Length-colonIndex-1)) +"</type>\r\n";
+						
+						
 						
 						string pName = param.Substring(0,colonIndex).TrimStart(' ');
+						if(param.IndexOf(":")!=-1) resultText += getType(param,pName);
 						
 						resultText += "<name>" +pName +"</name>\r\n";
 						resultText += "<summary><![CDATA["+getDescription(asFileLines,lineIndex,"@param "+pName)+"]]></summary>\r\n";
@@ -228,9 +230,12 @@ namespace Ortelius
 					
 					
 					
-					if(fileLine.IndexOf("):") > 1){
+		Regex returnParamTest = new Regex(@".*\) *:");
+		
+		
+					if(returnParamTest.IsMatch(fileLine)){
 						resultText += "<returns>\r\n";
-						resultText += "<type>"+stripElement(fileLine,@".*\) *: *",@" *{? *")+"</type>\r\n";
+						resultText += formatType(stripElement(fileLine,@".*\) *: *",@" *{? *"));
 						resultText += "<summary><![CDATA["+getDescription(asFileLines,lineIndex,"@return")+getDescription(asFileLines,lineIndex,"@returns")+"]]></summary>\r\n";
 						resultText += "</returns>\r\n";
 					}
@@ -247,11 +252,14 @@ namespace Ortelius
 				
 				resultText += "<name>"+stripElement(fileLine,@" *(static +)?(override +)?((protected|public|internal) +)?(override +)?(static +)?(function +get +)",@"\(.*")+"</name>\r\n";
 				
-				if(fileLine.IndexOf("):") != -1) resultText += "<type>"+stripElement(fileLine,@".*\) *: *",@" *{.*")+"</type>\r\n";
+				if(fileLine.IndexOf("):") != -1){
+					string typeName =stripElement(fileLine,@".*\) *: *",@" *{.*");
+					resultText += formatType(typeName);;
+				}
 				
 				resultText += "<modifiers>\r\n"+getModifiers(fileLine)+"</modifiers>\r\n";
 				resultText += "<summary><![CDATA["+getSummery(asFileLines,lineIndex)+"]]></summary>\r\n";
-				resultText += "<codeLine><![CDATA["+fileLine.Replace(";","")+"]]></codeLine>\r\n";
+				resultText += formatCodeline(fileLine);
 				resultText += "</property>\r\n";
 			}	
 			else if(fileLine.IndexOf("function set ") != -1){
@@ -259,14 +267,15 @@ namespace Ortelius
 				if(accessProtectedTest.IsMatch(fileLine))accesString = "protected";
 				resultText += "<property access=\""+accesString+"\" readWrite=\"Write\">\r\n";
 				
-				resultText += "<name>"+stripElement(fileLine,@" *(static +)?(override +)?((protected|public|internal) +)?(override +)?(static +)?(function +set +)",@"\(.*")+"</name>\r\n";
+				string pName = stripElement(fileLine,@" *(static +)?(override +)?((protected|public|internal) +)?(override +)?(static +)?(function +set +)",@"\(.*");
+				resultText += "<name>"+pName+"</name>\r\n";				
+				string typeName = stripElement(fileLine,@".*\(.*[^\)]:",@" *\).*");
 				
-							
-				resultText += "<type>"+stripElement(fileLine,@".*\(.*[^\)]:",@" *\).*")+"</type>\r\n";
-									
+				resultText += formatType(typeName);
+				
 				resultText += "<modifiers>\r\n"+getModifiers(fileLine)+"</modifiers>\r\n";			
 				resultText += "<summary><![CDATA["+getSummery(asFileLines,lineIndex)+"]]></summary>\r\n";
-				resultText += "<codeLine><![CDATA["+fileLine.Replace(";","")+"]]></codeLine>\r\n";
+				resultText += formatCodeline(fileLine);
 				resultText += "</property>\r\n";
 			}	
 			
@@ -279,10 +288,10 @@ namespace Ortelius
 				resultText += "<name>"+propName+"</name>\r\n";
 				resultText += "<modifiers>\r\n"+getModifiers(fileLine)+"</modifiers>\r\n";	
 				
-				if(fileLine.IndexOf(propName+":")!=-1) resultText += "<type>"+stripElement(fileLine,@".*"+propName+":",@" *=.*")+"</type>\r\n";
+				if(fileLine.IndexOf(propName+":")!=-1) resultText += "<type>"+getType(fileLine,propName)+"</type>\r\n";
 				
 				resultText += "<summary><![CDATA["+getSummery(asFileLines,lineIndex)+"]]></summary>\r\n";
-				resultText += "<codeLine><![CDATA["+stripElement(fileLine,"",@"[{|;]")+"]]></codeLine>\r\n";
+				resultText += formatCodeline(stripElement(fileLine,"",@"[{|;]"));
 				if(fileLine.IndexOf("=") != -1) resultText += "<defaultValue><![CDATA["+stripElement(fileLine,@".*= *",@";+ *")+"]]></defaultValue>\r\n";
 				
 				resultText += getStandAloneTags(asFileLines,lineIndex);
@@ -294,8 +303,28 @@ namespace Ortelius
 		}
 		
 		
+		string getType(string line,string name){
+			line = stripElement(line,@".*:",@" *[=|;|)|,].*");
+			return formatType(line);
+		}
 		
 		
+			
+			string formatType(string typeName){
+				
+			typeName = typeName.Replace("<","&lt;").Replace(">","&gt;").Replace(" ","");
+				return "<type><![CDATA[" +typeName+"]]></type>\r\n";
+			}
+		string formatCodeline(string codeLine){
+				
+			codeLine = codeLine.Replace("<","&lt;").Replace(">","&gt;").Replace(";","");
+			
+			Regex codeLineEnd = new Regex(@"[;|{|/].*");
+			codeLine =  codeLineEnd.Replace(codeLine, "");
+					
+			codeLine = codeLine.TrimEnd(' ').TrimEnd('{');
+				return "<codeLine><![CDATA[" +codeLine+"]]></codeLine>\r\n";
+			}
 		#endregion
 		
 		
