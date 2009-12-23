@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-# SharpDevelop 2.2.1.2648
+# SharpDevelop 3.0.0.3800
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ortelius", "Ortelius.csproj", "{962F5D1E-08B8-4CDE-B6B1-AC8100518985}"
-EndProject
-Project("{CFEE4113-1246-4D54-95CB-156813CB8593}") = "OrteliusSetup", "..\OrteliusSetup\OrteliusSetup.wixproj", "{FA02B703-6F3E-4953-8D91-FEFD75776B03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,9 +14,5 @@ Global
 		{962F5D1E-08B8-4CDE-B6B1-AC8100518985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{962F5D1E-08B8-4CDE-B6B1-AC8100518985}.Release|Any CPU.Build.0 = Release|Any CPU
 		{962F5D1E-08B8-4CDE-B6B1-AC8100518985}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA02B703-6F3E-4953-8D91-FEFD75776B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA02B703-6F3E-4953-8D91-FEFD75776B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA02B703-6F3E-4953-8D91-FEFD75776B03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA02B703-6F3E-4953-8D91-FEFD75776B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 EndGlobal
