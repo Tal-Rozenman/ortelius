@@ -1,0 +1,158 @@
+﻿<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>		
+		<DirectoryRef Id="TARGETDIR">
+			<Directory Id="ProgramFilesFolder" Name="PFiles">
+				<Directory Id="INSTALLDIR" Name="Ortelius 1.2">
+					<Component Guid="90464C33-C812-4F04-8829-492465E22529" Id="OrteliusMain" DiskId="1">
+						<File Source="..\OrteliusApp\bin\Release\Ortelius.exe" Name="Ortelius.exe" Id="Ortelius.exe" KeyPath="yes">
+						<Shortcut Id="startOrtelius" Directory="ProgramMenuDir" Name="Ortelius 1.2" WorkingDirectory='INSTALLDIR' Icon="Ortelius.exe" IconIndex="0" Advertise="yes" />
+						<Shortcut Id="orteliusDeskShortCut" Icon="Ortelius.exe" Directory="DesktopFolder" Name="Ortelius 1.2" WorkingDirectory="INSTALLDIR" Advertise="yes" />
+						</File>
+						<ProgId Id="Ortelius.orp" Description="Ortelius project file">
+							<Extension Id="orp" ContentType="application/orp">
+								<Verb Id="open"  Command="Open" TargetFile="Ortelius.exe" Argument="&quot;%1&quot;" />
+							</Extension>
+						</ProgId>
+					</Component>
+					
+				
+				
+				
+				
+				<Component Guid="a432a035-8da1-4c24-a07f-5cec03486e23" Id="CIKVMOpenJDKCharsetsdll1" DiskId="1">
+	<File Source="../OrteliusApp\bin\Release\IKVM.OpenJDK.Charsets.dll" Id="IKVMOpenJDKCharsetsdll1" Name="IKVM.OpenJDK.Charsets.dll" DiskId="1"/>
+</Component>
+<Component Guid="b42919bc-d48e-4ccc-82e0-cb300147aba3" Id="CIKVMOpenJDKCoredll2" DiskId="1">
+	<File Source="../OrteliusApp\bin\Release\IKVM.OpenJDK.Core.dll" Id="IKVMOpenJDKCoredll2" Name="IKVM.OpenJDK.Core.dll" DiskId="1"/>
+</Component>
+<Component Guid="17d65798-c343-42d9-b533-d9850130864b" Id="CIKVMOpenJDKTextdll3" DiskId="1">
+	<File Source="../OrteliusApp\bin\Release\IKVM.OpenJDK.Text.dll" Id="IKVMOpenJDKTextdll3" Name="IKVM.OpenJDK.Text.dll" DiskId="1"/>
+</Component>
+<Component Guid="439fe21a-016f-4442-92ff-aa1ca82d33ac" Id="CIKVMOpenJDKUtildll4" DiskId="1">
+	<File Source="../OrteliusApp\bin\Release\IKVM.OpenJDK.Util.dll" Id="IKVMOpenJDKUtildll4" Name="IKVM.OpenJDK.Util.dll" DiskId="1"/>
+</Component>
+<Component Guid="2f18122c-1f23-4397-acdc-f708d20f3938" Id="CIKVMOpenJDKXMLAPIdll5" DiskId="1">
+	<File Source="../OrteliusApp\bin\Release\IKVM.OpenJDK.XML.API.dll" Id="IKVMOpenJDKXMLAPIdll5" Name="IKVM.OpenJDK.XML.API.dll" DiskId="1"/>
+</Component>
+<Component Guid="8b33efad-1e83-4c18-869b-bfbf3e0285aa" Id="CIKVMRuntimedll6" DiskId="1">
+	<File Source="../OrteliusApp\bin\Release\IKVM.Runtime.dll" Id="IKVMRuntimedll6" Name="IKVM.Runtime.dll" DiskId="1"/>
+</Component>
+
+<Component Guid="a1c61e04-2bbd-4974-82a7-5c84568d2764" Id="Csaxon9heapidll8" DiskId="1">
+	<File Source="../OrteliusApp\bin\Release\saxon9he-api.dll" Id="saxon9heapidll8" Name="saxon9he-api.dll" DiskId="1"/>
+</Component>
+<Component Guid="d6b36fc4-66ac-4e4d-8dad-be79da8e9616" Id="Csaxon9hedll9" DiskId="1">
+	<File Source="../OrteliusApp\bin\Release\saxon9he.dll" Id="saxon9hedll9" Name="saxon9he.dll" DiskId="1"/>
+</Component>
+
+<Directory Id="styles" Name="styles">
+	<Component Guid="fb45fdb5-7e25-487d-9f35-bdd12a4ea98d" Id="COrteliusAjaxxsl12" DiskId="1">
+		<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax.xsl" Id="OrteliusAjaxxsl12" Name="OrteliusAjax.xsl" DiskId="1"/>
+	</Component>
+	<Component Guid="eba0cee3-2cb2-46b9-97af-215b0b4408a0" Id="COrteliusFramexsl13" DiskId="1">
+		<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame.xsl" Id="OrteliusFramexsl13" Name="OrteliusFrame.xsl" DiskId="1"/>
+	</Component>
+	<Component Guid="422f06d9-6649-4bf0-98cf-5fcc552ff5c2" Id="COrteliusXmlxsl14" DiskId="1">
+		<File Source="../OrteliusApp\bin\Release\styles\OrteliusXml.xsl" Id="OrteliusXmlxsl14" Name="OrteliusXml.xsl" DiskId="1"/>
+	</Component>
+	<Directory Id="OrteliusAjax" Name="OrteliusAjax">
+		<Component Guid="171a519c-dd71-4237-8607-d27866b3b54b" Id="Carrowleftgif15" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\arrowleft.gif" Id="arrowleftgif15" Name="arrowleft.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="a2b76b6e-47ff-4391-ae80-282806bb8314" Id="Carrowrightgif16" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\arrowright.gif" Id="arrowrightgif16" Name="arrowright.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="496b645a-0a3e-4d0e-822f-4a04a244668d" Id="Cdynamicmodifiergif17" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\dynamicmodifier.gif" Id="dynamicmodifiergif17" Name="dynamicmodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="9ebcb656-ff57-456b-8858-a77e1d65f6ac" Id="Cfoldindgif18" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\foldind.gif" Id="foldindgif18" Name="foldind.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="8c39be0d-3945-405c-865d-4f1caf874ecf" Id="Cfoldudgif19" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\foldud.gif" Id="foldudgif19" Name="foldud.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="299ed799-7d8a-4d8c-af18-dcb5d59cc57c" Id="Cmodifiergif20" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\modifier.gif" Id="modifiergif20" Name="modifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="bb5c8317-d6fc-45b0-830e-07156859620b" Id="Coverridemodifiergif21" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\overridemodifier.gif" Id="overridemodifiergif21" Name="overridemodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="cac995f4-61bc-4328-a4eb-16ceb32184f4" Id="Cscriptjs22" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\script.js" Id="scriptjs22" Name="script.js" DiskId="1"/>
+		</Component>
+		<Component Guid="a1cec438-e738-40f7-bcde-88a301953880" Id="Cstaticmodifiergif23" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\staticmodifier.gif" Id="staticmodifiergif23" Name="staticmodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="7fe87c9e-b8b7-46a7-8ef6-fa4b01a5b04c" Id="Cstylecss24" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\style.css" Id="stylecss24" Name="style.css" DiskId="1"/>
+		</Component>
+		<Component Guid="7c4451ce-8998-43e9-8e89-8558ae6497f1" Id="Ctopbggif25" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\topbg.gif" Id="topbggif25" Name="topbg.gif" DiskId="1"/>
+		</Component>
+	</Directory>
+	<Directory Id="OrteliusFrame" Name="OrteliusFrame">
+		<Component Guid="333bc48c-6191-4466-a540-11824682a152" Id="Carrowleftgif26" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\arrowleft.gif" Id="arrowleftgif26" Name="arrowleft.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="94bd3b5b-a661-4062-85a9-8f02a30ef297" Id="Carrowrightgif27" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\arrowright.gif" Id="arrowrightgif27" Name="arrowright.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="57a5ec98-3fbd-44d2-a45d-ddb04ec3ed41" Id="Cdynamicmodifiergif28" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\dynamicmodifier.gif" Id="dynamicmodifiergif28" Name="dynamicmodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="12a9579a-89b6-4382-8ae2-922985612a69" Id="Cmodifiergif29" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\modifier.gif" Id="modifiergif29" Name="modifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="136c2c87-dd04-45aa-a00f-49dc252aa101" Id="Coverridemodifiergif30" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\overridemodifier.gif" Id="overridemodifiergif30" Name="overridemodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="0d7aedce-4036-488e-81e0-56c77fd9f694" Id="Cstaticmodifiergif31" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\staticmodifier.gif" Id="staticmodifiergif31" Name="staticmodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="d00829c5-49d6-442d-8345-367ed29f094f" Id="Cstylecss32" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\style.css" Id="stylecss32" Name="style.css" DiskId="1"/>
+		</Component>
+		<Component Guid="6d9fa542-3314-4026-9c02-d49398ae81e3" Id="Ctopbggif33" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\topbg.gif" Id="topbggif33" Name="topbg.gif" DiskId="1"/>
+		</Component>
+	</Directory>
+</Directory>
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				</Directory>
+				<Directory Id="ProgramMenuFolder" Name="Programs">
+			        <Directory Id="ProgramMenuDir" Name="Ortelius">
+			          <Component Id="ProgramMenuDir" Guid="972262fd-b1bb-43b0-9fa3-d7ac106d97a0">
+			            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+			            <RegistryValue Root='HKCU' Key='Software\ortelius.marten.dk\ortelius' Type='string' Value='' KeyPath='yes' />
+			          </Component>
+			        </Directory>
+			      </Directory>
+			
+			     <Directory Id="DesktopFolder" Name="Desktop" />
+						
+				
+				
+				
+		
+				
+
+			
+			
+			
+			
+			
+			
+			</Directory>
+		</DirectoryRef>
+	</Fragment>
+</Wix>

@@ -1,0 +1,4 @@
+C:\Marten_privat\C#programmer\Ortelius\trunk\OrteliusSetup\bin\Release\OrteliusSetup.msi
+C:\Marten_privat\C#programmer\Ortelius\trunk\OrteliusSetup\bin\Release\OrteliusSetup.wixpdb
+obj\Release\Files.wixobj
+obj\Release\Setup.wixobj
