@@ -73,7 +73,7 @@ namespace Ortelius
 					}
 				}
 			}
-			int basicIndex = styleCB.FindString("basic");
+			int basicIndex = styleCB.FindString("OrteliusFrame");
 			if(basicIndex == -1) basicIndex = 0;
 			styleCB.SelectedIndex = basicIndex;
 		}
@@ -156,7 +156,10 @@ namespace Ortelius
 			progressBar1.Value = 100;
 			progressBar1.Refresh();
 			
-			
+			try{
+				File.Delete(projSettings.DestinationPath+projSettings.DocXmlFileName);
+			}catch(Exception){
+			}
 			
 			string endMessage = "The build is now finished";
 			if( systemSvar != ""){
@@ -263,8 +266,7 @@ namespace Ortelius
 			catch(Exception){
 				systemSvar +="\r\nCouldn't write XML file";
 			}
-			
-		
+					
 		}
 		
 		
@@ -298,6 +300,7 @@ namespace Ortelius
 		
 		void createHtmlFromXsl(){
 			string resultDoc = projSettings.DestinationPath+projSettings.DocHtmlFileName;
+			if(projSettings.StyleName == "OrteliusXml") resultDoc = projSettings.DestinationPath+"/orteliusXml.xml";
 			string xmlDoc = projSettings.DestinationPath+projSettings.DocXmlFileName;
 			string xslDoc = Path.GetDirectoryName(Application.ExecutablePath)+"/styles/"+projSettings.StyleName+".xsl";
 						
@@ -341,15 +344,7 @@ namespace Ortelius
 				MessageBox.Show(e.ToString());
 			}
 			
-//			try{			
-//			    XslCompiledTransform xslt = new XslCompiledTransform();
-//			    xslt.Load(xslDoc);
-//				xslt.Transform(xmlDoc, resultDoc);
-//				if(showAfterBuildCB.Checked) System.Diagnostics.Process.Start(resultDoc);
-//			}
-//			catch(Exception e){
-//				MessageBox.Show(e.ToString());
-//			}
+
 			
 			
 		}
@@ -555,7 +550,8 @@ namespace Ortelius
 			xmlPath.Text = "";
 			appSettings.CurrentProject = "";
 			introText.Text = "";
-			introHeader.Text = "";			
+			introHeader.Text = "";	
+			populateStyleCombo();
 			renderList();
 		}
 		

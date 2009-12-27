@@ -27,43 +27,39 @@
 		         <ComponentRef Id="OrteliusMain"/>
      			 <ComponentRef Id='ProgramMenuDir' />
 			
-<ComponentRef Id="CIKVMOpenJDKCharsetsdll1" />
-<ComponentRef Id="CIKVMOpenJDKCoredll2" />
-<ComponentRef Id="CIKVMOpenJDKTextdll3" />
-<ComponentRef Id="CIKVMOpenJDKUtildll4" />
-<ComponentRef Id="CIKVMOpenJDKXMLAPIdll5" />
-<ComponentRef Id="CIKVMRuntimedll6" />
-<ComponentRef Id="Csaxon9heapidll8" />
-<ComponentRef Id="Csaxon9hedll9" />
-<ComponentRef Id="COrteliusAjaxxsl12" />
-<ComponentRef Id="COrteliusFramexsl13" />
-<ComponentRef Id="COrteliusXmlxsl14" />
-<ComponentRef Id="Carrowleftgif15" />
-<ComponentRef Id="Carrowrightgif16" />
-<ComponentRef Id="Cdynamicmodifiergif17" />
-<ComponentRef Id="Cfoldindgif18" />
-<ComponentRef Id="Cfoldudgif19" />
-<ComponentRef Id="Cmodifiergif20" />
-<ComponentRef Id="Coverridemodifiergif21" />
-<ComponentRef Id="Cscriptjs22" />
-<ComponentRef Id="Cstaticmodifiergif23" />
-<ComponentRef Id="Cstylecss24" />
-<ComponentRef Id="Ctopbggif25" />
-<ComponentRef Id="Carrowleftgif26" />
-<ComponentRef Id="Carrowrightgif27" />
-<ComponentRef Id="Cdynamicmodifiergif28" />
-<ComponentRef Id="Cmodifiergif29" />
-<ComponentRef Id="Coverridemodifiergif30" />
-<ComponentRef Id="Cstaticmodifiergif31" />
-<ComponentRef Id="Cstylecss32" />
-<ComponentRef Id="Ctopbggif33" />
-
-		
-		
+				<ComponentRef Id="CIKVMOpenJDKCharsetsdll1" />
+				<ComponentRef Id="CIKVMOpenJDKCoredll2" />
+				<ComponentRef Id="CIKVMOpenJDKTextdll3" />
+				<ComponentRef Id="CIKVMOpenJDKUtildll4" />
+				<ComponentRef Id="CIKVMOpenJDKXMLAPIdll5" />
+				<ComponentRef Id="CIKVMRuntimedll6" />
+				<ComponentRef Id="Csaxon9heapidll8" />
+				<ComponentRef Id="Csaxon9hedll9" />
+				<ComponentRef Id="COrteliusAjaxxsl12" />
+				<ComponentRef Id="COrteliusFramexsl13" />
+				<ComponentRef Id="COrteliusXmlxsl14" />
+				<ComponentRef Id="Carrowleftgif15" />
+				<ComponentRef Id="Carrowrightgif16" />
+				<ComponentRef Id="Cdynamicmodifiergif17" />
+				<ComponentRef Id="Cfoldindgif18" />
+				<ComponentRef Id="Cfoldudgif19" />
+				<ComponentRef Id="Cmodifiergif20" />
+				<ComponentRef Id="Coverridemodifiergif21" />
+				<ComponentRef Id="Cscriptjs22" />
+				<ComponentRef Id="Cstaticmodifiergif23" />
+				<ComponentRef Id="Cstylecss24" />
+				<ComponentRef Id="Ctopbggif25" />
+				<ComponentRef Id="Carrowleftgif26" />
+				<ComponentRef Id="Carrowrightgif27" />
+				<ComponentRef Id="Cdynamicmodifiergif28" />
+				<ComponentRef Id="Cmodifiergif29" />
+				<ComponentRef Id="Coverridemodifiergif30" />
+				<ComponentRef Id="Cstaticmodifiergif31" />
+				<ComponentRef Id="Cstylecss32" />
+				<ComponentRef Id="Ctopbggif33" />
 		
 		</Feature>
-		
-		<!-- 
+				<!-- 
 			Using the Wix UI library
  
 			With the the WixUI_FeatureTree dialog set the user goes 
@@ -71,7 +67,9 @@
 			customization dialog. This dialog set is useful
 			when your product installs all features by default. 
 		-->
-		<UIRef Id="WixUI_FeatureTree"/>
+	<UIRef Id="WixUI_FeatureTree"/>
+	<WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
+	<WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
 	
 	<Icon Id="Ortelius.exe" SourceFile="..\OrteliusApp\bin\Release\Ortelius.exe" />
 	</Product>
