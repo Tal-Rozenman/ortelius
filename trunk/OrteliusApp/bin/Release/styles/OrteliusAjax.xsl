@@ -287,7 +287,7 @@
 <xsl:with-param name="text" select="summary"/>
 </xsl:call-template>
 </div>
-<div class="codeLine"><xsl:value-of select="codeLine"/></div>
+
 <br />
 
 
@@ -297,7 +297,7 @@
 <div class="detailHeader"><a onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
 
 <div id="div|details" class="hiddenElement">
-
+<div class="codeLine"><xsl:value-of select="codeLine"/></div>
 <xsl:if test="@inheritedFrom">
 <div class="detailElement"><b>Inherited from: </b> <a><xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@inheritedFrom"/>');return false;</xsl:attribute><xsl:value-of select="@inheritedFrom"/></a></div>
 </xsl:if>
@@ -339,12 +339,13 @@
 <div id="div|parameters" class="detailsVisible">
 
 <xsl:for-each select="param">
+<div class="detailHeader"><xsl:value-of disable-output-escaping="yes" select="name"/></div>
+<div class="detailElement"><b>Type</b> : <span class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></span></div>
 <div class="summary">
 <xsl:call-template name="PreserveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
 </xsl:call-template>
 </div>
-<div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="name"/> : <xsl:value-of disable-output-escaping="yes" select="type"/></div>
 <br />
 </xsl:for-each>
 
@@ -403,13 +404,14 @@
 <xsl:with-param name="text" select="summary"/>
 </xsl:call-template>
 </div>
-<div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="codeLine"/></div><br />
+<br />
 
 
 
 <div class="detailHeader"><a onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
 
 <div id="div|details" class="hiddenElement">
+<div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="codeLine"/></div>
 <xsl:if test="@inheritedFrom">
 <div class="detailElement"><b>Inherited from: </b> <a><xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@inheritedFrom"/>');return false;</xsl:attribute><xsl:value-of select="@inheritedFrom"/></a></div>
 </xsl:if>
@@ -443,9 +445,9 @@
 <div class="summary"><xsl:value-of select="@readWrite"/> only</div>
 </xsl:if>
 
-<div class="elementTitle">Type:</div>
+<div class="detailHeader">Type</div>
 <div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></div>
-<div class="elementTitle">Default value:</div>
+<div class="detailHeader">Default value</div>
 <xsl:value-of disable-output-escaping="yes" select="defaultValue"/>
 <div class="backButton"><img src="OrteliusAjax/arrowleft.gif" border="0" height="9" width="15"/> <a onmousedown="goBack()">Back</a></div>
 
