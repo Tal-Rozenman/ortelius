@@ -22,7 +22,7 @@
 	scrollbar-3dlight-color:  #FFFFFF;
 	scrollbar-darkshadow-color: #FFFFFF;
 }
-#classList {
+#classList,#indexByName,#indexByModifiedTime {
 	position: absolute;
 	background-color: #F7F8F9;
 	overflow:auto;
@@ -43,6 +43,11 @@
 	scrollbar-3dlight-color:  #F7F8F9;
 	scrollbar-darkshadow-color: #F7F8F9;
 }
+
+#indexByName,#indexByModifiedTime {
+	
+	visibility: hidden;
+	}
 .pakageTreeName {
 	font-weight:normal;
 }
@@ -188,6 +193,11 @@ body {
 a {
 	cursor: hand;
 	color: #333333;
+	text-decoration:none;
 }
 img {
+}
+td{
+	display: block;
+	white-space: nowrap;
 }

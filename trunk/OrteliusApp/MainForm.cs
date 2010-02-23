@@ -187,8 +187,7 @@ namespace Ortelius
 		{
 			
 			XmlDeclaration dec = allDocXml.CreateXmlDeclaration("1.0", null, null);
-			allDocXml.AppendChild(dec);	
-					
+			allDocXml.AppendChild(dec);
 			
 			XmlElement contentNode = allDocXml.CreateElement("docElements");
 			allDocXml.AppendChild(contentNode);
@@ -206,11 +205,14 @@ namespace Ortelius
 			//newNode2.InnerText = introText.Text.Replace("\r\n","<br/>\r\n");
 			contentNode.AppendChild(newNode2);
 			XmlCDataSection CData = allDocXml.CreateCDataSection(introText.Text.Replace("\r\n","<br/>\r\n"));
-		    newNode2.AppendChild(CData);  
+		    newNode2.AppendChild(CData);
 			
-						
+			XmlElement createdNode = allDocXml.CreateElement("created");
+			createdNode.InnerText = String.Format("{0:d/M yyyy}", DateTime.Now);
+			contentNode.AppendChild(createdNode);
+			
 			asDocumentation = new DocumentationBuilder();
-						
+			
 			//loop trough all files
 			int incFiles = 0;
 			foreach ( string filNavn in projSettings.AllASFiles ){
@@ -218,10 +220,11 @@ namespace Ortelius
 				incFiles++;
 				progressBar1.Value = (incFiles/projSettings.AllASFiles.Count)*48+2;				
 				progressBar1.Refresh();
+				DateTime modifiedTime = File.GetLastWriteTime(filNavn);
 				
-				string classXml = asDocumentation.AddClass(File.ReadAllLines(filNavn, Encoding.Default));
+				string classXml = asDocumentation.AddClass(File.ReadAllLines(filNavn, Encoding.Default),modifiedTime);
 				try{
-					if(classXml != "" && classXml !=null){
+					if(classXml != "" && classXml != null){
 						XmlElement classNode = allDocXml.CreateElement("class");
 						classNode.InnerXml = classXml;
 						contentNode.AppendChild(classNode);
@@ -229,8 +232,6 @@ namespace Ortelius
 						systemSvar += "File not added (no content): "+filNavn+"\r\n\r\n";
 						asDocumentation.SystemSvar = "";
 					}
-				
-				
 				}
 				catch(Exception){
 					systemSvar +="Error1: "+filNavn ;
@@ -242,9 +243,7 @@ namespace Ortelius
 				}
 			}
 			}
-			
-			
-			}
+		}
 		
 		///<summary>
 		/// Make the list of as files
@@ -255,6 +254,7 @@ namespace Ortelius
 			docXmlRestructure.UpdateSetterGetters();
 			docXmlRestructure.CreateInheritedElements();
 			docXmlRestructure.CreateNestedPackages();
+			docXmlRestructure.CreateClassIndex();
 			
 			systemSvar +=docXmlRestructure.Errors;
 				
