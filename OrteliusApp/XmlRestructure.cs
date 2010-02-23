@@ -195,7 +195,7 @@ namespace Ortelius
 		}
 		
 		/// <summary>
-		/// To be done
+		/// Creates the xml for the package/class tree
 		/// </summary
 		public void CreateNestedPackages(){			
 			makePackageTree();
@@ -321,6 +321,34 @@ namespace Ortelius
 			
 			
 		}
+		
+		
+		/// <summary>
+		/// Creates the xml for the class list sorted by name
+		/// </summary
+		public void CreateClassIndex(){
+			
+			XmlElement classByNameNode = documentationXml.CreateElement("classNameIndex");			
+			documentationXml.DocumentElement.AppendChild(classByNameNode);
+						
+			XmlNodeList allClasses = documentationXml.DocumentElement.SelectNodes("/docElements/class");
+			
+			
+			foreach (XmlElement node in allClasses) {
+				XmlElement classNode = documentationXml.CreateElement("packageClass");
+				
+				XmlNode nameNode = node.SelectSingleNode("name");
+				classNode.SetAttribute("class", nameNode.InnerText);	
+				XmlNode packageNode = node.SelectSingleNode("package");
+				classNode.SetAttribute("package", packageNode.InnerText);	
+				XmlNode ticks = node.SelectSingleNode("modified/@ticks");
+				classNode.SetAttribute("modified", ticks.InnerText);	
+					
+				classByNameNode.AppendChild(classNode);
+			}
+			
+		}
+
 		
 	}
 }

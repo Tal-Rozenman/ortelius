@@ -25,9 +25,15 @@
 </div>
 </xsl:result-document>
 
-<div id="topBar"><div id="topNavigation"><a><xsl:attribute name="onmousedown">goBack();</xsl:attribute><xsl:value-of select="@inheritedFrom"/><img src="OrteliusAjax/arrowleft.gif" border="0" height="9" width="15"/>Back</a></div><div id="createdText"><a><xsl:attribute name="onmousedown">showElement('introText');</xsl:attribute><b><xsl:value-of disable-output-escaping="yes" select="introHeader"/></b></a> was created with Ortelius - <a href="http://ortelius.marten.dk" target="_blank">ortelius.marten.dk</a></div></div>
+<div id="topBar"><div id="topNavigation"><a><xsl:attribute name="onmousedown">goBack();</xsl:attribute><xsl:value-of select="@inheritedFrom"/><img src="OrteliusAjax/arrowleft.gif" border="0" height="9" width="15"/>Back</a></div><div id="createdText"><a><xsl:attribute name="onmousedown">showElement('introText');</xsl:attribute><b><xsl:value-of disable-output-escaping="yes" select="introHeader"/></b></a> was created <xsl:value-of disable-output-escaping="yes" select="created"/> with Ortelius - <a href="http://ortelius.marten.dk" target="_blank">ortelius.marten.dk</a></div></div>
 
 <xsl:apply-templates select="allpackages"/>
+
+<xsl:comment>Index 1</xsl:comment>
+<xsl:apply-templates select="classNameIndex" mode="indexByName"/>
+<xsl:apply-templates select="classNameIndex" mode="indexByModifiedTime"/>
+
+
 
 <xsl:comment>Details of each class - start</xsl:comment>
 <xsl:apply-templates select="class" mode="DoClasses"/>
@@ -71,13 +77,15 @@
 <div class="modifierExplanation"><img src="OrteliusAjax/staticmodifier.gif"/>=static | <img src="OrteliusAjax/overridemodifier.gif"/>=overridden | <img src="OrteliusAjax/dynamicmodifier.gif"/>=dynamic</div>
 </xsl:template>
 	
-   
+    
+
 
 	
 	
 <xsl:template match="class" mode="DoClasses">
 
 <xsl:for-each select=".">
+
 <xsl:if test="name">
 <xsl:variable name="className" select="name"/>
 <xsl:variable name="packageName"><xsl:if test="package"><xsl:if test="string-length(package)!=0"><xsl:value-of disable-output-escaping="yes" select="package"/>.</xsl:if></xsl:if></xsl:variable>
@@ -98,8 +106,9 @@
 
 
 
-<div class="detailHeader"><a onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
+<div class="detailHeader"><a href="#" onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
 <div id="div|details" class="hiddenElement">
+<div class="detailElement"><b>Modified: </b> <xsl:value-of disable-output-escaping="yes" select="modified "/></div>
 <xsl:if test="author"><div class="detailElement"><b>Author: </b> <xsl:value-of disable-output-escaping="yes" select="author"/></div></xsl:if>
 <xsl:if test="copyright"><div class="detailElement"><b>Copyright: </b> <xsl:value-of disable-output-escaping="yes" select="copyright"/></div></xsl:if>
 <xsl:if test="version"><div class="detailElement"><b>Version: </b> <xsl:value-of disable-output-escaping="yes" select="version"/></div></xsl:if>
@@ -121,10 +130,10 @@
 </xsl:if>
 </div>
 
-<xsl:if test="example"><div class="detailHeader"><a onclick="toggleDetails('div|example')"><img src="OrteliusAjax/foldud.gif" ID="img|example" border="0" height="9" width="15"/>Example code</a></div><div id="div|example" class="hiddenElement"><div class="detailElement"><code><xsl:value-of disable-output-escaping="yes" select="example"/></code></div></div></xsl:if>
+<xsl:if test="example"><div class="detailHeader"><a href="#" onclick="toggleDetails('div|example')"><img src="OrteliusAjax/foldud.gif" ID="img|example" border="0" height="9" width="15"/>Example code</a></div><div id="div|example" class="hiddenElement"><div class="detailElement"><code><xsl:value-of disable-output-escaping="yes" select="example"/></code></div></div></xsl:if>
 
 <xsl:if test="import">
-<div class="detailHeader"><a onclick="toggleDetails('div|import')"><img src="OrteliusAjax/foldud.gif" ID="img|import" border="0" height="9" width="15"/>Imported packages</a></div>
+<div class="detailHeader"><a href="#" onclick="toggleDetails('div|import')"><img src="OrteliusAjax/foldud.gif" ID="img|import" border="0" height="9" width="15"/>Imported packages</a></div>
 <div id="div|import" class="hiddenElement">
 <xsl:for-each select="import">
 <xsl:sort select="packageName"/>
@@ -132,12 +141,10 @@
 </xsl:for-each>
 </div>
 </xsl:if>
-<br />
-<br />
 
 <xsl:if test="method[@access = 'public']">
 
-<div class="detailHeader"><a onclick="toggleDetails('div|publicmethod')"><img src="OrteliusAjax/foldind.gif" ID="img|publicmethod" border="0" height="9" width="15"/>Public methods</a></div>
+<div class="detailHeader"><a href="#" onclick="toggleDetails('div|publicmethod')"><img src="OrteliusAjax/foldind.gif" ID="img|publicmethod" border="0" height="9" width="15"/>Public methods</a></div>
 
 <div id="div|publicmethod" class="detailsVisible">
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
@@ -170,7 +177,7 @@
 </xsl:if>
 
 <xsl:if test="method[@access = 'protected']">
-<div class="detailHeader"><a onclick="toggleDetails('div|protectedmethod')"><img src="OrteliusAjax/foldud.gif" ID="img|protectedmethod" border="0" height="9" width="15"/>Protected methods</a></div>
+<div class="detailHeader"><a href="#" onclick="toggleDetails('div|protectedmethod')"><img src="OrteliusAjax/foldud.gif" ID="img|protectedmethod" border="0" height="9" width="15"/>Protected methods</a></div>
 
 <div id="div|protectedmethod" class="hiddenElement">
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
@@ -194,7 +201,7 @@
 
 <xsl:if test="property[@access = 'public']">
 
-<div class="detailHeader"><a onclick="toggleDetails('div|publicproperties')"><img src="OrteliusAjax/foldind.gif" ID="img|publicproperties" border="0" height="9" width="15"/>Public properties</a></div>
+<div class="detailHeader"><a href="#" onclick="toggleDetails('div|publicproperties')"><img src="OrteliusAjax/foldind.gif" ID="img|publicproperties" border="0" height="9" width="15"/>Public properties</a></div>
 
 <div id="div|publicproperties" class="detailsVisible">
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
@@ -217,7 +224,7 @@
 
 
 <xsl:if test="property[@access = 'protected']">
-<div class="detailHeader"><a onclick="toggleDetails('div|protectedproperty')"><img src="OrteliusAjax/foldud.gif" ID="img|protectedproperty" border="0" height="9" width="15"/>Protected properties</a></div>
+<div class="detailHeader"><a href="#" onclick="toggleDetails('div|protectedproperty')"><img src="OrteliusAjax/foldud.gif" ID="img|protectedproperty" border="0" height="9" width="15"/>Protected properties</a></div>
 
 <div id="div|protectedproperty" class="hiddenElement">
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
@@ -294,9 +301,9 @@
 
 
 
-<div class="detailHeader"><a onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
+<div class="detailHeader"><a href="#" onclick="toggleDetails('div|methoddetails')"><img src="OrteliusAjax/foldud.gif" ID="img|methoddetails" border="0" height="9" width="15"/>Details</a></div>
 
-<div id="div|details" class="hiddenElement">
+<div id="div|methoddetails" class="hiddenElement">
 <div class="codeLine"><xsl:value-of select="codeLine"/></div>
 <xsl:if test="@inheritedFrom">
 <div class="detailElement"><b>Inherited from: </b> <a><xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@inheritedFrom"/>');return false;</xsl:attribute><xsl:value-of select="@inheritedFrom"/></a></div>
@@ -335,12 +342,12 @@
 
 
 <xsl:if test="param">
-<div class="detailHeader">Parameters</div>
+<div class="detailHeader"><a href="#" onclick="toggleDetails('div|parameters')"><img src="OrteliusAjax/foldud.gif" ID="img|parameters" border="0" height="9" width="15"/>Parameters</a></div>
+
 <div id="div|parameters" class="detailsVisible">
 
 <xsl:for-each select="param">
-<div class="detailHeader"><xsl:value-of disable-output-escaping="yes" select="name"/></div>
-<div class="detailElement"><b>Type</b> : <span class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></span></div>
+<div class="detailElement"><b><xsl:value-of disable-output-escaping="yes" select="name"/></b> : <span class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></span></div>
 <div class="summary">
 <xsl:call-template name="PreserveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
@@ -408,9 +415,9 @@
 
 
 
-<div class="detailHeader"><a onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
+<div class="detailHeader"><a href="#" onclick="toggleDetails('div|propdetails')"><img src="OrteliusAjax/foldud.gif" ID="img|propdetails" border="0" height="9" width="15"/>Details</a></div>
 
-<div id="div|details" class="hiddenElement">
+<div id="div|propdetails" class="hiddenElement">
 <div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="codeLine"/></div>
 <xsl:if test="@inheritedFrom">
 <div class="detailElement"><b>Inherited from: </b> <a><xsl:attribute name="onmousedown">showElement('<xsl:value-of select="@inheritedFrom"/>');return false;</xsl:attribute><xsl:value-of select="@inheritedFrom"/></a></div>
@@ -481,7 +488,7 @@
 
 
 <xsl:for-each select="event">
-<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name" />.html</xsl:variable>
+<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name" />.htm</xsl:variable>
 
 <xsl:result-document href="{$filename}" format="text">
 
@@ -504,8 +511,9 @@
 
 <xsl:template match="allpackages">
 <div id="classList" >
-
+<xsl:call-template name="indexMenu"/>
 <xsl:apply-templates select="packageClass">
+<xsl:with-param name="extraTitle" select="'Button'"/>
 <xsl:sort select="@package"/>
 <xsl:sort select="@class"/>
 </xsl:apply-templates>
@@ -542,19 +550,68 @@
 </div>
 </xsl:template>
 
+
+
+
+   
+<xsl:template match="classNameIndex" mode="indexByName">
+<div id="indexByName">
+
+<xsl:call-template name="indexMenu"/>
+
+<xsl:apply-templates select="packageClass">
+<xsl:with-param name="extraTitle" select="'ByName'"/>
+<xsl:sort select="@class"/>
+<xsl:sort select="@package"/>
+</xsl:apply-templates>
+
+</div>
+</xsl:template>
+
+
+    
+<xsl:template match="classNameIndex" mode="indexByModifiedTime">
+<div id="indexByModifiedTime">
+<xsl:call-template name="indexMenu"/>
+
+
+<xsl:apply-templates select="packageClass">
+<xsl:with-param name="extraTitle" select="'ByTime'"/>
+<xsl:sort select="@modified" order="descending"/>
+<xsl:sort select="@class"/>
+<xsl:sort select="@package"/>
+</xsl:apply-templates>
+
+</div>
+</xsl:template>
+
+
+    
+<xsl:template name="indexMenu">
+<div id="indexMenu"><a href="#" onclick="changeIndex('classList')">Package tree</a> | <a href="#" onclick="changeIndex('indexByName')">Sort by name</a> | <a href="#" onclick="changeIndex('indexByModifiedTime')">Sort by date</a><hr />
+</div>
+</xsl:template>
+
+
 <xsl:template match="packageClass">
+<xsl:param name="extraTitle" select="'Button'"/>
+
 <xsl:variable name="packageNameVar"><xsl:if test="@package"><xsl:if test="string-length(@package)!=0"><xsl:value-of disable-output-escaping="yes" select="@package"/>.</xsl:if></xsl:if></xsl:variable>
 
 <script language="JavaScript">allClasses.push('<xsl:value-of disable-output-escaping="yes" select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>')</script>
 <a>
 <xsl:attribute name="onmousedown">showElement('<xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>');return false;</xsl:attribute>
 <span class="nonChoosen">
-<xsl:attribute name="ID"><xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>Button</xsl:attribute>
+<xsl:attribute name="ID"><xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/><xsl:value-of select="$extraTitle"/></xsl:attribute>
 <img src="OrteliusAjax/arrowright.gif" border="0" height="9" width="15"/> 
 <xsl:value-of disable-output-escaping="yes" select="@class"/>
 </span>
 </a><br/>
 </xsl:template>
 
-
 </xsl:stylesheet>
+
+
+
+
+ 

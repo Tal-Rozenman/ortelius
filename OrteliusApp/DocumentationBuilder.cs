@@ -30,8 +30,7 @@ namespace Ortelius
 		private Regex accessPublicAndProtectedTest = new Regex(".*(public|protected).*");
 		private Regex commentPublicAndProtectedTest = new Regex(@".*(//|/\*|\*).*(public|protected)");
 		private Regex lastWhiteSpace = new Regex(@"[\t| ]*$");
-		private Regex packageTest = new Regex(@"^[\t| ]*package");
-		
+		private Regex packageTest = new Regex(@"^[\t| ]*package");		
 		
 		private	Regex publicClassTest = new Regex(@"^[^\*/]*public[ |\t][^\*/]*class[ |\t]");
 		private	Regex interfaceTest = new Regex(@"^[^\*/]*public[ |\t][^\*/]*interface[ |\t]");
@@ -42,10 +41,6 @@ namespace Ortelius
 		
 		//private XmlDocument resultXml;
 		
-		
-		
-
-
 		
 		public DocumentationBuilder()
 		{
@@ -61,9 +56,9 @@ namespace Ortelius
 //			return newNode;
 //		}
 		
-		public string AddClass(string[] asFileLines)
+		public string AddClass(string[] asFileLines,DateTime modifiedTime)
 		{
-			string classXml = "";
+			string classXml = "<modified ticks=\""+modifiedTime.Ticks+"\">"+String.Format("{0:d/M yyyy}", modifiedTime)+"</modified>";
 			asFileLines = cleanUpLines(asFileLines);
 			classXml += getImportInfo(asFileLines);
 			classXml += getClassInfo(asFileLines);
@@ -78,7 +73,7 @@ namespace Ortelius
 		///
 		///</summary
 		private string getImportInfo(string[] asFileLines)
-		{	
+		{
 			string resultText = "";				
 			
 			for(int i = 0; i<asFileLines.Length;i++ ){
