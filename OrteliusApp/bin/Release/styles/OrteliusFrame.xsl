@@ -145,8 +145,6 @@
 </xsl:for-each>
 </div>
 </xsl:if>
-<br />
-<br />
 
 <xsl:if test="method[@access = 'public']">
 
@@ -358,8 +356,7 @@
 
 
 <xsl:for-each select="param">
-<div class="detailHeader"><xsl:value-of disable-output-escaping="yes" select="name"/></div>
-<div class="detailElement"><b>Type</b> : <span class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></span></div>
+<div class="detailElement"><b><xsl:value-of disable-output-escaping="yes" select="name"/></b> : <span class="codeLine"><xsl:value-of select="type"/></span></div>
 <div class="summary">
 <xsl:call-template name="PreserveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
