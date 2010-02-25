@@ -335,16 +335,17 @@ namespace Ortelius
 			
 			
 			foreach (XmlElement node in allClasses) {
-				XmlElement classNode = documentationXml.CreateElement("packageClass");
-				
-				XmlNode nameNode = node.SelectSingleNode("name");
-				classNode.SetAttribute("class", nameNode.InnerText);	
-				XmlNode packageNode = node.SelectSingleNode("package");
-				classNode.SetAttribute("package", packageNode.InnerText);	
-				XmlNode ticks = node.SelectSingleNode("modified/@ticks");
-				classNode.SetAttribute("modified", ticks.InnerText);	
-					
-				classByNameNode.AppendChild(classNode);
+				try{
+					XmlElement classNode = documentationXml.CreateElement("packageClass");
+					XmlNode nameNode = node.SelectSingleNode("name");
+					classNode.SetAttribute("class", nameNode.InnerText);	
+					XmlNode packageNode = node.SelectSingleNode("package");
+					classNode.SetAttribute("package", packageNode.InnerText);	
+					XmlNode ticks = node.SelectSingleNode("modified/@ticks");
+					classNode.SetAttribute("modified", ticks.InnerText);	
+						
+					classByNameNode.AppendChild(classNode);
+				}catch(Exception){}
 			}
 			
 		}

@@ -535,7 +535,9 @@ namespace Ortelius
 		
 		void OrteliusClosing(object sender, FormClosingEventArgs e)
 		{
-			SaveSettings();
+			try{
+				SaveSettings();
+			}catch(Exception){}
 		}
 		
 		
