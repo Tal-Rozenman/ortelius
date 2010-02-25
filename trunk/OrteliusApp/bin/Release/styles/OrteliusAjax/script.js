@@ -25,8 +25,11 @@ window.onload = function(){
 function changeIndex(elementId){
 	for(var i=0;i<allIndexLists.length;i++){
 		document.getElementById(allIndexLists[i]).style.visibility = "hidden";
+		document.getElementById(allIndexLists[i]+"Button").className = "nonChoosen";
 	}
 	document.getElementById(elementId).style.visibility = "visible";
+	document.getElementById(elementId+"Button").className = "choosen";
+	
 }
 
 
