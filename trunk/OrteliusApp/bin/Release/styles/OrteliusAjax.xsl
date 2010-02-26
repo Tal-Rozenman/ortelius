@@ -85,8 +85,8 @@
 
 <div class="detailHeader"><a href="#" onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
 <div id="div|details" class="hiddenElement">
-<div class="detailElement"><b>Package: </b> <xsl:value-of disable-output-escaping="yes" select="package"/>
-<div class="detailElement"><b>File modified: </b> <xsl:value-of disable-output-escaping="yes" select="modified "/></div>
+<div class="detailElement"><b>Package: </b> <xsl:value-of select="package "/></div>
+<div class="detailElement"><b>File modified: </b> <xsl:value-of select="modified "/></div>
 <xsl:if test="author"><div class="detailElement"><b>Author: </b> <xsl:value-of disable-output-escaping="yes" select="author"/></div></xsl:if>
 <xsl:if test="copyright"><div class="detailElement"><b>Copyright: </b> <xsl:value-of disable-output-escaping="yes" select="copyright"/></div></xsl:if>
 <xsl:if test="version"><div class="detailElement"><b>Version: </b> <xsl:value-of disable-output-escaping="yes" select="version"/></div></xsl:if>
@@ -329,7 +329,7 @@
 <div id="div|parameters" class="detailsVisible">
 
 <xsl:for-each select="param">
-<div class="detailElement"><b><xsl:value-of disable-output-escaping="yes" select="name"/></b> : <span class="codeLine"><xsl:value-of select="type"/></span></div>
+<div class="detailElement"><b><xsl:value-of disable-output-escaping="yes" select="name"/></b> : <span class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></span></div>
 <div class="summary">
 <xsl:call-template name="PreserveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
