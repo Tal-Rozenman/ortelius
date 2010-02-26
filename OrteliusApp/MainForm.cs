@@ -496,8 +496,14 @@ namespace Ortelius
 		
 		void SaveSettings()
 		{
-			string settingFile = Path.GetDirectoryName(Application.ExecutablePath)+"/settings.ors";
+			string settingFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+@"\Ortelius";
 			
+			//string settingFile = Path.GetDirectoryName(Application.ExecutablePath)+"/settings.ors";
+			if(!Directory.Exists(settingFile)){
+				Directory.CreateDirectory(settingFile);
+			}
+				
+			settingFile += @"\settings.ors";
 			FileStream myStream = new FileStream(settingFile,FileMode.OpenOrCreate,FileAccess.Write);
 			BinaryFormatter binSkriver = new BinaryFormatter();
 			binSkriver.Serialize(myStream,appSettings);
@@ -505,7 +511,7 @@ namespace Ortelius
 		}
 		
 		void LoadSettings(){
-			string settingFile = Path.GetDirectoryName(Application.ExecutablePath)+"/settings.ors";
+			string settingFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+@"\Ortelius\settings.ors";
 			
 			if(File.Exists(settingFile)){
 				try{
