@@ -110,7 +110,7 @@ namespace Ortelius
 			this.menuStrip1.Location = new System.Drawing.Point(4, 22);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.menuStrip1.Size = new System.Drawing.Size(139, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(231, 24);
 			this.menuStrip1.TabIndex = 3;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -176,6 +176,7 @@ namespace Ortelius
 			this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
 			this.buildToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
 			this.buildToolStripMenuItem.Text = "Documentation";
+			this.buildToolStripMenuItem.Click += new System.EventHandler(this.BuildToolStripMenuItemClick);
 			// 
 			// addClassFileToolStripMenuItem
 			// 
@@ -235,6 +236,7 @@ namespace Ortelius
 			this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
 			this.listBox1.Size = new System.Drawing.Size(404, 329);
 			this.listBox1.TabIndex = 7;
+			this.listBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ClassList_KeyDown);
 			// 
 			// button3
 			// 
