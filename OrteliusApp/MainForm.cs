@@ -524,17 +524,21 @@ namespace Ortelius
 				}
 				catch(Exception e){
 					MessageBox.Show(e.ToString());
-				}
-					
+				}					
 			}
 		}
 		
 		void CloseToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			string saveWarning = "Do you want to close without saving your changes?";
+			string saveWarning = "Do you want to save the current changes?";
 			if(changeFlag){
-				if(MessageBox.Show(saveWarning,"Confirm", MessageBoxButtons.YesNo) == DialogResult.No) return;
+				DialogResult saveAnswer = MessageBox.Show(saveWarning,"Save changes?",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question);
+				if( saveAnswer == DialogResult.Cancel) return;
+				else if( saveAnswer == DialogResult.Yes){
+					saveProject(false);
+				}
 			}
+			
 			this.Close();
 			
 		}
@@ -573,6 +577,10 @@ namespace Ortelius
 		//remove class
 		void RemoveClass(object sender, System.EventArgs e)
 		{
+			doRemoveClass();
+		}
+		//remove class
+		private void doRemoveClass(){
 			int lowInd = listBox1.Items.Count-1;
 			ListBox.SelectedIndexCollection allSIndices = listBox1.SelectedIndices;
 			foreach(int selectInd in allSIndices){
@@ -586,6 +594,12 @@ namespace Ortelius
 			renderList();
 			if(lowInd>=listBox1.Items.Count) lowInd = listBox1.Items.Count-1;
 			if(lowInd > 0) listBox1.SelectedIndex = lowInd;
+		}
+		
+		private void ClassList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e){	
+			if (e.KeyCode == Keys.Delete)	{		
+				doRemoveClass();
+			}
 		}
 		
 		//add folder
@@ -840,6 +854,11 @@ System.Windows.Forms.MouseEventArgs e)
 		{
 			string resultDoc = projSettings.DestinationPath+projSettings.DocHtmlFileName;
 			System.Diagnostics.Process.Start(resultDoc);
+		}
+		
+		void BuildToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			
 		}
 	}
 	

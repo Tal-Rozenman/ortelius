@@ -113,6 +113,8 @@
 
 <div class="detailHeader">Details</div>
 <div id="div|details" class="detailsVisible">
+<div class="detailElement"><b>Package: </b> <xsl:value-of select="package "/></div>
+<div class="detailElement"><b>File modified: </b> <xsl:value-of select="modified "/></div>
 <xsl:if test="author"><div class="detailElement"><b>Author: </b> <xsl:value-of disable-output-escaping="yes" select="author"/></div></xsl:if>
 <xsl:if test="copyright"><div class="detailElement"><b>Copyright: </b> <xsl:value-of disable-output-escaping="yes" select="copyright"/></div></xsl:if>
 <xsl:if test="version"><div class="detailElement"><b>Version: </b> <xsl:value-of disable-output-escaping="yes" select="version"/></div></xsl:if>
@@ -156,6 +158,7 @@
 <tr class="methodPropertyLine"><td class="methodPropertyTitle">
 <img src="../OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/> <a target="contentFrame">
 <xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>.html</xsl:attribute>
+<xsl:attribute name="title"><xsl:value-of select="method[name = $className]/codeLine"/></xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="method[name = $className]/name"/></a>
 </td><td class="methodPropertyModifiers">
 <img border="0"><xsl:attribute name="src">../OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="modifiers/modifier"/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="modifiers/modifier"/></xsl:attribute></img>
@@ -169,6 +172,7 @@
 <tr class="methodPropertyLine"><td class="methodPropertyTitle">
 <img src="../OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/><a target="contentFrame">
 <xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>.html</xsl:attribute>
+<xsl:attribute name="title"><xsl:value-of select="codeLine"/></xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/> </a>
 </td><td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"/>
 <xsl:for-each select="modifiers/modifier">
@@ -191,6 +195,7 @@
 <tr class="methodPropertyLine"><td class="methodPropertyTitle">
 <img src="../OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/> <a target="contentFrame">
 <xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>.html</xsl:attribute>
+<xsl:attribute name="title"><xsl:value-of select="codeLine"/></xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/> </a>
 </td><td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"/>
 <xsl:for-each select="modifiers/modifier">
@@ -574,6 +579,7 @@
 
 <a target="contentFrame">
 <xsl:attribute name="href">ortfiles/<xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>.html</xsl:attribute>
+<xsl:attribute name="title"><xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/></xsl:attribute>
 <span class="nonChoosen">
 <xsl:attribute name="ID"><xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>Button</xsl:attribute>
 <img src="OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/> 
