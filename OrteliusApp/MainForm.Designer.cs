@@ -111,7 +111,7 @@ namespace Ortelius
 			this.menuStrip1.Location = new System.Drawing.Point(4, 22);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.menuStrip1.Size = new System.Drawing.Size(231, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(139, 24);
 			this.menuStrip1.TabIndex = 3;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -177,7 +177,6 @@ namespace Ortelius
 			this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
 			this.buildToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
 			this.buildToolStripMenuItem.Text = "Documentation";
-			this.buildToolStripMenuItem.Click += new System.EventHandler(this.BuildToolStripMenuItemClick);
 			// 
 			// addClassFileToolStripMenuItem
 			// 
@@ -305,7 +304,6 @@ namespace Ortelius
 			this.label2.Size = new System.Drawing.Size(56, 19);
 			this.label2.TabIndex = 14;
 			this.label2.Text = "Class files";
-			this.label2.Click += new System.EventHandler(this.Label2Click);
 			// 
 			// BuildButton
 			// 
@@ -336,7 +334,6 @@ namespace Ortelius
 			this.titleText.Text = "Ortelius";
 			this.titleText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.titleText.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frm_MouseMove);
-			this.titleText.Click += new System.EventHandler(this.Label3Click);
 			this.titleText.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frm_MouseDown);
 			this.titleText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmGlavna_MouseUp);
 			// 
@@ -404,7 +401,6 @@ namespace Ortelius
 			this.label5.Size = new System.Drawing.Size(50, 16);
 			this.label5.TabIndex = 24;
 			this.label5.Text = "Title";
-			this.label5.Click += new System.EventHandler(this.Label5Click);
 			// 
 			// introHeader
 			// 
@@ -438,6 +434,7 @@ namespace Ortelius
 			this.newVersion.TabIndex = 26;
 			this.newVersion.Text = "Version 1.2.1.0 available";
 			this.newVersion.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.newVersion.Click += new System.EventHandler(this.NewVersionClick);
 			// 
 			// MainForm
 			// 
