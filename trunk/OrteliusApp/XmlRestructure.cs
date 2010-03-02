@@ -116,15 +116,10 @@ namespace Ortelius
 					elementNode.SetAttribute("inheritedFrom",superClassName);
 					
 					//Dont add if the element already exists
-					XmlNodeList originalElements = classNode.SelectNodes("method[name = '"+elementNodeName+"']");
-					if(originalElements.Count == 0) classNode.AppendChild(elementNode.Clone());
-					
-					originalElements = classNode.SelectNodes("property[name = '"+elementNodeName+"']");
+					XmlNodeList originalElements = classNode.SelectNodes("method[name = '"+elementNodeName+"'] | property[name = '"+elementNodeName+"']");
 					if(originalElements.Count == 0) classNode.AppendChild(elementNode.Clone());
 					else {
 						//the element exist
-						//MessageBox.Show(elementNode.InnerXml);
-						//MessageBox.Show(originalElements[0].InnerXml);
 						string rwSuper = elementNode.GetAttribute("readWrite");
 						string rwSub = ((XmlElement) originalElements[0]).GetAttribute("readWrite");
 						if(rwSub != "ReadWrite" && rwSuper != rwSub) ((XmlElement) originalElements[0]).SetAttribute("readWrite","ReadWrite");

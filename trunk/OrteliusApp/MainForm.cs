@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Net;
 using System.Windows.Forms;
 using System.Collections;
 using System.IO;
@@ -60,7 +61,29 @@ namespace Ortelius
 			
 			populateStyleCombo();
 			changeFlag = false;
+			checkForUpdates();
 			
+		}
+		/// <summary>
+		/// Checking if there is a new version available
+		/// </summary>
+		private void checkForUpdates(){
+			string url = "http://ortelius.marten.dk/latest_version.aspx";
+			string result = null;
+			
+			try
+			{
+			    WebClient client = new WebClient();
+			    result = client.DownloadString( url );
+			}
+			catch (Exception ex)
+			{
+			    // handle error
+			    MessageBox.Show( ex.Message );
+			}
+			if(result!="1.2.1.0"){
+				newVersion.Text = "Version "+result+" available";
+			}else newVersion.Text = "";
 		}
 		
 		void populateStyleCombo(){
@@ -854,6 +877,11 @@ System.Windows.Forms.MouseEventArgs e)
 		{
 			string resultDoc = projSettings.DestinationPath+projSettings.DocHtmlFileName;
 			System.Diagnostics.Process.Start(resultDoc);
+		}
+		
+		void Label3Click(object sender, EventArgs e)
+		{
+			
 		}
 		
 		void BuildToolStripMenuItemClick(object sender, EventArgs e)
