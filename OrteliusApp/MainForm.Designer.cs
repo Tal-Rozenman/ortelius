@@ -61,7 +61,7 @@ namespace Ortelius
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.BuildButton = new System.Windows.Forms.Button();
-			this.label3 = new System.Windows.Forms.Label();
+			this.titleText = new System.Windows.Forms.Label();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -70,6 +70,7 @@ namespace Ortelius
 			this.label5 = new System.Windows.Forms.Label();
 			this.introHeader = new System.Windows.Forms.TextBox();
 			this.showAfterBuildCB = new System.Windows.Forms.CheckBox();
+			this.newVersion = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -130,7 +131,7 @@ namespace Ortelius
 			// 
 			this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
 			this.newProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+			this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
 			this.newProjectToolStripMenuItem.Text = "New project";
 			this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProjectToolStripMenuItemClick);
 			// 
@@ -138,14 +139,14 @@ namespace Ortelius
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
 			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
 			// 
 			// saveProjectToolStripMenuItem
 			// 
 			this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-			this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+			this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
 			this.saveProjectToolStripMenuItem.Text = "Save project as...";
 			this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItemClick);
 			// 
@@ -153,7 +154,7 @@ namespace Ortelius
 			// 
 			this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
 			this.loadProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+			this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
 			this.loadProjectToolStripMenuItem.Text = "Open project";
 			this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProjectToolStripMenuItemClick);
 			// 
@@ -161,7 +162,7 @@ namespace Ortelius
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
 			this.closeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
 			this.closeToolStripMenuItem.Text = "Exit";
 			this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItemClick);
 			// 
@@ -181,21 +182,21 @@ namespace Ortelius
 			// addClassFileToolStripMenuItem
 			// 
 			this.addClassFileToolStripMenuItem.Name = "addClassFileToolStripMenuItem";
-			this.addClassFileToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.addClassFileToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.addClassFileToolStripMenuItem.Text = "Add Class file";
 			this.addClassFileToolStripMenuItem.Click += new System.EventHandler(this.AddASFile);
 			// 
 			// addFolderToolStripMenuItem
 			// 
 			this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.addFolderToolStripMenuItem.Text = "Add folder with class files";
 			this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.AddFolder);
 			// 
 			// chooseDestinationToolStripMenuItem
 			// 
 			this.chooseDestinationToolStripMenuItem.Name = "chooseDestinationToolStripMenuItem";
-			this.chooseDestinationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.chooseDestinationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.chooseDestinationToolStripMenuItem.Text = "Choose destination";
 			this.chooseDestinationToolStripMenuItem.Click += new System.EventHandler(this.ChooseDestination);
 			// 
@@ -203,14 +204,14 @@ namespace Ortelius
 			// 
 			this.buildDocumentationToolStripMenuItem.Name = "buildDocumentationToolStripMenuItem";
 			this.buildDocumentationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-			this.buildDocumentationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.buildDocumentationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.buildDocumentationToolStripMenuItem.Text = "Build documentation";
 			this.buildDocumentationToolStripMenuItem.Click += new System.EventHandler(this.BuildDocumentationToolStripMenuItemClick);
 			// 
 			// goToDocumentationToolStripMenuItem
 			// 
 			this.goToDocumentationToolStripMenuItem.Name = "goToDocumentationToolStripMenuItem";
-			this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.goToDocumentationToolStripMenuItem.Text = "Go to documentation";
 			this.goToDocumentationToolStripMenuItem.Click += new System.EventHandler(this.GoToDocumentationToolStripMenuItemClick);
 			// 
@@ -321,22 +322,23 @@ namespace Ortelius
 			this.BuildButton.UseVisualStyleBackColor = true;
 			this.BuildButton.Click += new System.EventHandler(this.BuildDocumentationToolStripMenuItemClick);
 			// 
-			// label3
+			// titleText
 			// 
-			this.label3.BackColor = System.Drawing.Color.Transparent;
-			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.label3.Location = new System.Drawing.Point(4, 5);
-			this.label3.Margin = new System.Windows.Forms.Padding(0);
-			this.label3.Name = "label3";
-			this.label3.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.label3.Size = new System.Drawing.Size(487, 41);
-			this.label3.TabIndex = 17;
-			this.label3.Text = "Ortelius";
-			this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frm_MouseMove);
-			this.label3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frm_MouseDown);
-			this.label3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmGlavna_MouseUp);
+			this.titleText.BackColor = System.Drawing.Color.Transparent;
+			this.titleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.titleText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.titleText.Location = new System.Drawing.Point(4, 5);
+			this.titleText.Margin = new System.Windows.Forms.Padding(0);
+			this.titleText.Name = "titleText";
+			this.titleText.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.titleText.Size = new System.Drawing.Size(487, 17);
+			this.titleText.TabIndex = 17;
+			this.titleText.Text = "Ortelius";
+			this.titleText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.titleText.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frm_MouseMove);
+			this.titleText.Click += new System.EventHandler(this.Label3Click);
+			this.titleText.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frm_MouseDown);
+			this.titleText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmGlavna_MouseUp);
 			// 
 			// pictureBox1
 			// 
@@ -423,6 +425,20 @@ namespace Ortelius
 			this.showAfterBuildCB.UseVisualStyleBackColor = false;
 			this.showAfterBuildCB.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
 			// 
+			// newVersion
+			// 
+			this.newVersion.BackColor = System.Drawing.Color.Transparent;
+			this.newVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.newVersion.ForeColor = System.Drawing.Color.DarkRed;
+			this.newVersion.Location = new System.Drawing.Point(152, 23);
+			this.newVersion.Margin = new System.Windows.Forms.Padding(0);
+			this.newVersion.Name = "newVersion";
+			this.newVersion.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.newVersion.Size = new System.Drawing.Size(207, 20);
+			this.newVersion.TabIndex = 26;
+			this.newVersion.Text = "Version 1.2.1.0 available";
+			this.newVersion.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -431,6 +447,7 @@ namespace Ortelius
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ClientSize = new System.Drawing.Size(500, 700);
+			this.Controls.Add(this.newVersion);
 			this.Controls.Add(this.showAfterBuildCB);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.introHeader);
@@ -440,7 +457,7 @@ namespace Ortelius
 			this.Controls.Add(this.menuStrip1);
 			this.Controls.Add(this.pictureBox2);
 			this.Controls.Add(this.pictureBox1);
-			this.Controls.Add(this.label3);
+			this.Controls.Add(this.titleText);
 			this.Controls.Add(this.BuildButton);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
@@ -472,6 +489,8 @@ namespace Ortelius
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Label newVersion;
+		private System.Windows.Forms.Label titleText;
 		private System.Windows.Forms.ToolStripMenuItem goToDocumentationToolStripMenuItem;
 		private System.Windows.Forms.CheckBox showAfterBuildCB;
 		private System.Windows.Forms.TextBox introHeader;
@@ -481,7 +500,6 @@ namespace Ortelius
 		private System.Windows.Forms.PictureBox pictureBox3;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Button BuildButton;
 		private System.Windows.Forms.ToolStripMenuItem chooseDestinationToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addFolderToolStripMenuItem;
