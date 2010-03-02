@@ -68,7 +68,8 @@ namespace Ortelius
 		/// Checking if there is a new version available
 		/// </summary>
 		private void checkForUpdates(){
-			string url = "http://ortelius.marten.dk/latest_version.aspx";
+			string version = "1.2.1.0";
+			string url = "http://ortelius.marten.dk/latest_version.aspx?version="+version;
 			string result = null;
 			
 			try
@@ -81,7 +82,7 @@ namespace Ortelius
 			    // handle error
 			    MessageBox.Show( ex.Message );
 			}
-			if(result!="1.2.1.0"){
+			if(result!=version){
 				newVersion.Text = "Version "+result+" available";
 			}else newVersion.Text = "";
 		}
@@ -822,34 +823,28 @@ System.Windows.Forms.MouseEventArgs e)
 		
 		void PictureBox3Click(object sender, EventArgs e)
 		{
-			  string target= "http://ortelius.marten.dk";
-
-    try
-        {
-         System.Diagnostics.Process.Start(target);
-        }
-    catch
-        ( 
-         System.ComponentModel.Win32Exception noBrowser) 
-        {
-         if (noBrowser.ErrorCode==-2147467259)
-          MessageBox.Show(noBrowser.Message);
-        }
-    catch (System.Exception other)
-        {
-          MessageBox.Show(other.Message);
-        }
+			openSite();
 		}
 		
-		void Label2Click(object sender, EventArgs e)
-		{
-			
+		private void openSite(){
+			string target= "http://ortelius.marten.dk";
+		    try
+		        {
+		         System.Diagnostics.Process.Start(target);
+		        }
+		    catch
+		        ( 
+		         System.ComponentModel.Win32Exception noBrowser) 
+		        {
+		         if (noBrowser.ErrorCode==-2147467259)
+		          MessageBox.Show(noBrowser.Message);
+		        }
+		    catch (System.Exception other)
+		        {
+		          MessageBox.Show(other.Message);
+		        }
 		}
 		
-		void Label5Click(object sender, EventArgs e)
-		{
-			
-		}
 		
 		void IntroTextTextChanged(object sender, EventArgs e)
 		{
@@ -879,14 +874,11 @@ System.Windows.Forms.MouseEventArgs e)
 			System.Diagnostics.Process.Start(resultDoc);
 		}
 		
-		void Label3Click(object sender, EventArgs e)
-		{
-			
-		}
+
 		
-		void BuildToolStripMenuItemClick(object sender, EventArgs e)
+		void NewVersionClick(object sender, EventArgs e)
 		{
-			
+			openSite();
 		}
 	}
 	
