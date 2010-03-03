@@ -131,7 +131,7 @@ namespace Ortelius
 			// 
 			this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
 			this.newProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.newProjectToolStripMenuItem.Text = "New project";
 			this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProjectToolStripMenuItemClick);
 			// 
@@ -139,14 +139,14 @@ namespace Ortelius
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
 			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
 			// 
 			// saveProjectToolStripMenuItem
 			// 
 			this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-			this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.saveProjectToolStripMenuItem.Text = "Save project as...";
 			this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItemClick);
 			// 
@@ -154,7 +154,7 @@ namespace Ortelius
 			// 
 			this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
 			this.loadProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.loadProjectToolStripMenuItem.Text = "Open project";
 			this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProjectToolStripMenuItemClick);
 			// 
@@ -162,7 +162,7 @@ namespace Ortelius
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
 			this.closeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
 			this.closeToolStripMenuItem.Text = "Exit";
 			this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItemClick);
 			// 
@@ -181,21 +181,21 @@ namespace Ortelius
 			// addClassFileToolStripMenuItem
 			// 
 			this.addClassFileToolStripMenuItem.Name = "addClassFileToolStripMenuItem";
-			this.addClassFileToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.addClassFileToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.addClassFileToolStripMenuItem.Text = "Add Class file";
 			this.addClassFileToolStripMenuItem.Click += new System.EventHandler(this.AddASFile);
 			// 
 			// addFolderToolStripMenuItem
 			// 
 			this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
-			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.addFolderToolStripMenuItem.Text = "Add folder with class files";
 			this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.AddFolder);
 			// 
 			// chooseDestinationToolStripMenuItem
 			// 
 			this.chooseDestinationToolStripMenuItem.Name = "chooseDestinationToolStripMenuItem";
-			this.chooseDestinationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.chooseDestinationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.chooseDestinationToolStripMenuItem.Text = "Choose destination";
 			this.chooseDestinationToolStripMenuItem.Click += new System.EventHandler(this.ChooseDestination);
 			// 
@@ -203,14 +203,14 @@ namespace Ortelius
 			// 
 			this.buildDocumentationToolStripMenuItem.Name = "buildDocumentationToolStripMenuItem";
 			this.buildDocumentationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-			this.buildDocumentationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.buildDocumentationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.buildDocumentationToolStripMenuItem.Text = "Build documentation";
 			this.buildDocumentationToolStripMenuItem.Click += new System.EventHandler(this.BuildDocumentationToolStripMenuItemClick);
 			// 
 			// goToDocumentationToolStripMenuItem
 			// 
 			this.goToDocumentationToolStripMenuItem.Name = "goToDocumentationToolStripMenuItem";
-			this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.goToDocumentationToolStripMenuItem.Text = "Go to documentation";
 			this.goToDocumentationToolStripMenuItem.Click += new System.EventHandler(this.GoToDocumentationToolStripMenuItemClick);
 			// 
@@ -329,7 +329,7 @@ namespace Ortelius
 			this.titleText.Margin = new System.Windows.Forms.Padding(0);
 			this.titleText.Name = "titleText";
 			this.titleText.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.titleText.Size = new System.Drawing.Size(487, 17);
+			this.titleText.Size = new System.Drawing.Size(487, 41);
 			this.titleText.TabIndex = 17;
 			this.titleText.Text = "Ortelius";
 			this.titleText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -426,11 +426,11 @@ namespace Ortelius
 			this.newVersion.BackColor = System.Drawing.Color.Transparent;
 			this.newVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.newVersion.ForeColor = System.Drawing.Color.DarkRed;
-			this.newVersion.Location = new System.Drawing.Point(152, 23);
+			this.newVersion.Location = new System.Drawing.Point(176, 23);
 			this.newVersion.Margin = new System.Windows.Forms.Padding(0);
 			this.newVersion.Name = "newVersion";
 			this.newVersion.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.newVersion.Size = new System.Drawing.Size(207, 20);
+			this.newVersion.Size = new System.Drawing.Size(154, 20);
 			this.newVersion.TabIndex = 26;
 			this.newVersion.Text = "Version 1.2.1.0 available";
 			this.newVersion.TextAlign = System.Drawing.ContentAlignment.TopCenter;

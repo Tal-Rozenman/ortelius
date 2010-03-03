@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 	<Product Id="*"
 		Name="Ortelius"
 		Language="1033"
@@ -15,6 +15,12 @@
  			Specifies a single cab file to be embedded in the installer's .msi. 
 		-->
 		<Media Id="1" Cabinet="contents.cab" EmbedCab="yes" CompressionLevel="high"/>
+		
+		<PropertyRef Id="NETFRAMEWORK35" /> 
+<Condition Message="This setup requires the .NET Framework 3.5 to be installed."> 
+  Installed OR NETFRAMEWORK35 
+</Condition> 
+
 		
 		<!-- Installation directory and files are defined in Files.wxs -->
 		<Directory Id="TARGETDIR" Name="SourceDir"/>

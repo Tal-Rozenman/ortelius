@@ -81,7 +81,7 @@ function showHideAllTreeElement(doShow){
 	}
 
 function showElement(elementId){
-	if(elementId.indexOf("@") ==0){
+	if(elementId.indexOf("@")==0){
 		var url = elementId.replace("@","");
 		window.open("http://www.google.com/search?q="+url+"+Actionscript");
 		return;
