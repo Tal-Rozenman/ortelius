@@ -25,6 +25,8 @@ namespace Ortelius
 		private string delimeter = "*";
 		private string classType = "";
 		
+		private int idCounter = 0;
+		
 		private Regex accessPublicTest = new Regex(".*public.*");
 		private Regex accessProtectedTest = new Regex(".*protected.*");
 		private Regex accessPublicAndProtectedTest = new Regex(".*(public|protected).*");
@@ -122,6 +124,7 @@ namespace Ortelius
 					resultText += "<package>"+packageName+"</package>\r\n";
 					
 					resultText += "<name>"+stripElement(fileLine,@" *(\[.*\] +)?(dynamic +)?(final +)?((public|internal) +)?(dynamic +)?(final +)?(class +)",@"( +extends)?( +\S*)?( +implements)?( +\S*)? *{? *")+"</name>\r\n";
+					resultText += getId();
 					
 					resultText += "<summary><![CDATA["+getSummery(asFileLines,i)+"]]></summary>\r\n";
 					//tjek for events
@@ -133,7 +136,7 @@ namespace Ortelius
 					resultText += "<package>"+packageName+"</package>\r\n";
 					
 					resultText += "<name>"+stripElement(fileLine,@" *((public|internal) +)?(interface +)",@"( +extends)?( +\S*)? *{? *")+"</name>\r\n";
-					
+					resultText += getId();
 					resultText += "<summary><![CDATA["+getSummery(asFileLines,i)+"]]></summary>\r\n";
 					//tjek for events
 			 		resultText += getStandAloneTags(asFileLines,i);
@@ -191,6 +194,7 @@ namespace Ortelius
 				resultText += "<method access=\""+accesString+"\">\r\n";
 				
 				resultText += "<name>"+stripElement(fileLine,@" *(static +)?(override +)?(virtual +)?((protected|public|internal) +)?(override +)?(static +)?(virtual +)?(function +)",@"\(.*")+"</name>\r\n";
+				resultText += getId();
 				resultText += "<summary><![CDATA["+getSummery(asFileLines,lineIndex)+"]]></summary>\r\n";
 				
 				resultText += formatCodeline(fileLine);
@@ -213,6 +217,7 @@ namespace Ortelius
 						if(param.IndexOf(":")!=-1) resultText += getType(param,pName);
 						
 						resultText += "<name>" +pName +"</name>\r\n";
+						resultText += getId();
 						resultText += "<summary><![CDATA["+getDescription(asFileLines,lineIndex,"@param "+pName)+"]]></summary>\r\n";
 						resultText += "</param>\r\n";
 					}
@@ -246,7 +251,7 @@ namespace Ortelius
 				resultText += "<property access=\""+accesString+"\"  readWrite=\"Read\">\r\n";
 				
 				resultText += "<name>"+stripElement(fileLine,@" *(static +)?(override +)?((protected|public|internal) +)?(override +)?(static +)?(function +get +)",@"\(.*")+"</name>\r\n";
-				
+				resultText += getId();
 				if(fileLine.IndexOf("):") != -1){
 					string typeName =stripElement(fileLine,@".*\) *: *",@" *{.*");
 					resultText += formatType(typeName);;
@@ -263,7 +268,8 @@ namespace Ortelius
 				resultText += "<property access=\""+accesString+"\" readWrite=\"Write\">\r\n";
 				
 				string pName = stripElement(fileLine,@" *(static +)?(override +)?((protected|public|internal) +)?(override +)?(static +)?(function +set +)",@"\(.*");
-				resultText += "<name>"+pName+"</name>\r\n";				
+				resultText += "<name>"+pName+"</name>\r\n";	
+				resultText += getId();
 				string typeName = stripElement(fileLine,@".*\(.*[^\)]:",@" *\).*");
 				
 				resultText += formatType(typeName);
@@ -281,6 +287,7 @@ namespace Ortelius
 				
 				string propName = stripElement(fileLine,@" *((public|protected) +)?(static +)?((public|protected) +)?((const|var) +)(static +)?",@" *[:| |=|;].*");
 				resultText += "<name>"+propName+"</name>\r\n";
+				resultText += getId();
 				resultText += "<modifiers>\r\n"+getModifiers(fileLine)+"</modifiers>\r\n";	
 				
 				if(fileLine.IndexOf(propName+":")!=-1) resultText += "<type>"+getType(fileLine,propName)+"</type>\r\n";
@@ -507,7 +514,7 @@ namespace Ortelius
 					string eventName = tempDocString.Substring(0,delimIndex);
 					string summery = "";
 					if(tempDocString.Length > (delimIndex+1) ) summery =tempDocString.Substring(delimIndex+1);
-					resultText += "<event>\r\n<name>"+eventName+"</name>\r\n<summary><![CDATA["+summery+"]]></summary>\r\n</event>\r\n";
+					resultText += "<event>\r\n<name>"+eventName+"</name>\r\n"+getId()+"<summary><![CDATA["+summery+"]]></summary>\r\n</event>\r\n";
 				}
 		
 			
@@ -656,6 +663,9 @@ namespace Ortelius
 			return linje;
 		}
 		
+		private string getId(){
+			return "<fid>"+(idCounter++).ToString()+"</fid>\r\n";
+		}
 		#endregion
 		
 		

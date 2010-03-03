@@ -281,6 +281,10 @@ namespace Ortelius
 					XmlElement classNode = documentationXml.CreateElement("packageClass");
 					classNode.SetAttribute("package",packageName);
 					classNode.SetAttribute("class",cNode.InnerText);
+					
+					XmlNode fidNode = node.SelectSingleNode("fid");
+					classNode.SetAttribute("fid", fidNode.InnerText);
+					
 					xmlElement.AppendChild(classNode);
 				}
 				
@@ -340,7 +344,9 @@ namespace Ortelius
 					XmlNode packageNode = node.SelectSingleNode("package");
 					classNode.SetAttribute("package", packageNode.InnerText);	
 					XmlNode ticks = node.SelectSingleNode("modified/@ticks");
-					classNode.SetAttribute("modified", ticks.InnerText);	
+					classNode.SetAttribute("modified", ticks.InnerText);
+					XmlNode fidNode = node.SelectSingleNode("fid");
+					classNode.SetAttribute("fid", fidNode.InnerText);
 						
 					classByNameNode.AppendChild(classNode);
 				}catch(Exception){}
