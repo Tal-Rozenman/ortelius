@@ -66,7 +66,7 @@
 <xsl:if test="name">
 <xsl:variable name="className" select="name"/>
 <xsl:variable name="packageName"><xsl:if test="package"><xsl:if test="string-length(package)!=0"><xsl:value-of disable-output-escaping="yes" select="package"/>.</xsl:if></xsl:if></xsl:variable>
-<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.html</xsl:variable>
+<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="fid"/>.html</xsl:variable>
 
 <xsl:result-document href="{$filename}" format="text">
 <div class="classDetails" >
