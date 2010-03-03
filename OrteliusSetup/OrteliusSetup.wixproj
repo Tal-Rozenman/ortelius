@@ -27,6 +27,7 @@
   <Import Project="$(WixToolPath)\wix.targets" />
   <ItemGroup>
     <WixExtension Include="$(WixToolPath)\WixUIExtension.dll" />
+    <WixExtension Include="..\..\..\..\..\Program Files\Windows Installer XML v3\bin\WixNetFxExtension.dll" />
     <Compile Include="Files.wxs" />
     <Compile Include="Setup.wxs" />
     <None Include="license.rtf" />

@@ -84,7 +84,10 @@ namespace Ortelius
 			}
 			if(result!=version){
 				newVersion.Text = "Version "+result+" available";
-			}else newVersion.Text = "";
+			}else{
+				newVersion.Visible = false;
+				
+			}
 		}
 		
 		void populateStyleCombo(){
@@ -765,7 +768,6 @@ namespace Ortelius
 				if(appSettings.CurrentProject !="") saveProjectSettings();
 				changeFlag = false;
 			}
-			
 		}
 		
 				
@@ -782,42 +784,42 @@ namespace Ortelius
 		
 		
 		private Point mouseOffset;
-private bool isMouseDown = false;
-
-private void frm_MouseDown(object sender, 
-System.Windows.Forms.MouseEventArgs e)
-{
-int xOffset;
-int yOffset;
-    if (e.Button == MouseButtons.Left)
-    {
-    xOffset = -e.X - SystemInformation.FrameBorderSize.Width;
-    yOffset = -e.Y ;
-
-    mouseOffset = new Point(xOffset, yOffset);
-    isMouseDown = true;
-    }
-}
-private void frm_MouseMove(object sender, 
-System.Windows.Forms.MouseEventArgs e)
-{
-    if (isMouseDown)
-    {
-        Point mousePos = Control.MousePosition;
-        mousePos.Offset(mouseOffset.X, mouseOffset.Y);
-        Location = mousePos;
-    }
-}
-
-private void FrmGlavna_MouseUp(object sender, 
-System.Windows.Forms.MouseEventArgs e)
-{
-    if (e.Button == MouseButtons.Left)
-    {
-        isMouseDown = false;
-    }
-}
+		private bool isMouseDown = false;
 		
+		private void frm_MouseDown(object sender, 
+		System.Windows.Forms.MouseEventArgs e)
+		{
+		int xOffset;
+		int yOffset;
+		    if (e.Button == MouseButtons.Left)
+		    {
+		    xOffset = -e.X - SystemInformation.FrameBorderSize.Width;
+		    yOffset = -e.Y ;
+		
+		    mouseOffset = new Point(xOffset, yOffset);
+		    isMouseDown = true;
+		    }
+		}
+
+		private void frm_MouseMove(object sender, 
+		System.Windows.Forms.MouseEventArgs e)
+		{
+		    if (isMouseDown)
+		    {
+		        Point mousePos = Control.MousePosition;
+		        mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+		        Location = mousePos;
+		    }
+		}
+		
+		private void FrmGlavna_MouseUp(object sender, 
+		System.Windows.Forms.MouseEventArgs e)
+		{
+		    if (e.Button == MouseButtons.Left)
+		    {
+		        isMouseDown = false;
+		    }
+		}
 		
 		
 		
@@ -858,8 +860,6 @@ System.Windows.Forms.MouseEventArgs e)
 			projSettings.IntroHeader = introHeader.Text;
 			
 		}
-		
-	
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
 		{

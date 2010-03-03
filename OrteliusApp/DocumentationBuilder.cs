@@ -25,7 +25,7 @@ namespace Ortelius
 		private string delimeter = "*";
 		private string classType = "";
 		
-		private int idCounter = 0;
+		private int idCounter = 1;
 		
 		private Regex accessPublicTest = new Regex(".*public.*");
 		private Regex accessProtectedTest = new Regex(".*protected.*");
@@ -60,6 +60,7 @@ namespace Ortelius
 		
 		public string AddClass(string[] asFileLines,DateTime modifiedTime)
 		{
+			idCounter = 1;
 			string classXml = "<modified ticks=\""+modifiedTime.Ticks+"\">"+String.Format("{0:d/M yyyy}", modifiedTime)+"</modified>";
 			asFileLines = cleanUpLines(asFileLines);
 			classXml += getImportInfo(asFileLines);
