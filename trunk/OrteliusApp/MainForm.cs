@@ -626,6 +626,9 @@ namespace Ortelius
 		private void ClassList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e){	
 			if (e.KeyCode == Keys.Delete)	{		
 				doRemoveClass();
+			}else if(e.KeyCode == Keys.A && e.Control){
+				for (int i = 0; i < listBox1.Items.Count; i++)listBox1.SetSelected(i,true);
+
 			}
 		}
 		
