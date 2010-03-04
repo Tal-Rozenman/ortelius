@@ -222,7 +222,7 @@ namespace Ortelius
 			this.button2.ForeColor = System.Drawing.Color.White;
 			this.button2.Location = new System.Drawing.Point(76, 591);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(110, 24);
+			this.button2.Size = new System.Drawing.Size(110, 22);
 			this.button2.TabIndex = 6;
 			this.button2.Text = "Choose destination";
 			this.button2.UseVisualStyleBackColor = true;
