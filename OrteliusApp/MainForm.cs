@@ -75,18 +75,17 @@ namespace Ortelius
 			try
 			{
 			    WebClient client = new WebClient();
-			    result = client.DownloadString( url );
+				result = client.DownloadString( url );
+				if(result!=version){
+					newVersion.Text = "Version "+result+" available";
+				}else{
+					newVersion.Visible = false;				
+				}
 			}
-			catch (Exception ex)
+			catch(Exception)
 			{
-			    // handle error
-			    MessageBox.Show( ex.Message );
-			}
-			if(result!=version){
-				newVersion.Text = "Version "+result+" available";
-			}else{
-				newVersion.Visible = false;
-				
+				newVersion.Visible = false;	
+			    //MessageBox.Show( ex.Message );
 			}
 		}
 		
@@ -624,7 +623,7 @@ namespace Ortelius
 		}
 		
 		private void ClassList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e){	
-			if (e.KeyCode == Keys.Delete)	{		
+			if (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back)	{		
 				doRemoveClass();
 			}else if(e.KeyCode == Keys.A && e.Control){
 				for (int i = 0; i < listBox1.Items.Count; i++)listBox1.SetSelected(i,true);
@@ -833,13 +832,10 @@ namespace Ortelius
 		
 		private void openSite(){
 			string target= "http://ortelius.marten.dk";
-		    try
-		        {
+		    try{
 		         System.Diagnostics.Process.Start(target);
 		        }
-		    catch
-		        ( 
-		         System.ComponentModel.Win32Exception noBrowser) 
+		    catch (System.ComponentModel.Win32Exception noBrowser) 
 		        {
 		         if (noBrowser.ErrorCode==-2147467259)
 		          MessageBox.Show(noBrowser.Message);
