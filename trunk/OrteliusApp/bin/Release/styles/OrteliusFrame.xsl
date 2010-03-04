@@ -157,7 +157,7 @@
 <xsl:if test="method[name = $className]">
 <tr class="methodPropertyLine"><td class="methodPropertyTitle">
 <img src="../OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/> <a target="contentFrame">
-<xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>.html</xsl:attribute>
+<xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name"/><xsl:value-of select="method[name = $className]/fid" />.html</xsl:attribute>
 <xsl:attribute name="title"><xsl:value-of select="method[name = $className]/codeLine"/></xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="method[name = $className]/name"/></a>
 </td><td class="methodPropertyModifiers">
@@ -171,7 +171,7 @@
 <xsl:sort select="name"/>
 <tr class="methodPropertyLine"><td class="methodPropertyTitle">
 <img src="../OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/><a target="contentFrame">
-<xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>.html</xsl:attribute>
+<xsl:attribute name="href"><xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name"/><xsl:value-of select="fid"/>.html</xsl:attribute>
 <xsl:attribute name="title"><xsl:value-of select="codeLine"/></xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/> </a>
 </td><td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"/>
@@ -194,7 +194,7 @@
 <xsl:sort select="name"/>
 <tr class="methodPropertyLine"><td class="methodPropertyTitle">
 <img src="../OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/> <a target="contentFrame">
-<xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>.html</xsl:attribute>
+<xsl:attribute name="href"><xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name"/><xsl:value-of select="fid"/>.html</xsl:attribute>
 <xsl:attribute name="title"><xsl:value-of select="codeLine"/></xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/> </a>
 </td><td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"/>
@@ -217,7 +217,7 @@
 <xsl:sort select="name"/>
 <tr class="methodPropertyLine"><td class="methodPropertyTitle">
 <img src="../OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/> <a target="contentFrame">
-<xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>.html</xsl:attribute>
+<xsl:attribute name="href"><xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name"/><xsl:value-of select="fid"/>.html</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/> </a>
 </td><td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"/>
 <xsl:for-each select="modifiers/modifier">
@@ -240,7 +240,7 @@
 <xsl:sort select="name"/>
 <tr class="methodPropertyLine"><td class="methodPropertyTitle">
 <img src="../OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/> <a target="contentFrame">
-<xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>.html</xsl:attribute>
+<xsl:attribute name="href"><xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name"/><xsl:value-of select="fid"/>.html</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/> </a>
 </td><td class="methodPropertyModifiers"><img border="0" src="../OrteliusFrame/modifier.gif"/>
 <xsl:for-each select="modifiers/modifier">
@@ -258,7 +258,7 @@
 <xsl:for-each select="event">
 <xsl:sort select="name"/>
 <img src="../OrteliusFrame/arrowright.gif" border="0" height="9" width="15"/> <a target="contentFrame">
-<xsl:attribute name="href"><xsl:value-of disable-output-escaping="yes" select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="$className" />.<xsl:value-of disable-output-escaping="yes" select="name"/>.html</xsl:attribute>
+<xsl:attribute name="href"><xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name"/><xsl:value-of select="fid"/>.html</xsl:attribute>
 <xsl:value-of disable-output-escaping="yes" select="name"/>
 </a><br/>
 </xsl:for-each>
@@ -289,7 +289,7 @@
 <xsl:variable name="packageName"><xsl:if test="string-length(package)!=0"><xsl:value-of select="package"/>.</xsl:if></xsl:variable>
 
 <xsl:for-each select="method">
-<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name" />.html</xsl:variable>
+<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name" /><xsl:value-of select="fid"/>.html</xsl:variable>
 
 <xsl:result-document href="{$filename}" format="text">
 <html>
@@ -415,7 +415,7 @@
 
 <xsl:for-each select="property">
 
-<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name" />.html</xsl:variable>
+<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name" /><xsl:value-of select="fid"/>.html</xsl:variable>
 <xsl:result-document href="{$filename}" format="text">
 <html>
 <head/>
@@ -510,7 +510,7 @@
 
 
 <xsl:for-each select="event">
-<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name" />.html</xsl:variable>
+<xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.<xsl:value-of select="name" /><xsl:value-of select="fid"/>.html</xsl:variable>
 
 <xsl:result-document href="{$filename}" format="text">
 <html>
