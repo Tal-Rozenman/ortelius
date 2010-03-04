@@ -218,7 +218,6 @@ namespace Ortelius
 						if(param.IndexOf(":")!=-1) resultText += getType(param,pName);
 						
 						resultText += "<name>" +pName +"</name>\r\n";
-						resultText += getId();
 						resultText += "<summary><![CDATA["+getDescription(asFileLines,lineIndex,"@param "+pName)+"]]></summary>\r\n";
 						resultText += "</param>\r\n";
 					}
@@ -665,7 +664,7 @@ namespace Ortelius
 		}
 		
 		private string getId(){
-			return "<fid>"+(idCounter++).ToString()+"</fid>\r\n";
+			return "<fid>_"+(idCounter++).ToString()+"</fid>\r\n";
 		}
 		#endregion
 		
