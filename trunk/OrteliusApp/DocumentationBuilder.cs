@@ -65,9 +65,9 @@ namespace Ortelius
 			idCounter = 1;
 			string classXml = "<modified ticks=\""+modifiedTime.Ticks+"\">"+String.Format("{0:d/M yyyy}", modifiedTime)+"</modified>";
 			asFileLines = cleanUpLines(asFileLines);
-			string testAS = "";
-			foreach(string line in asFileLines) testAS += line+"\n";
-			MessageBox.Show(testAS);
+//			string testAS = "";
+//			foreach(string line in asFileLines) testAS += line+"\n";
+//			MessageBox.Show(testAS);
 			classXml += getImportInfo(asFileLines);
 			classXml += getClassInfo(asFileLines);
 			classXml += getOtherInfo(asFileLines);
@@ -356,7 +356,6 @@ namespace Ortelius
 		{	
 			
 			char[] trimChar = {'\n','\r','\t',' '};
-			string tag = "/*";
 			string resultText = "";
 			int decIndex = elementIndex-1;
 			int tagIndex = elementIndex;
