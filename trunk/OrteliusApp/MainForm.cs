@@ -68,7 +68,7 @@ namespace Ortelius
 		/// Checking if there is a new version available
 		/// </summary>
 		private void checkForUpdates(){
-			string version = "1.2.1.0";
+			string version = "1.2.1.1";
 			string url = "http://ortelius.marten.dk/latest_version.aspx?version="+version;
 			string result = null;
 			

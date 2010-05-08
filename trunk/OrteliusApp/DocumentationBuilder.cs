@@ -23,6 +23,8 @@ namespace Ortelius
 		
 		public string SystemSvar = "";
 		private string delimeter = "*";
+		private string startTag = "/**";
+		private string endTag = "*/";
 		private string classType = "";
 		
 		private int idCounter = 1;
@@ -63,6 +65,9 @@ namespace Ortelius
 			idCounter = 1;
 			string classXml = "<modified ticks=\""+modifiedTime.Ticks+"\">"+String.Format("{0:d/M yyyy}", modifiedTime)+"</modified>";
 			asFileLines = cleanUpLines(asFileLines);
+			string testAS = "";
+			foreach(string line in asFileLines) testAS += line+"\n";
+			MessageBox.Show(testAS);
 			classXml += getImportInfo(asFileLines);
 			classXml += getClassInfo(asFileLines);
 			classXml += getOtherInfo(asFileLines);
@@ -350,18 +355,19 @@ namespace Ortelius
 		private string getSummery(string[] asFileLines,int elementIndex)
 		{	
 			
-			char[] trimChar = {'\n','\r'};
+			char[] trimChar = {'\n','\r','\t',' '};
 			string tag = "/*";
 			string resultText = "";
 			int decIndex = elementIndex-1;
 			int tagIndex = elementIndex;
-						//skip empty line
+			
+			//skip empty line
 			while(decIndex>0 && asFileLines[decIndex].TrimEnd(trimChar)=="" ){				
 				decIndex --;
 			}
-						
-			while(decIndex>=0 && (asFileLines[decIndex].IndexOf(delimeter) == 0 || asFileLines[decIndex].IndexOf("/*") == 0)){
-				if(asFileLines[decIndex].IndexOf(tag)!= -1){
+			//find the first line of the documentation
+			while(decIndex>=0 && (asFileLines[decIndex].IndexOf(delimeter) == 0 || asFileLines[decIndex].IndexOf(startTag) == 0)){
+				if(asFileLines[decIndex].IndexOf(startTag)!= -1){
 					tagIndex = decIndex+1;
 					break;
 				}
@@ -541,7 +547,7 @@ namespace Ortelius
 				asFileLines[i] = removeIndent(asFileLines[i]);
 				
 				//ignore if javadoc comments
-				int javadocCommentIndex = asFileLines[i].IndexOf("/**");
+				int javadocCommentIndex = asFileLines[i].IndexOf(startTag);
 				if(!javaDocComment && javadocCommentIndex!=-1 && 
 				   (javadocCommentIndex<=asFileLines[i].IndexOf("/*")) && 
 				   (asFileLines[i].IndexOf("//")==-1 || javadocCommentIndex<asFileLines[i].IndexOf("//"))  ){
@@ -553,13 +559,16 @@ namespace Ortelius
 					javaDocComment = false;
 				}
 				
-				
 				if(!javaDocComment){
+					
+					//remove inline multiline comments
+					Regex imcPattern = new Regex(@"\/\*.*(\*\/)");
+					asFileLines[i] =  imcPattern.Replace(asFileLines[i], "");
 					
 					//remove multiline comments
 					int multiLineCommentIndexStart = asFileLines[i].IndexOf("/*");
 					if(!multiLineComment && multiLineCommentIndexStart!=-1 && 
-					   asFileLines[i].IndexOf("/**")==-1 && 
+					   asFileLines[i].IndexOf(startTag)==-1 && 
 					   (asFileLines[i].IndexOf("//")==-1 || multiLineCommentIndexStart<asFileLines[i].IndexOf("//"))){
 						multiLineComment = true;
 					}
@@ -567,12 +576,12 @@ namespace Ortelius
 					int multiLineCommentIndexEnd = asFileLines[i].IndexOf("*/");
 					if(multiLineComment && multiLineCommentIndexEnd!=-1){
 						if(multiLineCommentIndexStart==-1) multiLineCommentIndexStart=0;
-						asFileLines[i] = asFileLines[i].Substring(multiLineCommentIndexStart,(asFileLines[i].Length - multiLineCommentIndexEnd));
+						asFileLines[i] = asFileLines[i].Substring(multiLineCommentIndexEnd+2,(asFileLines[i].Length - (multiLineCommentIndexEnd+2)));
 						multiLineComment = false;
 					} 
-					if(javaDocComment && multiLineCommentIndexEnd!=-1){
-						javaDocComment = false;
-					}
+//					if(javaDocComment && multiLineCommentIndexEnd!=-1){
+//						javaDocComment = false;
+//					}
 					
 					//remove single line comments
 					int commentIndex = asFileLines[i].IndexOf("//");
@@ -636,9 +645,9 @@ namespace Ortelius
 		///</summary
 		private string removeIndent(string asLine)
 		{	
-			asLine = asLine.Trim(' ');
 			char[] trimChar = {'\t',' '};
 			asLine = asLine.TrimStart(trimChar);
+			asLine = asLine.TrimEnd(trimChar);
 						
 			return asLine;
 		}
