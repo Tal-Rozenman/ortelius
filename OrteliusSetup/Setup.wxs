@@ -3,7 +3,7 @@
 	<Product Id="*"
 		Name="Ortelius"
 		Language="1033"
-		Version="1.2.1.1"
+		Version="1.2.2.0"
 		UpgradeCode="A615A351-E924-4C49-B1E1-B9226BACD5A7"
 		Manufacturer="ortelius.marten.dk">
 		<Package Description="Actionscript documentation generator"
@@ -63,6 +63,10 @@
 				<ComponentRef Id="Cstaticmodifiergif31" />
 				<ComponentRef Id="Cstylecss32" />
 				<ComponentRef Id="Ctopbggif33" />
+				<ComponentRef Id="Cinheritedmodifiergif1" />
+				<ComponentRef Id="Cinheritedmodifiergif2" />
+		
+		
 		
 		</Feature>
 				<!-- 

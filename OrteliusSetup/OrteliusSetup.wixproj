@@ -11,6 +11,7 @@
     <WixTasksPath Condition=" '$(WixTasksPath)' == '' ">$(WixToolPath)\WixTasks.dll</WixTasksPath>
     <SupressIces>ICE45</SupressIces>
     <WixVariables>WixUILicenseRtf=license.rtf</WixVariables>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -31,5 +32,8 @@
     <Compile Include="Files.wxs" />
     <Compile Include="Setup.wxs" />
     <None Include="license.rtf" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
 </Project>

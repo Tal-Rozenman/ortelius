@@ -188,6 +188,14 @@ namespace Ortelius
 				projectHistory=value;
 			}
 		}
+				
+		private Boolean firstRun = true;
+		public Boolean FirstRun {
+			get{
+				firstRun = false;
+				return firstRun;
+			}
+		}
 		
 		public GenerelSettings(){
 			projectHistory= new ArrayList();

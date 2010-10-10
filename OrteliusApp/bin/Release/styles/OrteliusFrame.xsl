@@ -9,7 +9,7 @@
 		
 <html>
 <head>
-<title><xsl:value-of disable-output-escaping="yes" select="introHeader"/></title>
+<title><xsl:value-of disable-output-escaping="yes" select="introHeader"/> | Actionscript documentation</title>
 <link rel="stylesheet" href="OrteliusFrame/style.css" type="text/css" media="screen"/>
 </head>
 <body>
@@ -75,10 +75,6 @@
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
-
-<xsl:template name="Explanation">
-<div class="modifierExplanation"><img src="../OrteliusFrame/staticmodifier.gif"/>=static | <img src="../OrteliusFrame/overridemodifier.gif"/>=overridden | <img src="../OrteliusFrame/dynamicmodifier.gif"/>=dynamic</div>
-</xsl:template>
 	
    
 
@@ -143,7 +139,14 @@
 <div id="div|import" class="detailsVisible">
 <xsl:for-each select="import">
 <xsl:sort select="packageName"/>
-<div class="detailElement"><xsl:value-of disable-output-escaping="yes" select="packageName"/></div>
+<div class="detailElement">
+  <a>
+    <xsl:attribute name="href"><xsl:value-of select="packageName/@fullPath"/>.html</xsl:attribute>
+    <span class="codeLine">
+      <xsl:value-of disable-output-escaping="yes" select="packageName"/>
+    </span>
+  </a>
+</div>
 </xsl:for-each>
 </div>
 </xsl:if>
@@ -178,7 +181,11 @@
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">../OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
-</xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
+</xsl:for-each>
+  <xsl:if test="@inherited='true'">
+    <img border="0" src="../OrteliusFrame/inheritedmodifier.gif" title="inherited"/>
+  </xsl:if>
+</td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
 </xsl:for-each></table>
 <xsl:call-template name="Explanation"/>
 </div>
@@ -201,7 +208,11 @@
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">../OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
-</xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
+</xsl:for-each>
+  <xsl:if test="@inherited='true'">
+    <img border="0" src="../OrteliusFrame/inheritedmodifier.gif" title="inherited"/>
+  </xsl:if>
+</td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
 </xsl:for-each></table>
 <xsl:call-template name="Explanation"/>
 </div>
@@ -223,7 +234,11 @@
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">../OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
-</xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
+</xsl:for-each>
+  <xsl:if test="@inherited='true'">
+    <img border="0" src="../OrteliusFrame/inheritedmodifier.gif" title="inherited"/>
+  </xsl:if>
+</td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
 </xsl:for-each>
 </table>
 <xsl:call-template name="Explanation"/>
@@ -246,7 +261,11 @@
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">../OrteliusFrame/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
-</xsl:for-each> </td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
+</xsl:for-each>
+  <xsl:if test="@inherited='true'">
+    <img border="0" src="../OrteliusFrame/inheritedmodifier.gif" title="inherited"/>
+  </xsl:if>
+</td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="../OrteliusFrame/modifier.gif"/></td></tr>
 </xsl:for-each></table>
 <xsl:call-template name="Explanation"/>
 </div>
@@ -361,8 +380,15 @@
 
 
 <xsl:for-each select="param">
-<div class="detailElement"><b><xsl:value-of disable-output-escaping="yes" select="name"/></b> : <span class="codeLine"><xsl:value-of select="type"/></span></div>
-<div class="summary">
+<div class="detailElement"><b><xsl:value-of disable-output-escaping="yes" select="name"/></b> : 
+  <a>
+    <xsl:attribute name="href"><xsl:value-of select="type/@fullPath"/>.html</xsl:attribute>
+    <span class="codeLine">
+      <xsl:value-of disable-output-escaping="yes" select="type"/>
+    </span>
+  </a>
+  </div>
+  <div class="summary">
 <xsl:call-template name="PreserveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
 </xsl:call-template>
@@ -378,7 +404,12 @@
 <xsl:if test="returns">
 <div class="detailHeader">Return value</div>
 <div id="div|parameters" class="detailsVisible">
-<div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="returns/type"/></div>
+  <a>
+    <xsl:attribute name="href"><xsl:value-of select="returns/type/@fullPath"/>.html</xsl:attribute>
+    <div class="codeLine">
+      <xsl:value-of disable-output-escaping="yes" select="returns/type"/>
+    </div>
+  </a>
 <div class="summary"><xsl:value-of disable-output-escaping="yes" select="returns/summary"/></div>
 </div>
 </xsl:if>
@@ -473,7 +504,14 @@
 </xsl:if>
 
 <div class="detailHeader">Type</div>
-<div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></div>
+<div class="codeLine">
+  <a>
+    <xsl:attribute name="href"><xsl:value-of select="type/@fullPath"/>.html</xsl:attribute>
+    <div class="codeLine">
+      <xsl:value-of disable-output-escaping="yes" select="type"/>
+    </div>
+  </a>
+</div>
 <div class="detailHeader">Default value</div>
 <xsl:value-of disable-output-escaping="yes" select="defaultValue"/>
 
@@ -588,5 +626,13 @@
 </a><br/>
 </xsl:template>
 
+
+
+
+  <xsl:template name="Explanation">
+    <div class="modifierExplanation">
+      <img src="../OrteliusFrame/staticmodifier.gif"/>=static | <img src="../OrteliusFrame/overridenmodifier.gif"/>=overridden | <img src="../OrteliusFrame/dynamicmodifier.gif"/>=dynamic  | <img border="0" src="../OrteliusFrame/inheritedmodifier.gif"/>=inherited
+    </div>
+  </xsl:template>
 
 </xsl:stylesheet>

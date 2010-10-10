@@ -92,7 +92,7 @@ namespace Ortelius
 			XmlElement inHieraNode = documentationXml.CreateElement("inheritanceClass");
 			
 			if(!succes){
-				inHieraNode.SetAttribute("fullPath","@"+superClassName);
+				inHieraNode.SetAttribute("fullPath","#"+superClassName);
 				inHieraNode.InnerText = superClassName.Substring(superClassName.LastIndexOf(".")+1);
 				inherHieraElement.AppendChild(inHieraNode);
 				//the extended class dosent exist in the in the documentation
@@ -330,7 +330,7 @@ namespace Ortelius
 		/// </summary
 		public void CreateClassIndex(){
 			
-			XmlElement classByNameNode = documentationXml.CreateElement("classNameIndex");			
+			XmlElement classByNameNode = documentationXml.CreateElement("classNameIndex");
 			documentationXml.DocumentElement.AppendChild(classByNameNode);
 						
 			XmlNodeList allClasses = documentationXml.DocumentElement.SelectNodes("/docElements/class");
@@ -354,6 +354,27 @@ namespace Ortelius
 			
 		}
 
-		
+		public void UpdateTypesFullpath(){
+			//<type fullPath="#String" context="com.adnuvo.util.FlashVars">String</type>
+			
+			DataTypeUtil allDataTypes = DataTypeUtil.Instance;
+			
+			XmlNodeList allTypes = documentationXml.DocumentElement.SelectNodes("//type");
+			foreach (XmlElement node in allTypes) {
+				string typeContext = node.GetAttribute("context");
+				string typeName = node.InnerText;
+				node.SetAttribute("fullPath",allDataTypes.GetFullPath(typeName,typeContext.Split(',')));
+				node.RemoveAttribute("context");
+			}
+			
+			XmlNodeList allPackageName = documentationXml.DocumentElement.SelectNodes("//packageName");
+			foreach (XmlElement node in allPackageName) {
+				string packageName = node.InnerText;
+				node.SetAttribute("fullPath",allDataTypes.GetFullPath(packageName));
+			}
+			
+			
+				
+		}
 	}
 }

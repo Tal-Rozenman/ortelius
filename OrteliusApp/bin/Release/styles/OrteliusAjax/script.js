@@ -80,9 +80,10 @@ function showHideAllTreeElement(doShow){
 	
 	}
 
-function showElement(elementId){
-	if(elementId.indexOf("@")==0){
-		var url = elementId.replace("@","");
+	function showElement(elementId) {
+	   // alert(elementId);
+	if(elementId.indexOf("#")==0){
+		var url = elementId.replace("#","");
 		window.open("http://www.google.com/search?q="+url+"+Actionscript");
 		return;
 	}
