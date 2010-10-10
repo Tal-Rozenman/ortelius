@@ -52,6 +52,7 @@ namespace Ortelius
 			this.chooseDestinationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.buildDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.goToDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.button2 = new System.Windows.Forms.Button();
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.button3 = new System.Windows.Forms.Button();
@@ -71,6 +72,7 @@ namespace Ortelius
 			this.introHeader = new System.Windows.Forms.TextBox();
 			this.showAfterBuildCB = new System.Windows.Forms.CheckBox();
 			this.newVersion = new System.Windows.Forms.Label();
+			this.versionLabel = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -106,12 +108,13 @@ namespace Ortelius
 			this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 									this.filesToolStripMenuItem,
-									this.buildToolStripMenuItem});
+									this.buildToolStripMenuItem,
+									this.donateToolStripMenuItem});
 			this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
 			this.menuStrip1.Location = new System.Drawing.Point(4, 22);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.menuStrip1.Size = new System.Drawing.Size(139, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(193, 24);
 			this.menuStrip1.TabIndex = 3;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -213,6 +216,13 @@ namespace Ortelius
 			this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.goToDocumentationToolStripMenuItem.Text = "Go to documentation";
 			this.goToDocumentationToolStripMenuItem.Click += new System.EventHandler(this.GoToDocumentationToolStripMenuItemClick);
+			// 
+			// donateToolStripMenuItem
+			// 
+			this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
+			this.donateToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+			this.donateToolStripMenuItem.Text = "Donate";
+			this.donateToolStripMenuItem.Click += new System.EventHandler(this.DonateToolStripMenuItemClick);
 			// 
 			// button2
 			// 
@@ -325,14 +335,14 @@ namespace Ortelius
 			this.titleText.BackColor = System.Drawing.Color.Transparent;
 			this.titleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.titleText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.titleText.Location = new System.Drawing.Point(4, 5);
+			this.titleText.Location = new System.Drawing.Point(39, 5);
 			this.titleText.Margin = new System.Windows.Forms.Padding(0);
 			this.titleText.Name = "titleText";
 			this.titleText.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.titleText.Size = new System.Drawing.Size(487, 41);
+			this.titleText.Size = new System.Drawing.Size(233, 17);
 			this.titleText.TabIndex = 17;
 			this.titleText.Text = "Ortelius";
-			this.titleText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.titleText.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			this.titleText.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frm_MouseMove);
 			this.titleText.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frm_MouseDown);
 			this.titleText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmGlavna_MouseUp);
@@ -424,17 +434,34 @@ namespace Ortelius
 			// newVersion
 			// 
 			this.newVersion.BackColor = System.Drawing.Color.Transparent;
-			this.newVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.newVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.newVersion.ForeColor = System.Drawing.Color.DarkRed;
-			this.newVersion.Location = new System.Drawing.Point(176, 23);
+			this.newVersion.Location = new System.Drawing.Point(228, 25);
 			this.newVersion.Margin = new System.Windows.Forms.Padding(0);
 			this.newVersion.Name = "newVersion";
 			this.newVersion.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-			this.newVersion.Size = new System.Drawing.Size(154, 20);
+			this.newVersion.Size = new System.Drawing.Size(253, 18);
 			this.newVersion.TabIndex = 26;
 			this.newVersion.Text = "Version 1.2.1.0 available";
-			this.newVersion.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.newVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.newVersion.UseMnemonic = false;
 			this.newVersion.Click += new System.EventHandler(this.NewVersionClick);
+			// 
+			// versionLabel
+			// 
+			this.versionLabel.BackColor = System.Drawing.Color.Transparent;
+			this.versionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.versionLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.versionLabel.Location = new System.Drawing.Point(267, 5);
+			this.versionLabel.Margin = new System.Windows.Forms.Padding(0);
+			this.versionLabel.Name = "versionLabel";
+			this.versionLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+			this.versionLabel.Size = new System.Drawing.Size(156, 18);
+			this.versionLabel.TabIndex = 27;
+			this.versionLabel.Text = "1.2.2.4";
+			this.versionLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frm_MouseMove);
+			this.versionLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frm_MouseDown);
+			this.versionLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmGlavna_MouseUp);
 			// 
 			// MainForm
 			// 
@@ -444,6 +471,7 @@ namespace Ortelius
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ClientSize = new System.Drawing.Size(500, 700);
+			this.Controls.Add(this.versionLabel);
 			this.Controls.Add(this.newVersion);
 			this.Controls.Add(this.showAfterBuildCB);
 			this.Controls.Add(this.label5);
@@ -477,7 +505,11 @@ namespace Ortelius
 			this.Text = "Ortelius";
 			this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(204)))));
 			this.Load += new System.EventHandler(this.MainFormLoad);
+			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FrmGlavna_MouseUp);
+			this.Shown += new System.EventHandler(this.MainFormShown);
+			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frm_MouseDown);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrteliusClosing);
+			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frm_MouseMove);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -486,6 +518,8 @@ namespace Ortelius
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Label versionLabel;
+		private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
 		private System.Windows.Forms.Label newVersion;
 		private System.Windows.Forms.Label titleText;
 		private System.Windows.Forms.ToolStripMenuItem goToDocumentationToolStripMenuItem;

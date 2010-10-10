@@ -11,6 +11,8 @@ using System.Xml.Xsl;
 using System.Xml.XPath;
 using System.Text;
 
+using System.Reflection;
+
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -61,14 +63,17 @@ namespace Ortelius
 			
 			populateStyleCombo();
 			changeFlag = false;
-			checkForUpdates();
+			newVersion.Visible = false;	
+			//checkForUpdates();
 			
 		}
 		/// <summary>
 		/// Checking if there is a new version available
 		/// </summary>
 		private void checkForUpdates(){
-			string version = "1.2.1.1";
+			Assembly asm = Assembly.GetExecutingAssembly();
+			string version = asm.GetName().Version.ToString();
+			versionLabel.Text = version;
 			string url = "http://ortelius.marten.dk/latest_version.aspx?version="+version;
 			string result = null;
 			
@@ -77,14 +82,12 @@ namespace Ortelius
 			    WebClient client = new WebClient();
 				result = client.DownloadString( url );
 				if(result!=version){
-					newVersion.Text = "Version "+result+" available";
-				}else{
-					newVersion.Visible = false;				
+					newVersion.Text = "Version "+result+" is available";
+					newVersion.Visible = true;	
 				}
 			}
-			catch(Exception)
+			catch(Exception ex)
 			{
-				newVersion.Visible = false;	
 			    //MessageBox.Show( ex.Message );
 			}
 		}
@@ -165,20 +168,20 @@ namespace Ortelius
 			
 			BuildDocumentationXml();
 						
-			progressBar1.Value = 48;
+			progressBar1.Value = 40;
 			progressBar1.Refresh();
 			
-			SaveXml();
-				
-			progressBar1.Value = 70;
+			SaveXml();				
+			progressBar1.Value = 65;
 			progressBar1.Refresh();
+			
 			
 			createHtmlFromXsl();
-			
-			progressBar1.Value = 95;
+			progressBar1.Value = 90;
 			progressBar1.Refresh();
-			copyExtraFiles();
 			
+						
+			copyExtraFiles();			
 			progressBar1.Value = 100;
 			progressBar1.Refresh();
 			
@@ -204,6 +207,11 @@ namespace Ortelius
 			BuildButton.Enabled = true;
 			progressBar1.Enabled = false;
 			
+			if(showAfterBuildCB.Checked ) {
+				string resultDoc = projSettings.DestinationPath+projSettings.DocHtmlFileName;
+				System.Diagnostics.Process.Start(resultDoc);
+			}
+			
 		}
 		
 		///<summary>
@@ -212,12 +220,13 @@ namespace Ortelius
 		private void BuildDocumentationXml()
 		{
 			
+			DataTypeUtil allDataTypes = DataTypeUtil.Instance;
 			XmlDeclaration dec = allDocXml.CreateXmlDeclaration("1.0", null, null);
 			allDocXml.AppendChild(dec);
 			
 			XmlElement contentNode = allDocXml.CreateElement("docElements");
 			allDocXml.AppendChild(contentNode);
-			
+						
 			XmlElement pathNode = allDocXml.CreateElement("basePath");
 			pathNode.InnerText = "file:/"+xmlPath.Text.Replace("\\","/")+"/";
 			contentNode.AppendChild(pathNode);
@@ -228,7 +237,6 @@ namespace Ortelius
 			  
 		 
     		XmlElement newNode2 = allDocXml.CreateElement("introText");
-			//newNode2.InnerText = introText.Text.Replace("\r\n","<br/>\r\n");
 			contentNode.AppendChild(newNode2);
 			XmlCDataSection CData = allDocXml.CreateCDataSection(introText.Text.Replace("\r\n","<br/>\r\n"));
 		    newNode2.AppendChild(CData);
@@ -244,7 +252,7 @@ namespace Ortelius
 			foreach ( string filNavn in projSettings.AllASFiles ){
 				if(File.Exists(filNavn)){
 				incFiles++;
-				progressBar1.Value = (incFiles/projSettings.AllASFiles.Count)*48+2;				
+				progressBar1.Value = (incFiles/projSettings.AllASFiles.Count)*38+2;				
 				progressBar1.Refresh();
 				DateTime modifiedTime = File.GetLastWriteTime(filNavn);
 				
@@ -253,22 +261,25 @@ namespace Ortelius
 					if(classXml != "" && classXml != null){
 						XmlElement classNode = allDocXml.CreateElement("class");
 						classNode.InnerXml = classXml;
+						//add datatype to list
+						allDataTypes.AddDataType(classNode.SelectSingleNode("name").InnerText,classNode.SelectSingleNode("package").InnerText,null);//,classNode.SelectSingleNode("fid").InnerText
 						contentNode.AppendChild(classNode);
 					}else{
 						systemSvar += "File not added (no content): "+filNavn+"\r\n\r\n";
 						asDocumentation.SystemSvar = "";
 					}
 				}
-				catch(Exception){
-					systemSvar +="Error1: "+filNavn ;
+				catch(Exception e){
+					systemSvar +="Exception error in: "+filNavn+"\r\n"+e.ToString()+"\r\n\r\n" ;
 				}
 				
 				if(asDocumentation.SystemSvar!=""){
-					systemSvar += "Error in "+filNavn+asDocumentation.SystemSvar+"\r\n\r\n";
+					systemSvar += "Error in "+filNavn+": "+asDocumentation.SystemSvar+"\r\n\r\n";
 					asDocumentation.SystemSvar = "";
 				}
 			}
 			}
+			
 		}
 		
 		///<summary>
@@ -277,10 +288,28 @@ namespace Ortelius
 		private void SaveXml()
 		{
 			XmlRestructure docXmlRestructure = new XmlRestructure(allDocXml);
-			docXmlRestructure.UpdateSetterGetters();
-			docXmlRestructure.CreateInheritedElements();
-			docXmlRestructure.CreateNestedPackages();
-			docXmlRestructure.CreateClassIndex();
+			
+			
+			docXmlRestructure.UpdateSetterGetters();			
+			progressBar1.Value = 45;
+			progressBar1.Refresh();
+			
+			docXmlRestructure.CreateInheritedElements();			
+			progressBar1.Value = 50;
+			progressBar1.Refresh();
+			
+			docXmlRestructure.CreateNestedPackages();			
+			progressBar1.Value = 55;
+			progressBar1.Refresh();
+			
+			docXmlRestructure.CreateClassIndex();			
+			progressBar1.Value = 57;
+			progressBar1.Refresh();
+			
+			docXmlRestructure.UpdateTypesFullpath();			
+			progressBar1.Value = 61;
+			progressBar1.Refresh();
+			
 			
 			systemSvar +=docXmlRestructure.Errors;
 				
@@ -292,6 +321,9 @@ namespace Ortelius
 			catch(Exception){
 				systemSvar +="\r\nCouldn't write XML file";
 			}
+			
+			progressBar1.Value = 65;
+			progressBar1.Refresh();
 					
 		}
 		
@@ -354,24 +386,19 @@ namespace Ortelius
 				
 				// Set the root node of the source document to be the initial context node				
 				transformer.InitialContextNode = input;
-				
+								
 				// Create a serializer				
 				Serializer serializer = new Serializer();
 								
 				serializer.SetOutputFile(resultDoc);
-								
+
 				// Transform the source XML to System.out.				
-				transformer.Run(serializer);				
-				
-				if(showAfterBuildCB.Checked) System.Diagnostics.Process.Start(resultDoc);
-				
+				transformer.Run(serializer);
 			}
 			catch(Exception e){
-				MessageBox.Show(e.ToString());
+				//MessageBox.Show(e.ToString());
+				systemSvar += "Error in xslt rendering:\r\n"+e.ToString()+"\r\n\r\n";
 			}
-			
-
-			
 			
 		}
 		
@@ -788,23 +815,21 @@ namespace Ortelius
 		private Point mouseOffset;
 		private bool isMouseDown = false;
 		
-		private void frm_MouseDown(object sender, 
-		System.Windows.Forms.MouseEventArgs e)
+		private void frm_MouseDown(object sender,System.Windows.Forms.MouseEventArgs e)
 		{
 		int xOffset;
 		int yOffset;
 		    if (e.Button == MouseButtons.Left)
 		    {
-		    xOffset = -e.X - SystemInformation.FrameBorderSize.Width;
-		    yOffset = -e.Y ;
-		
-		    mouseOffset = new Point(xOffset, yOffset);
-		    isMouseDown = true;
+			    xOffset = Location.X-Control.MousePosition.X;//-e.X - SystemInformation.FrameBorderSize.Width;
+			    yOffset = Location.Y-Control.MousePosition.Y;//e.Y ;
+			
+			    mouseOffset = new Point(xOffset, yOffset);
+			    isMouseDown = true;
 		    }
 		}
 
-		private void frm_MouseMove(object sender, 
-		System.Windows.Forms.MouseEventArgs e)
+		private void frm_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
 		    if (isMouseDown)
 		    {
@@ -879,6 +904,33 @@ namespace Ortelius
 		{
 			openSite();
 		}
+		
+		void MainFormShown(object sender, EventArgs e)
+		{
+			checkForUpdates();
+		}
+		
+		
+		
+		void DonateToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			string target= "http://ortelius.marten.dk/donate.aspx";
+		    try{
+		         System.Diagnostics.Process.Start(target);
+		        }
+		    catch (System.ComponentModel.Win32Exception noBrowser) 
+		        {
+		         if (noBrowser.ErrorCode==-2147467259)
+		          MessageBox.Show(noBrowser.Message);
+		        }
+		    catch (System.Exception other)
+		        {
+		          MessageBox.Show(other.Message);
+		        }
+		}
+		
+	
+		
 	}
 	
 	

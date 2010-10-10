@@ -76,10 +76,13 @@
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\modifier.gif" Id="modifiergif20" Name="modifier.gif" DiskId="1"/>
 		</Component>
 		<Component Guid="bb5c8317-d6fc-45b0-830e-07156859620b" Id="Coverridemodifiergif21" DiskId="1">
-			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\overridemodifier.gif" Id="overridemodifiergif21" Name="overridemodifier.gif" DiskId="1"/>
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\overridenmodifier.gif" Id="overridemodifiergif21" Name="overridenmodifier.gif" DiskId="1"/>
 		</Component>
 		<Component Guid="cac995f4-61bc-4328-a4eb-16ceb32184f4" Id="Cscriptjs22" DiskId="1">
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\script.js" Id="scriptjs22" Name="script.js" DiskId="1"/>
+		</Component>
+		<Component Guid="8c82abe6-dace-4a4d-801d-517bb3fc159f" Id="Cinheritedmodifiergif1" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\inheritedmodifier.gif" Id="inheritedmodifiergif1" Name="inheritedmodifier.gif" DiskId="1"/>
 		</Component>
 		<Component Guid="a1cec438-e738-40f7-bcde-88a301953880" Id="Cstaticmodifiergif23" DiskId="1">
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\staticmodifier.gif" Id="staticmodifiergif23" Name="staticmodifier.gif" DiskId="1"/>
@@ -105,7 +108,10 @@
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\modifier.gif" Id="modifiergif29" Name="modifier.gif" DiskId="1"/>
 		</Component>
 		<Component Guid="136c2c87-dd04-45aa-a00f-49dc252aa101" Id="Coverridemodifiergif30" DiskId="1">
-			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\overridemodifier.gif" Id="overridemodifiergif30" Name="overridemodifier.gif" DiskId="1"/>
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\overridenmodifier.gif" Id="overridemodifiergif30" Name="overridenmodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="bfa433af-76ca-4555-b7e7-ea9ec6dcd535" Id="Cinheritedmodifiergif2" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\inheritedmodifier.gif" Id="inheritedmodifiergif2" Name="inheritedmodifier.gif" DiskId="1"/>
 		</Component>
 		<Component Guid="0d7aedce-4036-488e-81e0-56c77fd9f694" Id="Cstaticmodifiergif31" DiskId="1">
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\staticmodifier.gif" Id="staticmodifiergif31" Name="staticmodifier.gif" DiskId="1"/>

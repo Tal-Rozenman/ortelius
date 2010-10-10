@@ -9,7 +9,7 @@
 		
 <html>
 <head>
-<title><xsl:value-of disable-output-escaping="yes" select="introHeader"/></title>
+<title><xsl:value-of disable-output-escaping="yes" select="introHeader"/> | Actionscript documentation</title>
 <script language="JavaScript" type="text/javascript" src="OrteliusAjax/script.js"></script>
 <link rel="stylesheet" href="OrteliusAjax/style.css" type="text/css" media="screen"/>
 </head>
@@ -114,8 +114,14 @@
 <div class="detailHeader"><a href="#" onclick="toggleDetails('div|import')"><img src="OrteliusAjax/foldud.gif" ID="img|import" border="0" height="9" width="15"/>Imported packages</a></div>
 <div id="div|import" class="hiddenElement">
 <xsl:for-each select="import">
-<xsl:sort select="packageName"/>
-<div class="detailElement"><xsl:value-of disable-output-escaping="yes" select="packageName"/></div>
+<xsl:sort select="packageName"/>   
+<div class="detailElement">
+  <a href="#">
+    <xsl:attribute name="onclick">
+      showElement('<xsl:value-of select="packageName/@fullPath"/>');return false;
+    </xsl:attribute>
+    <xsl:value-of disable-output-escaping="yes" select="packageName"/>
+  </a></div>
 </xsl:for-each>
 </div>
 </xsl:if>
@@ -151,7 +157,11 @@
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
-</xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
+</xsl:for-each>
+  <xsl:if test="@inherited='true'">
+   <img border="0" src="OrteliusAjax/inheritedmodifier.gif" title="inherited"/>
+  </xsl:if>
+</td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
 </xsl:for-each></table>
 <xsl:call-template name="Explanation"/>
 </div>
@@ -174,7 +184,11 @@
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
-</xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
+</xsl:for-each>
+  <xsl:if test="@inherited='true'">
+    <img border="0" src="OrteliusAjax/inheritedmodifier.gif" title="inherited"/>
+  </xsl:if>
+</td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
 </xsl:for-each></table>
 <xsl:call-template name="Explanation"/>
 </div>
@@ -197,7 +211,11 @@
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
-</xsl:for-each></td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
+</xsl:for-each>
+  <xsl:if test="@inherited='true'">
+    <img border="0" src="OrteliusAjax/inheritedmodifier.gif" title="inherited"/>
+  </xsl:if>
+</td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
 </xsl:for-each>
 </table>
 <xsl:call-template name="Explanation"/>
@@ -220,7 +238,11 @@
 <xsl:for-each select="modifiers/modifier">
 <xsl:text> </xsl:text>
 <img border="0"><xsl:attribute name="src">OrteliusAjax/<xsl:value-of disable-output-escaping="yes" select="."/>modifier.gif</xsl:attribute><xsl:attribute name="title"><xsl:value-of disable-output-escaping="yes" select="."/></xsl:attribute></img>
-</xsl:for-each> </td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
+</xsl:for-each>
+  <xsl:if test="@inherited='true'">
+    <img border="0" src="OrteliusAjax/inheritedmodifier.gif" title="inherited"/>
+  </xsl:if>
+</td><td class="methodPropertySummary"><xsl:value-of disable-output-escaping="yes" select="summary"/><img border="0" src="OrteliusAjax/modifier.gif"/></td></tr>
 </xsl:for-each></table>
 <xsl:call-template name="Explanation"/>
 </div>
@@ -317,20 +339,22 @@
 
 
 
-
-
-
-
-
-
-
 <xsl:if test="param">
 <div class="detailHeader"><a href="#" onclick="toggleDetails('div|parameters')"><img src="OrteliusAjax/foldud.gif" ID="img|parameters" border="0" height="9" width="15"/>Parameters</a></div>
 
 <div id="div|parameters" class="detailsVisible">
 
 <xsl:for-each select="param">
-<div class="detailElement"><b><xsl:value-of disable-output-escaping="yes" select="name"/></b> : <span class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></span></div>
+<div class="detailElement"><b><xsl:value-of disable-output-escaping="yes" select="name"/></b> : 
+  <a href="#">
+  <xsl:attribute name="onclick">
+    showElement('<xsl:value-of select="type/@fullPath"/>');return false;
+  </xsl:attribute>
+    <span class="codeLine">
+      <xsl:value-of disable-output-escaping="yes" select="type"/>
+    </span>
+</a>  
+</div>
 <div class="summary">
 <xsl:call-template name="PreserveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
@@ -347,10 +371,33 @@
 <xsl:if test="returns">
 <div class="detailHeader">Return value</div>
 <div id="div|parameters" class="detailsVisible">
-<div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="returns/type"/></div>
+  <a href="#">
+    <xsl:attribute name="onclick">
+      showElement('<xsl:value-of select="returns/type/@fullPath"/>');return false;
+    </xsl:attribute>
+    <div class="codeLine">
+      <xsl:value-of disable-output-escaping="yes" select="returns/type"/>
+    </div>
+  </a>
 <div class="summary"><xsl:value-of disable-output-escaping="yes" select="returns/summary"/></div>
 </div>
 </xsl:if>
+
+
+  <xsl:if test="example">
+    <div class="detailHeader">
+      <a href="#" onclick="toggleDetails('div|example')">
+        <img src="OrteliusAjax/foldud.gif" ID="img|example" border="0" height="9" width="15"/>Example code
+      </a>
+    </div>
+    <div id="div|example" class="hiddenElement">
+      <div class="detailElement">
+        <code>
+          <xsl:value-of disable-output-escaping="yes" select="example"/>
+        </code>
+      </div>
+    </div>
+  </xsl:if>
 
 <xsl:call-template name="backButton"/>
 
@@ -437,7 +484,15 @@
 </xsl:if>
 
 <div class="detailHeader">Type</div>
-<div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="type"/></div>
+  <a href="#">
+    <xsl:attribute name="onclick">
+      showElement('<xsl:value-of select="type/@fullPath"/>');return false;
+    </xsl:attribute>
+    <div class="codeLine">
+      <xsl:value-of disable-output-escaping="yes" select="type"/>
+    </div>
+  </a>
+  
 <div class="detailHeader">Default value</div>
 <xsl:value-of disable-output-escaping="yes" select="defaultValue"/>
 <xsl:call-template name="backButton"/>
@@ -613,7 +668,7 @@
 </xsl:template>
 
 <xsl:template name="Explanation">
-<div class="modifierExplanation"><img src="OrteliusAjax/staticmodifier.gif"/>=static | <img src="OrteliusAjax/overridemodifier.gif"/>=overridden | <img src="OrteliusAjax/dynamicmodifier.gif"/>=dynamic</div>
+<div class="modifierExplanation"><img src="OrteliusAjax/staticmodifier.gif"/>=static | <img src="OrteliusAjax/overridenmodifier.gif"/>=overridden | <img src="OrteliusAjax/dynamicmodifier.gif"/>=dynamic | <img border="0" src="OrteliusAjax/inheritedmodifier.gif" title="inherited"/>=inherited</div>
 </xsl:template>
 
 </xsl:stylesheet>

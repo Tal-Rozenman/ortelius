@@ -26,6 +26,9 @@ namespace Ortelius
 		private string startTag = "/**";
 		private string endTag = "*/";
 		private string classType = "";
+		private string currentPackages = "";
+		
+		
 		
 		private int idCounter = 1;
 		
@@ -62,6 +65,7 @@ namespace Ortelius
 		
 		public string AddClass(string[] asFileLines,DateTime modifiedTime)
 		{
+			currentPackages = "";
 			idCounter = 1;
 			string classXml = "<modified ticks=\""+modifiedTime.Ticks+"\">"+String.Format("{0:d/M yyyy}", modifiedTime)+"</modified>";
 			asFileLines = cleanUpLines(asFileLines);
@@ -92,13 +96,13 @@ namespace Ortelius
 					int namePosStart = fileLine.IndexOf("import ")+7;
 					string text = fileLine.Substring(namePosStart,(fileLine.Length-namePosStart));
 					text = text.TrimEnd(';');
-					resultText += "<import><packageName>"+text+"</packageName></import>\r\n";
+					resultText += "<import><packageName fullPath=\"\">"+text+"</packageName></import>\r\n";
 					resultText.TrimEnd(("\r\n ;").ToCharArray());
-					
-					
+					currentPackages += text+",";
 				}
 			}
 			
+			currentPackages = currentPackages.TrimEnd(',');
 			return resultText;
 		}
 		
@@ -128,6 +132,7 @@ namespace Ortelius
 					
 					
 					resultText += "<package>"+packageName+"</package>\r\n";
+					currentPackages += (packageName=="")?  ",*" : ","+packageName+".*";
 					
 					resultText += "<name>"+stripElement(fileLine,@" *(\[.*\] +)?(dynamic +)?(final +)?((public|internal) +)?(dynamic +)?(final +)?(class +)",@"( +extends)?( +\S*)?( +implements)?( +\S*)? *{? *")+"</name>\r\n";
 					resultText += getId();
@@ -188,8 +193,7 @@ namespace Ortelius
 			string accesString = "public";	
 			
 			string resultText = "";
-			string fileLine = asFileLines[lineIndex];
-			
+			string fileLine = asFileLines[lineIndex];		
 							
 			
 			//methods
@@ -220,16 +224,16 @@ namespace Ortelius
 						
 						
 						string pName = param.Substring(0,colonIndex).TrimStart(' ');
-						if(param.IndexOf(":")!=-1) resultText += getType(param,pName);
+						if(param.IndexOf(":")!=-1) resultText += getTypeXml(param,pName);
 						
 						resultText += "<name>" +pName +"</name>\r\n";
-						resultText += "<summary><![CDATA["+getDescription(asFileLines,lineIndex,"@param "+pName)+"]]></summary>\r\n";
+						resultText += "<summary><![CDATA["+getDescription(asFileLines,lineIndex,"@param "+pName+" ")+"]]></summary>\r\n";
 						resultText += "</param>\r\n";
 					}
 				
 					}
 				}catch(Exception){
-					SystemSvar += "\nLine #"+lineIndex+" \""+ asFileLines[lineIndex]+"\"";
+					SystemSvar += "\r\nLine #"+lineIndex+": \""+ asFileLines[lineIndex]+"\"";
 				}
 				
 					
@@ -295,7 +299,7 @@ namespace Ortelius
 				resultText += getId();
 				resultText += "<modifiers>\r\n"+getModifiers(fileLine)+"</modifiers>\r\n";	
 				
-				if(fileLine.IndexOf(propName+":")!=-1) resultText += "<type>"+getType(fileLine,propName)+"</type>\r\n";
+				if(fileLine.IndexOf(propName+":")!=-1) resultText += getTypeXml(fileLine,propName)+"\r\n";
 				
 				resultText += "<summary><![CDATA["+getSummery(asFileLines,lineIndex)+"]]></summary>\r\n";
 				resultText += formatCodeline(stripElement(fileLine,"",@"[{|;]"));
@@ -310,28 +314,25 @@ namespace Ortelius
 		}
 		
 		
-		string getType(string line,string name){
+		string getTypeXml(string line,string name){
 			line = stripElement(line,@".*:",@" *[=|;|)|,].*");
 			return formatType(line);
 		}
-		
-		
 			
-			string formatType(string typeName){
-				
+		string formatType(string typeName){
 			typeName = typeName.Replace("<","&lt;").Replace(">","&gt;").Replace(" ","");
-				return "<type><![CDATA[" +typeName+"]]></type>\r\n";
-			}
-		string formatCodeline(string codeLine){
-				
+			return "<type fullPath=\"\"  context=\""+currentPackages+"\"><![CDATA[" +typeName+"]]></type>\r\n";
+		}
+		
+		string formatCodeline(string codeLine){				
 			codeLine = codeLine.Replace("<","&lt;").Replace(">","&gt;").Replace(";","");
 			
 			Regex codeLineEnd = new Regex(@"[;|{|/].*");
 			codeLine =  codeLineEnd.Replace(codeLine, "");
 					
 			codeLine = codeLine.TrimEnd(' ').TrimEnd('{');
-				return "<codeLine><![CDATA[" +codeLine+"]]></codeLine>\r\n";
-			}
+			return "<codeLine><![CDATA[" +codeLine+"]]></codeLine>\r\n";
+		}
 		#endregion
 		
 		
@@ -344,7 +345,7 @@ namespace Ortelius
 		{	
 			string result = "";
 				if(fileLine.IndexOf("static ") != -1) result += "<modifier>static</modifier>\r\n";				
-				if(fileLine.IndexOf("override ") != -1) result += "<modifier>override</modifier>\r\n";		
+				if(fileLine.IndexOf("override ") != -1) result += "<modifier>overriden</modifier>\r\n";		
 				if(fileLine.IndexOf("dynamic ") != -1) result += "<modifier>dynamic</modifier>\r\n";	
 				if(fileLine.IndexOf("abstract ") != -1) result += "<modifier>dynamic</modifier>\r\n";
 				return result;
@@ -585,7 +586,7 @@ namespace Ortelius
 					//remove single line comments
 					int commentIndex = asFileLines[i].IndexOf("//");
 					if(commentIndex!=-1){
-						asFileLines[i] = asFileLines[i].Substring(0,(asFileLines[i].Length - commentIndex));
+						asFileLines[i] = asFileLines[i].Substring(0,commentIndex);
 					}
 					
 					//keep count on when the class is ending to avoid package with more than one class
