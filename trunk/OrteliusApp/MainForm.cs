@@ -396,8 +396,9 @@ namespace Ortelius
 				transformer.Run(serializer);
 			}
 			catch(Exception e){
+				
 				//MessageBox.Show(e.ToString());
-				systemSvar += "Error in xslt rendering:\r\n"+e.ToString()+"\r\n\r\n";
+				systemSvar += "Error in xslt rendering:\r\n"+e.ToString();
 			}
 			
 		}
