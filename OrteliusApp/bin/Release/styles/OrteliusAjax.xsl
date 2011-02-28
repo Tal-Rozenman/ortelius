@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
 <xsl:output method="html" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" encoding="UTF-8" indent="yes"/>
+<xsl:output method="html" name="text"  encoding="UTF-8"  indent="yes"/>
 <xsl:variable name="basePath" select="docElements/basePath"/>
 
 
@@ -79,19 +80,22 @@
 </xsl:call-template></div>
 
 
-
-    <div class="detailHeader">
+    
+<xsl:if test="see">
+        <div class="detailHeader">
         <a href="#" onclick="toggleDetails('div|see')">
-            <img src="OrteliusAjax/foldud.gif" ID="img|see" border="0" height="9" width="15"/>Reference
+            <img src="OrteliusAjax/foldud.gif" ID="img|see" border="0" height="9" width="15"/>See
         </a>
     </div>
+
     <div id="div|see" class="hiddenElement">
-        <xsl:if test="see">
-            <div class="detailElement">
-                <xsl:value-of disable-output-escaping="yes" select="see"/>
-            </div>
-        </xsl:if>
-    </div>
+    <xsl:for-each select="see">
+        <xsl:value-of disable-output-escaping="yes" select="."/>
+        <br />
+    </xsl:for-each>
+</div></xsl:if>
+
+
 
 
 <div class="detailHeader"><a href="#" onclick="toggleDetails('div|details')"><img src="OrteliusAjax/foldud.gif" ID="img|details" border="0" height="9" width="15"/>Details</a></div>
