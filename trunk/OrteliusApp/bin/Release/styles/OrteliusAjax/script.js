@@ -16,7 +16,7 @@ var origUrl = location.href
 
 window.onload = function(){
 	showElement("introText");
-	shownHiddenDetails = [{"name":"div|details","show":false},{"name":"div|example","show":false},{"name":"div|publicmethod","show":true},{"name":"div|import","show":false},{"name":"div|publicproperties","show":true},{"name":"div|parameters","show":true},{"name":"div|methoddetails","show":false},{"name":"div|protectedmethod","show":false},{"name":"div|protectedproperty","show":false},{"name":"div|propdetails","show":false}];
+	shownHiddenDetails = [{ "name": "div|see", "show": false }, { "name": "div|details", "show": false }, { "name": "div|example", "show": false }, { "name": "div|publicmethod", "show": true }, { "name": "div|import", "show": false }, { "name": "div|publicproperties", "show": true }, { "name": "div|parameters", "show": true }, { "name": "div|methoddetails", "show": false }, { "name": "div|protectedmethod", "show": false }, { "name": "div|protectedproperty", "show": false }, { "name": "div|propdetails", "show": false}];
 	
 
 }
