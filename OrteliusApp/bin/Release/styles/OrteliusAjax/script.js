@@ -15,8 +15,8 @@ var allIndexLists = new Array("classList","indexByName","indexByModifiedTime");
 var origUrl = location.href
 
 window.onload = function(){
-	showElement("introText");
-	shownHiddenDetails = [{ "name": "div|see", "show": false }, { "name": "div|details", "show": false }, { "name": "div|example", "show": false }, { "name": "div|publicmethod", "show": true }, { "name": "div|import", "show": false }, { "name": "div|publicproperties", "show": true }, { "name": "div|parameters", "show": true }, { "name": "div|methoddetails", "show": false }, { "name": "div|protectedmethod", "show": false }, { "name": "div|protectedproperty", "show": false }, { "name": "div|propdetails", "show": false}];
+    showElement("introText");
+    shownHiddenDetails = [{ "name": "showInherited", "show": true }, { "name": "div|see", "show": false }, { "name": "div|details", "show": false }, { "name": "div|example", "show": false }, { "name": "div|publicmethod", "show": true }, { "name": "div|import", "show": false }, { "name": "div|publicproperties", "show": true }, { "name": "div|parameters", "show": true }, { "name": "div|methoddetails", "show": false }, { "name": "div|protectedmethod", "show": false }, { "name": "div|protectedproperty", "show": false }, { "name": "div|propdetails", "show": false}];
 	
 
 }
@@ -167,10 +167,13 @@ for(var i=0;i<shownHiddenDetails.length;i++){
 
 function updateDetails(){
 	for(var i=0;i<shownHiddenDetails.length;i++){
-		if(document.getElementById(shownHiddenDetails[i].name)){
-			document.getElementById(shownHiddenDetails[i].name).className = (shownHiddenDetails[i].show) ?"detailsVisible" : "hiddenElement";
-			document.getElementById(shownHiddenDetails[i].name.replace("div|","img|")).src = (shownHiddenDetails[i].show) ?"OrteliusAjax/foldind.gif" : "OrteliusAjax/foldud.gif";
-		}
+	    if (shownHiddenDetails[i].name == "showInherited") {
+	        showHideInherited(shownHiddenDetails[i].show);
+         }
+        else if (document.getElementById(shownHiddenDetails[i].name)) {
+	        document.getElementById(shownHiddenDetails[i].name).className = (shownHiddenDetails[i].show) ? "detailsVisible" : "hiddenElement";
+	        document.getElementById(shownHiddenDetails[i].name.replace("div|", "img|")).src = (shownHiddenDetails[i].show) ? "OrteliusAjax/foldind.gif" : "OrteliusAjax/foldud.gif";
+	    }
 	}	
 }
 
@@ -216,4 +219,49 @@ else if (window.ActiveXObject)
 objXMLHttp=new ActiveXObject("Microsoft.XMLHTTP")
 }
 return objXMLHttp
-} 
+}
+
+function toggleIsInherited() {
+    for (var i = 0; i < shownHiddenDetails.length; i++) {
+        if (shownHiddenDetails[i].name == "showInherited") {
+            //alert(shownHiddenDetails[i].show==true)
+            showHideInherited(!shownHiddenDetails[i].show);
+        }
+    }
+}
+
+function showHideInherited(show) {
+    selectorText = ".isInherited";
+    setDetailCookie("showInherited", show);
+    var theRules = new Array();
+    if (document.styleSheets[0].cssRules) {
+        theRules = document.styleSheets[0].cssRules;
+    } else if (document.styleSheets[0].rules) {
+        theRules = document.styleSheets[0].rules;
+    }
+    for (n in theRules) {
+        if (theRules[n].selectorText == selectorText) {
+            theRules[n].style.display = (show) ? 'table-row' : 'none';
+        }
+    }
+    changeToggleInheritedText(show);
+  }
+
+
+  function changeToggleInheritedText(show) {
+      theClass = "toggleInheritedText";
+      //Create Array of All HTML Tags
+      var allHTMLTags = document.getElementsByTagName("*");
+
+      //Loop through all tags using a for loop
+      for (i = 0; i < allHTMLTags.length; i++) {
+
+          //Get all tags with the specified class name.
+          if (allHTMLTags[i].className == theClass) {
+
+              allHTMLTags[i].innerHTML = (show) ? 'Hide inherited elements' : 'Show inherited elements'; ;
+
+          }
+      }
+  }
+

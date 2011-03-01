@@ -152,7 +152,7 @@ namespace Ortelius
 			AllASFiles.Clear();
 			
 			destinationPath="";
-			styleName = "OrteliusFrame";
+			styleName = "OrteliusAjax";
 			docXmlFileName = "/ortelius.xml";
 			docHtmlFileName = "/index.html";
 			introText = "";
