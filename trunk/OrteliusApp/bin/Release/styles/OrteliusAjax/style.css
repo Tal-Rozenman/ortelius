@@ -6,6 +6,18 @@
 	padding: 10px;
 	padding-top: 15px;
 }
+
+.toggleInheritedText
+{
+}
+.isInherited
+{
+}
+.toggleInherited
+{
+    position:absolute;
+    left:10px;
+}
 #content {
 	border: 1px solid #999999;
 	overflow: auto;

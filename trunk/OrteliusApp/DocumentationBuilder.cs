@@ -303,7 +303,7 @@ namespace Ortelius
 				
 				resultText += "<summary><![CDATA["+getSummery(asFileLines,lineIndex)+"]]></summary>\r\n";
 				resultText += formatCodeline(stripElement(fileLine,"",@"[{|;]"));
-				if(fileLine.IndexOf("=") != -1) resultText += "<defaultValue><![CDATA["+stripElement(fileLine,@".*= *",@";+ *")+"]]></defaultValue>\r\n";
+				if(fileLine.IndexOf("=") != -1) resultText += "<defaultValue><![CDATA["+formatCode(stripElement(fileLine,@".*= *",@";+ *"))+"]]></defaultValue>\r\n";
 				
 				resultText += getStandAloneTags(asFileLines,lineIndex);
 				resultText += "</property>\r\n";
@@ -324,14 +324,18 @@ namespace Ortelius
 			return "<type fullPath=\"\"  context=\""+currentPackages+"\"><![CDATA[" +typeName+"]]></type>\r\n";
 		}
 		
-		string formatCodeline(string codeLine){				
+		string formatCodeline(string codeLine){
+			return "<codeLine><![CDATA[" +formatCode(codeLine)+"]]></codeLine>\r\n";
+		}
+		
+		string formatCode(string codeLine){				
 			codeLine = codeLine.Replace("<","&lt;").Replace(">","&gt;").Replace(";","");
 			
 			Regex codeLineEnd = new Regex(@"[;|{|/].*");
 			codeLine =  codeLineEnd.Replace(codeLine, "");
 					
 			codeLine = codeLine.TrimEnd(' ').TrimEnd('{');
-			return "<codeLine><![CDATA[" +codeLine+"]]></codeLine>\r\n";
+			return "<![CDATA[" +codeLine+"]]>";
 		}
 		#endregion
 		
