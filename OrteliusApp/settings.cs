@@ -29,7 +29,7 @@ namespace Ortelius
 			}
 		}
 		
-		private string styleName = "OrteliusFrame";
+		private string styleName = "OrteliusAjax";
 		public string StyleName {
 			get{
 				return styleName;
