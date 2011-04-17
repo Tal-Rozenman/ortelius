@@ -158,6 +158,10 @@ namespace Ortelius
 		void BuildDocumentationToolStripMenuItemClick(object sender, System.EventArgs e)
 		{
 			
+			if(projSettings.DestinationPath == "" || !Directory.Exists(projSettings.DestinationPath)){
+				MessageBox.Show("You need to select a destination folder","No destination folder", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+				return;
+			}
 			allDocXml = new XmlDocument();
 			
 			systemSvar = "";

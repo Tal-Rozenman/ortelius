@@ -335,7 +335,7 @@ namespace Ortelius
 			codeLine =  codeLineEnd.Replace(codeLine, "");
 					
 			codeLine = codeLine.TrimEnd(' ').TrimEnd('{');
-			return "<![CDATA[" +codeLine+"]]>";
+			return codeLine;
 		}
 		#endregion
 		
