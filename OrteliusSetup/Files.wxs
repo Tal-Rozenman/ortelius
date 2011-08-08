@@ -76,7 +76,7 @@
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\modifier.gif" Id="modifiergif20" Name="modifier.gif" DiskId="1"/>
 		</Component>
 		<Component Guid="bb5c8317-d6fc-45b0-830e-07156859620b" Id="Coverridemodifiergif21" DiskId="1">
-			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\overridenmodifier.gif" Id="overridemodifiergif21" Name="overridenmodifier.gif" DiskId="1"/>
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\overridemodifier.gif" Id="overridemodifiergif21" Name="overridemodifier.gif" DiskId="1"/>
 		</Component>
 		<Component Guid="cac995f4-61bc-4328-a4eb-16ceb32184f4" Id="Cscriptjs22" DiskId="1">
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\script.js" Id="scriptjs22" Name="script.js" DiskId="1"/>
@@ -93,6 +93,15 @@
 		<Component Guid="7c4451ce-8998-43e9-8e89-8558ae6497f1" Id="Ctopbggif25" DiskId="1">
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\topbg.gif" Id="topbggif25" Name="topbg.gif" DiskId="1"/>
 		</Component>
+		<Component Guid="4e9ca76a-52fa-4d41-ba8f-244c47f24636" Id="Cfinalmodifiergif34" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\finalmodifier.gif" Id="finalmodifiergif34" Name="finalmodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="8fff6e87-1848-4886-8fb1-168ab2eb34f7" Id="Cabstractmodifiergif35" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\abstractmodifier.gif" Id="abstractmodifiergif35" Name="abstractmodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="80621eaa-6e18-48d3-a649-cde55e87c328" Id="Cvirtualmodifiergif36" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\virtualmodifier.gif" Id="virtualmodifiergif34" Name="virtualmodifier.gif" DiskId="1"/>
+		</Component>
 	</Directory>
 	<Directory Id="OrteliusFrame" Name="OrteliusFrame">
 		<Component Guid="333bc48c-6191-4466-a540-11824682a152" Id="Carrowleftgif26" DiskId="1">
@@ -108,7 +117,7 @@
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\modifier.gif" Id="modifiergif29" Name="modifier.gif" DiskId="1"/>
 		</Component>
 		<Component Guid="136c2c87-dd04-45aa-a00f-49dc252aa101" Id="Coverridemodifiergif30" DiskId="1">
-			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\overridenmodifier.gif" Id="overridemodifiergif30" Name="overridenmodifier.gif" DiskId="1"/>
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\overridemodifier.gif" Id="overridemodifiergif30" Name="overridemodifier.gif" DiskId="1"/>
 		</Component>
 		<Component Guid="bfa433af-76ca-4555-b7e7-ea9ec6dcd535" Id="Cinheritedmodifiergif2" DiskId="1">
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusAjax\inheritedmodifier.gif" Id="inheritedmodifiergif2" Name="inheritedmodifier.gif" DiskId="1"/>
@@ -121,7 +130,18 @@
 		</Component>
 		<Component Guid="6d9fa542-3314-4026-9c02-d49398ae81e3" Id="Ctopbggif33" DiskId="1">
 			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\topbg.gif" Id="topbggif33" Name="topbg.gif" DiskId="1"/>
+		</Component>	
+	
+		<Component Guid="c399c925-f02b-4e48-ac11-e647f9b586fa" Id="Cfinalmodifiergif37" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\finalmodifier.gif" Id="finalmodifiergif37" Name="finalmodifier.gif" DiskId="1"/>
 		</Component>
+		<Component Guid="e01920d7-9548-4b19-a827-479bd86e8945" Id="Cabstractmodifiergif38" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\abstractmodifier.gif" Id="abstractmodifiergif38" Name="abstractmodifier.gif" DiskId="1"/>
+		</Component>
+		<Component Guid="210ae55c-db62-46b3-8dbd-eb659b352c5a" Id="Cvirtualmodifiergif39" DiskId="1">
+			<File Source="../OrteliusApp\bin\Release\styles\OrteliusFrame\virtualmodifier.gif" Id="virtualmodifiergif39" Name="virtualmodifier.gif" DiskId="1"/>
+		</Component>
+	
 	</Directory>
 </Directory>
 
