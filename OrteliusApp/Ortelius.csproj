@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Ortelius</RootNamespace>
@@ -47,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTypeUtil.cs" />
+    <Compile Include="JSDocumentationBuilder.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="XmlRestructure.cs" />
     <Compile Include="DocumentationBuilder.cs" />
     <Compile Include="MainForm.cs" />
