@@ -29,15 +29,14 @@ namespace Ortelius
 		private static string startPath="";
 		private static string startName="";
 		private static string destinationPath="";
+		private string latestVersion = "";
 		
 		[STAThread]
 		public static void Main(string[] args)
 		{
-			
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());
-			
 		}
 		
 		public MainForm()
@@ -75,14 +74,13 @@ namespace Ortelius
 			string version = asm.GetName().Version.ToString();
 			versionLabel.Text = version;
 			string url = "http://ortelius.marten.dk/latest_version.aspx?version="+version;
-			string result = null;
 			
 			try
 			{
 			    WebClient client = new WebClient();
-				result = client.DownloadString( url );
-				if(result!=version){
-					newVersion.Text = "Version "+result+" is available";
+				latestVersion = client.DownloadString( url );
+				if(latestVersion!=version){
+					newVersion.Text = "Version "+latestVersion+" is available";
 					newVersion.Visible = true;	
 				}
 			}
@@ -194,16 +192,33 @@ namespace Ortelius
 			}catch(Exception){
 			}
 			
+			string errorLogFil = projSettings.DestinationPath+"/errors.log";
+			
 			string endMessage = "The build is now finished";
 			if( systemSvar != ""){
-				MessageBox.Show(endMessage+ "\n\nDuring the build a number of errors occured.\nYou can find details in the error.log file","Build finished, but with errors", MessageBoxButtons.OK,MessageBoxIcon.Warning);
-				
-				StreamWriter skrivObjekt = new StreamWriter(projSettings.DestinationPath+"/errors.log", false,System.Text.Encoding.UTF8);
-				skrivObjekt.Write(systemSvar);
+				string todoMessage = "";
+				Assembly asm = Assembly.GetExecutingAssembly();
+				string version = asm.GetName().Version.ToString();
+				if(latestVersion!=version){
+					todoMessage = "\nTry upgrade to the latest version. This might solve the problem.";
+				}
+				StreamWriter skrivObjekt = new StreamWriter(errorLogFil, false,System.Text.Encoding.UTF8);
+				skrivObjekt.Write(systemSvar+"\r\n"+todoMessage+"\r\nYour version: "+version);
 				skrivObjekt.Close();
+				
+				DialogResult svar = MessageBox.Show(endMessage+ "\n\nDuring the build a number of errors occured."+todoMessage+"\nYou can find details in the error.log file.\n\nDo you want to se the log file?","Build finished, but with errors", MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+				if( svar == DialogResult.Yes){
+					System.Diagnostics.Process.Start(errorLogFil);
+				}
+				
 		
 				
-			}else if(!showAfterBuildCB.Checked ) MessageBox.Show(endMessage,"Build finished", MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+			}
+			else if(!showAfterBuildCB.Checked ) MessageBox.Show(endMessage,"Build finished", MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+			
+			if(systemSvar == "" && File.Exists(errorLogFil)){
+				File.Delete(errorLogFil);
+			}
 			
 			progressBar1.Value = 0;
 			progressBar1.Refresh();
@@ -265,6 +280,7 @@ namespace Ortelius
 					if(classXml != "" && classXml != null){
 						XmlElement classNode = allDocXml.CreateElement("class");
 						classNode.InnerXml = classXml;
+//						MessageBox.Show(classXml);
 						//add datatype to list
 						allDataTypes.AddDataType(classNode.SelectSingleNode("name").InnerText,classNode.SelectSingleNode("package").InnerText,null);//,classNode.SelectSingleNode("fid").InnerText
 						contentNode.AppendChild(classNode);
@@ -665,9 +681,7 @@ namespace Ortelius
 		
 		//add folder
 		void AddFolder(object sender, System.EventArgs e)
-		{
-			
-			
+		{			
 			FolderBrowserDialog folderDialog = new FolderBrowserDialog();
 			
 			if( projSettings.LastFolderName=="")folderDialog.SelectedPath = "Desktop";

@@ -16,9 +16,26 @@ var origUrl = location.href
 
 window.onload = function(){
     showElement("introText");
-    shownHiddenDetails = [{ "name": "showInherited", "show": true }, { "name": "div|see", "show": false }, { "name": "div|details", "show": false }, { "name": "div|example", "show": false }, { "name": "div|publicmethod", "show": true }, { "name": "div|import", "show": false }, { "name": "div|publicproperties", "show": true }, { "name": "div|parameters", "show": true }, { "name": "div|methoddetails", "show": false }, { "name": "div|protectedmethod", "show": false }, { "name": "div|protectedproperty", "show": false }, { "name": "div|propdetails", "show": false}];
-	
-
+    shownHiddenDetails = [
+    { "name": "showInherited_publicmethod", "show": true }, 
+    { "name": "showInherited_protectedmethod", "show": true }, 
+    { "name": "showInherited_internalmethod", "show": true }, 
+    { "name": "showInherited_publicproperties", "show": true }, 
+    { "name": "showInherited_protectedproperties", "show": true }, 
+    { "name": "showInherited_internalproperties", "show": true },     
+    { "name": "div|see", "show": false }, 
+    { "name": "div|details", "show": false }, 
+    { "name": "div|example", "show": false }, 
+    { "name": "div|publicmethod", "show": true }, 
+    { "name": "div|import", "show": false }, 
+    { "name": "div|publicproperties", "show": true }, 
+    { "name": "div|parameters", "show": true }, 
+    { "name": "div|methoddetails", "show": false }, 
+    { "name": "div|propdetails", "show": false}, 
+    { "name": "div|protectedmethod", "show": false }, 
+    { "name": "div|protectedproperties", "show": false },
+    { "name": "div|internalmethod", "show": false }, 
+    { "name": "div|internalproperties", "show": false }  ];
 }
 
 
@@ -167,8 +184,8 @@ for(var i=0;i<shownHiddenDetails.length;i++){
 
 function updateDetails(){
 	for(var i=0;i<shownHiddenDetails.length;i++){
-	    if (shownHiddenDetails[i].name == "showInherited") {
-	        showHideInherited(shownHiddenDetails[i].show);
+	    if (shownHiddenDetails[i].name.indexOf("showInherited")!=-1) {
+	        showHideInherited(shownHiddenDetails[i].show,shownHiddenDetails[i].name.replace("showInherited_",""));
          }
         else if (document.getElementById(shownHiddenDetails[i].name)) {
 	        document.getElementById(shownHiddenDetails[i].name).className = (shownHiddenDetails[i].show) ? "detailsVisible" : "hiddenElement";
@@ -221,18 +238,20 @@ objXMLHttp=new ActiveXObject("Microsoft.XMLHTTP")
 return objXMLHttp
 }
 
-function toggleIsInherited() {
+function toggleIsInherited(type) {
     for (var i = 0; i < shownHiddenDetails.length; i++) {
-        if (shownHiddenDetails[i].name == "showInherited") {
+        if (shownHiddenDetails[i].name == "showInherited_"+type) {
             //alert(shownHiddenDetails[i].show==true)
-            showHideInherited(!shownHiddenDetails[i].show);
+            showHideInherited(!shownHiddenDetails[i].show,type);
         }
     }
 }
 
-function showHideInherited(show) {
-    selectorText = ".isInherited";
-    setDetailCookie("showInherited", show);
+function showHideInherited(show,type) {
+if(type == undefined) return;
+    selectorText = ".isInherited_"+type;
+   // alert(selectorText)
+    setDetailCookie("showInherited_"+type, show);
     var theRules = new Array();
     if (document.styleSheets[0].cssRules) {
         theRules = document.styleSheets[0].cssRules;
@@ -244,24 +263,13 @@ function showHideInherited(show) {
             theRules[n].style.display = (show) ? 'table-row' : 'none';
         }
     }
-    changeToggleInheritedText(show);
+    changeToggleInheritedText(show,type);
   }
 
 
-  function changeToggleInheritedText(show) {
-      theClass = "toggleInheritedText";
-      //Create Array of All HTML Tags
-      var allHTMLTags = document.getElementsByTagName("*");
-
-      //Loop through all tags using a for loop
-      for (i = 0; i < allHTMLTags.length; i++) {
-
-          //Get all tags with the specified class name.
-          if (allHTMLTags[i].className == theClass) {
-
-              allHTMLTags[i].innerHTML = (show) ? 'Hide inherited elements' : 'Show inherited elements'; ;
-
-          }
-      }
+  function changeToggleInheritedText(show,type) { 
+	if(document.getElementById("btn_"+type)==undefined) return;
+  document.getElementById("btn_"+type).innerHTML = (show) ? 'Hide inherited elements' : 'Show inherited elements';
+  return;
   }
 

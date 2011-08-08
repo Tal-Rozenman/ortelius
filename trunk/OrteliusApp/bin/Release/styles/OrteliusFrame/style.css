@@ -5,6 +5,19 @@
 	right: 30px;
 	padding: 10px;
 	padding-top: 15px;
+	width:94%;
+}
+
+.toggleInheritedText
+{
+}
+.isInherited
+{
+}
+.toggleInherited
+{
+    position:absolute;
+    left:10px;
 }
 #content {
 	border: 1px solid #999999;
@@ -22,7 +35,7 @@
 	scrollbar-3dlight-color:  #FFFFFF;
 	scrollbar-darkshadow-color: #FFFFFF;
 }
-#classList {
+#classList,#indexByName,#indexByModifiedTime {
 	position: absolute;
 	background-color: #F7F8F9;
 	overflow:auto;
@@ -30,11 +43,10 @@
 	width: 280px;
 	min-height:100px;
 	left: 10px;
-	top: 32px;
+	top: 63px;
 	bottom: 10px;
 	border: 1px solid #999999;
 	padding: 10px;
-	padding-top: 15px;
 	scrollbar-arrow-color: #C50023;
 	scrollbar-face-color: #F7F8F9;
 	scrollbar-track-color: #F7F8F9;
@@ -43,6 +55,26 @@
 	scrollbar-3dlight-color:  #F7F8F9;
 	scrollbar-darkshadow-color: #F7F8F9;
 }
+
+#indexByName,#indexByModifiedTime {
+	
+	visibility: hidden;
+	}
+	
+#indexMenu {
+	background-color: #F7F8F9;
+	border: 1px solid #999999;
+	position: absolute;
+	visibility: visible;
+	width: 280px;
+	height:10px;
+	left: 10px;
+	top: 32px;
+	padding: 10px;
+
+}
+
+
 .pakageTreeName {
 	font-weight:normal;
 }
@@ -80,10 +112,7 @@
 	padding-bottom: 8px;
 	display:inline-block;
 }
-.hiddenElement {
-	display:none;
-}
-.detailsVisible {
+.hiddenElement,.detailsVisible {
 	display:block;
 	margin:0px;
 	margin-bottom:30px;
@@ -127,7 +156,7 @@
 }
 .methodPropertyModifiers {
 	white-space: nowrap;
-	width:5%;
+	width:2%;
 	padding-right:5px;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
@@ -144,7 +173,7 @@
 }
 .methodPropertyTitle {
 	white-space: nowrap;
-	width:2%;
+	width:5%;
 	padding-right:5px;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
@@ -154,6 +183,8 @@
 .methodPropertyLine {
 	padding-bottom:3px;
 	padding-top:3px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
 }
 .modifierExplanation{
 	right:10px;
@@ -178,6 +209,10 @@ code {
 .backButton {
 	margin-top: 30px;
 }
+
+#topNavigation .backButton {
+	margin-top: 0px;
+}
 .summary {
 	font-style: italic;
 }
@@ -186,22 +221,13 @@ body {
 	font-size: 11px;
 	color: #333333;
 	background-color: #FFFFFF;
-	scrollbar-arrow-color: #C50023;
-	scrollbar-face-color: #FFFFFF;
-	scrollbar-track-color: #FFFFFF;
-	scrollbar-highlight-color: #999999;
-	scrollbar-shadow-color:#999999;
-	scrollbar-3dlight-color:  #FFFFFF;
-	scrollbar-darkshadow-color: #FFFFFF;
 }
 a {
 	cursor: hand;
 	color: #333333;
 	text-decoration:none;
-	font-size: 11px;
 }
-img {
-}
+
 
 #contentIframe{
 	position:absolute;

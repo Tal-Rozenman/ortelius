@@ -19,32 +19,31 @@ namespace Ortelius
 	/// Description of build.
 	/// ]]></summary>
 	public class DocumentationBuilder
-	{
-		
+	{		
 		public string SystemSvar = "";
 		private string delimeter = "*";
 		private string startTag = "/**";
-		private string endTag = "*/";
 		private string classType = "";
 		private string currentPackages = "";
-		
-		
 		
 		private int idCounter = 1;
 		
 		private Regex accessPublicTest = new Regex(".*public.*");
 		private Regex accessProtectedTest = new Regex(".*protected.*");
-		private Regex accessPublicAndProtectedTest = new Regex(".*(public|protected).*");
-		private Regex commentPublicAndProtectedTest = new Regex(@".*(//|/\*|\*).*(public|protected)");
+		private Regex accessInternalTest = new Regex(".*internal.*");
+		private Regex accessPublicAndProtectedTest = new Regex(".*(public|protected|internal).*");
+		private Regex commentPublicAndProtectedTest = new Regex(@".*(//|/\*|\*).*(public|protected|internal)");
 		private Regex lastWhiteSpace = new Regex(@"[\t| ]*$");
 		private Regex packageTest = new Regex(@"^[\t| ]*package");		
 		
-		private	Regex publicClassTest = new Regex(@"^[^\*/]*public[ |\t][^\*/]*class[ |\t]");
-		private	Regex interfaceTest = new Regex(@"^[^\*/]*public[ |\t][^\*/]*interface[ |\t]");
+		private	Regex publicClassTest = new Regex(@"^[^\*/]*(public|internal)[ |\t][^\*/]*class[ |\t]");
+		private	Regex interfaceTest = new Regex(@"^[^\*/]*(public|internal)[ |\t][^\*/]*interface[ |\t]");
 		
 		private Regex funcTest = new Regex(@"^[^\*/]*function +");
 		private Regex funcGetTest = new Regex("function +get +");
 		private Regex funcSetTest = new Regex("function +set +");
+		
+		private string[] modifiers;
 		
 		//private XmlDocument resultXml;
 		
@@ -55,12 +54,15 @@ namespace Ortelius
 //			XmlDeclaration dec = resultXml.CreateXmlDeclaration("1.0", null, null);
 //			resultXml.AppendChild(dec);
 //			addToXml("docElements").InnerText = "HEJ";
+			
+			modifiers = new string[]{"override","dynamic","static","final","abstract","virtual"};
 		}
 
 //		private XmlElement addToXml(string nodeName){
 //			XmlElement newNode = resultXml.CreateElement(nodeName);
 //			resultXml.AppendChild(newNode);
 //			return newNode;
+		
 //		}
 		
 		public string AddClass(string[] asFileLines,DateTime modifiedTime)
@@ -69,9 +71,6 @@ namespace Ortelius
 			idCounter = 1;
 			string classXml = "<modified ticks=\""+modifiedTime.Ticks+"\">"+String.Format("{0:d/M yyyy}", modifiedTime)+"</modified>";
 			asFileLines = cleanUpLines(asFileLines);
-//			string testAS = "";
-//			foreach(string line in asFileLines) testAS += line+"\n";
-//			MessageBox.Show(testAS);
 			classXml += getImportInfo(asFileLines);
 			classXml += getClassInfo(asFileLines);
 			classXml += getOtherInfo(asFileLines);
@@ -189,26 +188,29 @@ namespace Ortelius
 		///
 		///</summary
 		private string createElementDoc(int lineIndex,string[] asFileLines){
-			
-			string accesString = "public";	
+//			
+//			string accesString = "public";	
 			
 			string resultText = "";
-			string fileLine = asFileLines[lineIndex];		
-							
+			string fileLine = asFileLines[lineIndex];	
+
+			string[] modifierStrings = getModifierStrings(fileLine);
+			string modifierRegExpString = "";
+			for(int i=0;i<modifierStrings.Length;i++){
+				modifierRegExpString += "("+modifierStrings[i]+" +)?";	
+			}
 			
 			//methods
 			if(funcTest.IsMatch(fileLine) && !funcGetTest.IsMatch(fileLine)  && !funcSetTest.IsMatch(fileLine)){	
 				
+				resultText += "<method access=\""+getAccessString(fileLine)+"\">\r\n";
 				
-				if(accessProtectedTest.IsMatch(fileLine))accesString = "protected";
-				resultText += "<method access=\""+accesString+"\">\r\n";
-				
-				resultText += "<name>"+stripElement(fileLine,@" *(static +)?(override +)?(virtual +)?((protected|public|internal) +)?(override +)?(static +)?(virtual +)?(function +)",@"\(.*")+"</name>\r\n";
+				resultText += "<name>"+stripElement(fileLine,@" *"+modifierRegExpString+"((protected|public|internal) +)?"+modifierRegExpString+"(function +)",@"\(.*")+"</name>\r\n";
 				resultText += getId();
 				resultText += "<summary><![CDATA["+getSummery(asFileLines,lineIndex)+"]]></summary>\r\n";
 				
 				resultText += formatCodeline(fileLine);
-				resultText += "<modifiers>\r\n"+getModifiers(fileLine)+"</modifiers>\r\n";	
+				resultText += "<modifiers>\r\n"+getModifierXml(modifierStrings)+"</modifiers>\r\n";	
 				
 				try{
 					//loop through
@@ -255,11 +257,10 @@ namespace Ortelius
 					
 				}
 		
-			else if(fileLine.IndexOf("function get ") != -1){								
-				if(accessProtectedTest.IsMatch(fileLine))accesString = "protected";
-				resultText += "<property access=\""+accesString+"\"  readWrite=\"Read\">\r\n";
+			else if(fileLine.IndexOf("function get ") != -1){
+				resultText += "<property access=\""+getAccessString(fileLine)+"\" readWrite=\"Read\">\r\n";
 				
-				resultText += "<name>"+stripElement(fileLine,@" *(static +)?(override +)?((protected|public|internal) +)?(override +)?(static +)?(function +get +)",@"\(.*")+"</name>\r\n";
+				resultText += "<name>"+stripElement(fileLine,@" *"+modifierRegExpString+"((protected|public|internal) +)?"+modifierRegExpString+"(function +get +)",@"\(.*")+"</name>\r\n";
 				resultText += getId();
 				if(fileLine.IndexOf("):") != -1){
 					string typeName =stripElement(fileLine,@".*\) *: *",@" *{.*");
@@ -273,10 +274,9 @@ namespace Ortelius
 			}	
 			else if(fileLine.IndexOf("function set ") != -1){
 				
-				if(accessProtectedTest.IsMatch(fileLine))accesString = "protected";
-				resultText += "<property access=\""+accesString+"\" readWrite=\"Write\">\r\n";
+				resultText += "<property access=\""+getAccessString(fileLine)+"\" readWrite=\"Write\">\r\n";
 				
-				string pName = stripElement(fileLine,@" *(static +)?(override +)?((protected|public|internal) +)?(override +)?(static +)?(function +set +)",@"\(.*");
+				string pName = stripElement(fileLine,@" *"+modifierRegExpString+"((protected|public|internal) +)?"+modifierRegExpString+"(function +set +)",@"\(.*");
 				resultText += "<name>"+pName+"</name>\r\n";	
 				resultText += getId();
 				string typeName = stripElement(fileLine,@".*\(.*[^\)]:",@" *\).*");
@@ -291,10 +291,9 @@ namespace Ortelius
 			
 				else if(fileLine.IndexOf("var ") != -1 || fileLine.IndexOf("const ") != -1){	
 				
-				if(accessProtectedTest.IsMatch(fileLine))accesString = "protected";
-				resultText += "<property access=\""+accesString+"\" readWrite=\"ReadWrite\">\r\n";
+				resultText += "<property access=\""+getAccessString(fileLine)+"\" readWrite=\"ReadWrite\">\r\n";
 				
-				string propName = stripElement(fileLine,@" *((public|protected) +)?(static +)?((public|protected) +)?((const|var) +)(static +)?",@" *[:| |=|;].*");
+				string propName = stripElement(fileLine,@" *"+modifierRegExpString+"((protected|public|internal) +)?"+modifierRegExpString+"((const|var) +)",@" *[:| |=|;].*");
 				resultText += "<name>"+propName+"</name>\r\n";
 				resultText += getId();
 				resultText += "<modifiers>\r\n"+getModifiers(fileLine)+"</modifiers>\r\n";	
@@ -309,10 +308,15 @@ namespace Ortelius
 				resultText += "</property>\r\n";
 				
 			}
-			return resultText;
-			
+			return resultText;			
 		}
 		
+		string getAccessString(string fileLine){
+			if(accessPublicTest.IsMatch(fileLine))return "public";
+			else if(accessProtectedTest.IsMatch(fileLine))return "protected";
+			else if(accessInternalTest.IsMatch(fileLine))return "internal";
+			else return "protected";
+		}
 		
 		string getTypeXml(string line,string name){
 			line = stripElement(line,@".*:",@" *[=|;|)|,].*");
@@ -348,12 +352,40 @@ namespace Ortelius
 		private string getModifiers(string fileLine)
 		{	
 			string result = "";
-				if(fileLine.IndexOf("static ") != -1) result += "<modifier>static</modifier>\r\n";				
-				if(fileLine.IndexOf("override ") != -1) result += "<modifier>overriden</modifier>\r\n";		
-				if(fileLine.IndexOf("dynamic ") != -1) result += "<modifier>dynamic</modifier>\r\n";	
-				if(fileLine.IndexOf("abstract ") != -1) result += "<modifier>dynamic</modifier>\r\n";
-				return result;
+			for(int i=0;i<modifiers.Length;i++){
+				if(fileLine.IndexOf(modifiers[i]+" ") != -1)result += "<modifier>"+modifiers[i]+"</modifier>\r\n";	
+			}
+			return result;
 		}
+		
+		///<summary><![CDATA[
+		///
+		///</summary
+		private string[] getModifierStrings(string fileLine)
+		{	
+			string result = "";
+			for(int i=0;i<modifiers.Length;i++){
+				if(fileLine.IndexOf(modifiers[i]+" ") != -1){
+					result += modifiers[i]+",";
+				}
+			}
+			result.TrimEnd(',');
+			return result.Split(',');
+		}
+		
+		///<summary><![CDATA[
+		///
+		///</summary
+		private string getModifierXml(string[] modifierStrings)
+		{	
+			string result = "";
+			for(int i=0;i<modifierStrings.Length;i++){
+				result += "<modifier>"+modifierStrings[i]+"</modifier>\r\n";	
+			}
+			return result;
+		}
+		
+		
 		///<summary>
 		///Getting the clas summary - getSummery, getDescription & getMultiLineDescription looks very alike
 		///</summary>
@@ -680,7 +712,6 @@ namespace Ortelius
 			return "<fid>_"+(idCounter++).ToString()+"</fid>\r\n";
 		}
 		#endregion
-		
 		
 		
 	}
