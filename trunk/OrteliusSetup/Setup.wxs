@@ -3,8 +3,8 @@
 	<Product Id="*"
 		Name="Ortelius"
 		Language="1033"
-		Version="1.2.3.0"
-		UpgradeCode="A615A351-E924-4C49-B1E1-B9226BACD5A7"
+		Version="1.2.4.0"
+		UpgradeCode="77D6D5B7-441C-4A78-8341-D7D82EE989E4"
 		Manufacturer="ortelius.marten.dk">
 		<Package Description="Actionscript documentation generator"
 			Comments="Comments"
@@ -65,8 +65,13 @@
 				<ComponentRef Id="Ctopbggif33" />
 				<ComponentRef Id="Cinheritedmodifiergif1" />
 				<ComponentRef Id="Cinheritedmodifiergif2" />
-		
-		
+				<ComponentRef Id="Cfinalmodifiergif34" />
+				<ComponentRef Id="Cvirtualmodifiergif36" />
+				<ComponentRef Id="Cabstractmodifiergif35" />
+
+				<ComponentRef Id="Cfinalmodifiergif37" />
+				<ComponentRef Id="Cabstractmodifiergif38" />
+				<ComponentRef Id="Cvirtualmodifiergif39" />
 		
 		</Feature>
 				<!-- 
