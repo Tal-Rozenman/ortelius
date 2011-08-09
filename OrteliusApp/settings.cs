@@ -115,7 +115,16 @@ namespace Ortelius
 				showAfterBuild=value;
 			}
 		}
-				
+		
+		private int language = 0;
+		public int Language {
+			get{
+				return language;
+			}
+			set{
+				language = value;
+			}
+		}		
 				
 		public ProjectSettings(){
 			AllASFiles= new ArrayList();
@@ -124,7 +133,8 @@ namespace Ortelius
 		public bool AddAsFile(string fileName){
 			
 			bool test = false;
-			if (Path.GetExtension(fileName) == ".as"){
+			string filExtension = Path.GetExtension(fileName);
+			if (filExtension == ".as" || filExtension == ".js" ){
 					test = true;
 					foreach(string asFile in allASFiles){
 						//test om filen findes allerede
@@ -138,9 +148,9 @@ namespace Ortelius
 		}
 		
 		public void RemoveAsFile(string fileName){
-			
-			string filExtension = fileName.Substring(fileName.LastIndexOf(".")).ToLower();
-			if (filExtension == ".as"){
+
+			string filExtension = Path.GetExtension(fileName);//fileName.Substring(fileName.LastIndexOf(".")).ToLower();
+			if (filExtension == ".as" || filExtension == ".js" ){
 				allASFiles.Remove(fileName);
 					
 				
@@ -158,6 +168,7 @@ namespace Ortelius
 			introText = "";
 			introHeader = "";
 			showAfterBuild = false;
+			language = 0;
 			
 		
 		}

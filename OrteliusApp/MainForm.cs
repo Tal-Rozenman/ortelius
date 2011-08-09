@@ -31,6 +31,9 @@ namespace Ortelius
 		private static string destinationPath="";
 		private string latestVersion = "";
 		
+		
+		public enum CodeLanguage { Actionscript, Javascript };
+		
 		[STAThread]
 		public static void Main(string[] args)
 		{
@@ -48,7 +51,7 @@ namespace Ortelius
 		bool changeFlag = false;
 		ProjectSettings projSettings;
 		GenerelSettings appSettings;
-		DocumentationBuilder asDocumentation;
+		IDocumentationBuilder asDocumentation;
 		
 		private string systemSvar ="";
 		
@@ -115,13 +118,24 @@ namespace Ortelius
 		{
 			
 			string fileName = "";
+			string fileExt = "";
 			OpenFileDialog openFileDialog1 = new OpenFileDialog();
 			if( projSettings.LastFolderName=="")openFileDialog1.InitialDirectory = "Desktop" ;
 			else openFileDialog1.InitialDirectory = projSettings.LastFolderName;
-			openFileDialog1.Filter = "ActionScript files(*.as)|*.as" ;	
+			switch((CodeLanguage) projSettings.Language){
+				case CodeLanguage.Actionscript:
+				openFileDialog1.Filter = "ActionScript files(*.as)|*.as" ;
+				openFileDialog1.Title = "Add ActionScript file ";
+				fileExt = ".as";
+				break;
+				case CodeLanguage.Javascript:
+				openFileDialog1.Filter = "Javascript files(*.js)|*.js" ;
+				openFileDialog1.Title = "Add Javascript file ";
+				fileExt = ".js";
+				break;
+			}
 			openFileDialog1.FilterIndex = 1 ;
 			openFileDialog1.RestoreDirectory = true ;
-			openFileDialog1.Title = "Add ActionScript file ";
 			
 			if(openFileDialog1.ShowDialog() == DialogResult.OK){
 				projSettings.LastFolderName = Path.GetDirectoryName(openFileDialog1.FileName);
@@ -131,7 +145,7 @@ namespace Ortelius
 						changeFlag = true;
 						renderList();
 					}
-					else if (Path.GetExtension(fileName) != ".as") MessageBox.Show("Wrong file format");
+					else if (Path.GetExtension(fileName) != fileExt) MessageBox.Show("Wrong file format");
 				}
 			}
 		}
@@ -264,7 +278,17 @@ namespace Ortelius
 			createdNode.InnerText = String.Format("{0:d/M yyyy}", DateTime.Now);
 			contentNode.AppendChild(createdNode);
 			
-			asDocumentation = new DocumentationBuilder();
+			
+			switch((CodeLanguage) projSettings.Language){
+				case CodeLanguage.Actionscript:
+				asDocumentation = new DocumentationBuilder();
+				break;
+				case CodeLanguage.Javascript:
+				asDocumentation = new JSDocumentationBuilder();
+				break;
+			}
+			
+			
 			
 			//loop trough all files
 			int incFiles = 0;
@@ -275,19 +299,19 @@ namespace Ortelius
 				progressBar1.Refresh();
 				DateTime modifiedTime = File.GetLastWriteTime(filNavn);
 				
-				string classXml = asDocumentation.AddClass(File.ReadAllLines(filNavn, Encoding.Default),modifiedTime);
+				XmlNodeList classXml = asDocumentation.AddFile(File.ReadAllLines(filNavn, Encoding.Default),modifiedTime);
+				
 				try{
-					if(classXml != "" && classXml != null){
-						XmlElement classNode = allDocXml.CreateElement("class");
-						classNode.InnerXml = classXml;
-//						MessageBox.Show(classXml);
-						//add datatype to list
-						allDataTypes.AddDataType(classNode.SelectSingleNode("name").InnerText,classNode.SelectSingleNode("package").InnerText,null);//,classNode.SelectSingleNode("fid").InnerText
-						contentNode.AppendChild(classNode);
-					}else{
-						systemSvar += "File not added (no content): "+filNavn+"\r\n\r\n";
-						asDocumentation.SystemSvar = "";
-					}
+					foreach (XmlNode classNode in classXml){
+						if(classNode.InnerXml != ""){
+							allDataTypes.AddDataType(classNode.SelectSingleNode("name").InnerText,classNode.SelectSingleNode("package").InnerText,null);//,classNode.SelectSingleNode("fid").InnerText
+							
+							contentNode.AppendChild(allDocXml.ImportNode(classNode,true ));
+						}else{
+							systemSvar += "File not added (no content): "+filNavn+"\r\n\r\n";
+							asDocumentation.SystemSvar = "";
+						}
+					}				
 				}
 				catch(Exception e){
 					systemSvar +="Exception error in: "+filNavn+"\r\n"+e.ToString()+"\r\n\r\n" ;
@@ -625,7 +649,7 @@ namespace Ortelius
 		}
 		
 		
-		void NewProjectToolStripMenuItemClick(object sender, EventArgs e)
+		void NewProject(object sender, EventArgs e)
 		{
 			string saveWarning = "Do you want to continue without saving your changes?";
 			if(changeFlag){
@@ -633,6 +657,8 @@ namespace Ortelius
 			}
 			
 			projSettings.ResetProjectSettings();
+			if(sender == newJSProjectToolStripMenuItem) projSettings.Language = (int) CodeLanguage.Javascript;
+				
 			xmlPath.Text = "";
 			appSettings.CurrentProject = "";
 			introText.Text = "";

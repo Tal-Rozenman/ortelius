@@ -7,6 +7,7 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.Collections;
 using System.Text.RegularExpressions;
 
 namespace Ortelius
@@ -22,8 +23,9 @@ namespace Ortelius
 		private static string startTag = "/**";
 		
 		private static Regex lastWhiteSpace = new Regex(@"[\t| ]*$");
+		private static Regex funcTest = new Regex(@"^[^\*/]*function +");
 		//
-		public static string[] cleanUpLines(string[] asFileLines)
+		public static string[] cleanUpLines(string[] asFileLines, bool singleClass)
 		{	
 			int curlyBracketCounter = 0;
 			bool removeTheRest = false;
@@ -89,7 +91,7 @@ namespace Ortelius
 						bracketPos = asFileLines[i].IndexOf("}");
 						while(bracketPos != -1){
 							curlyBracketCounter--;
-							if(curlyBracketCounter<=1) removeTheRest = true;
+							if(curlyBracketCounter<=1 && singleClass) removeTheRest = true;
 							bracketPos++;
 							if(bracketPos<asFileLines[i].Length) bracketPos = asFileLines[i].IndexOf("}",bracketPos);
 							else bracketPos = -1;
@@ -149,7 +151,7 @@ namespace Ortelius
 			return summeryText.TrimStart(trimChar);			
 		}
 		
-		string stripElement(string linje,string startRegexp,string slutRegexp){
+		public static string stripElement(string linje,string startRegexp,string slutRegexp){
 			Regex rx1 = new Regex(startRegexp);
 			Regex rx2 = new Regex(slutRegexp);
 			linje =  rx1.Replace(linje, "");
@@ -162,5 +164,179 @@ namespace Ortelius
 		public static string getId(){
 			return "<fid>_"+(idCounter++).ToString()+"</fid>\r\n";
 		}
+		
+		///<summary>
+		///Getting the clas summary - getSummery, getDescription & getMultiLineDescription looks very alike
+		///</summary>
+		public static string getSummery(string[] asFileLines,int elementIndex)
+		{	
+			
+			char[] trimChar = {'\n','\r','\t',' '};
+			string resultText = "";
+			int decIndex = elementIndex-1;
+			int tagIndex = elementIndex;
+			
+			//skip empty line
+			while(decIndex>0 && asFileLines[decIndex].TrimEnd(trimChar)=="" ){				
+				decIndex --;
+			}
+			//find the first line of the documentation
+			while(decIndex>=0 && (asFileLines[decIndex].IndexOf(delimeter) == 0 || asFileLines[decIndex].IndexOf(startTag) == 0)){
+				if(asFileLines[decIndex].IndexOf(startTag)!= -1){
+					tagIndex = decIndex+1;
+					break;
+				}
+				decIndex --;
+			}
+			
+			while(tagIndex < elementIndex){
+				
+				if(asFileLines[tagIndex].IndexOf("*@")==0 || asFileLines[tagIndex].IndexOf("*/")!=-1 ) break;
+				else {
+				string text = removeCommentChars(asFileLines[tagIndex]);
+				if(text != "") resultText +=  text +"<br/>";
+				}
+				tagIndex ++;
+			}
+			
+			resultText = resultText.TrimEnd('\r');
+			resultText = resultText.TrimEnd('\n');
+			resultText = resultText.TrimEnd('\r');
+			return resultText;
+		}
+		
+		
+		public static string getOneLineMultiDescription(string[] asFileLines,int elementIndex,string tag){
+			string[] lines = getMultiDescription( asFileLines, elementIndex, tag);
+			string result = "";
+			foreach(string docString in lines){
+				result += docString;
+			}
+			return result;
+		}
+		
+		///<summary>
+		///Gets the description of more than one occurence of a tag - getSummery, getDescription & getMultiDescription looks very alike
+		///</summary>
+		public static string[] getMultiDescription(string[] asFileLines,int elementIndex,string tag){
+			
+			if(elementIndex<=0) return new string[]{};
+			string resultText="";
+			ArrayList allResults = new ArrayList();
+			char[] trimChar = {'\n','\r'};
+			
+			int index = elementIndex-1;
+			int tagIndex = elementIndex;
+			
+			//skip empty line
+			while(index>0 && asFileLines[index].TrimEnd(trimChar)=="" ){				
+				index --;
+			}
+			//find line where doc starts
+			while(index>0 && asFileLines[index].IndexOf(delimeter) == 0 ){
+				index --;
+			}
+			
+			try{
+			bool recordFlag = false;
+			while(index <= elementIndex){
+				string asLine = removeCommentChars(asFileLines[index]);
+				if((asFileLines[index].IndexOf("*/")== 0 ||  asLine.IndexOf("@")== 0 || index == elementIndex) && recordFlag){
+					//stop recording
+					resultText = resultText.TrimEnd(trimChar);
+					allResults.Add(resultText);
+					recordFlag = false;
+				}
+				if(asLine.IndexOf("@"+tag)== 0){
+					//start recording
+					string text = removeCommentChars(asFileLines[index]);
+					
+					text = text.Substring(tag.Length+1);
+					
+					resultText =  text.TrimStart(' ') +"<br/>";
+					recordFlag = true;
+				} else if(recordFlag){					
+					resultText +=asLine+"<br/>";					
+				}			
+				index ++;
+			}
+			
+			}catch(Exception){
+//				SystemSvar +=  "\nLine #"+tagIndex+" \""+asFileLines[tagIndex]+"\"";
+			}
+			return (string[])allResults.ToArray(typeof(string));
+		}
+		
+		///<summary>
+		///getSummery, getDescription & getMultiDescription looks very alike
+		///</summary>
+		public static string getDescription(string[] asFileLines,int elementIndex,string tag)
+		{
+			
+			char[] trimChar = {'\n','\r'};
+			string resultText = "";
+			int decIndex = elementIndex-1;
+			int tagIndex = elementIndex;
+			try{
+						//skip empty line
+			while(decIndex>0 && asFileLines[decIndex].TrimEnd(trimChar)=="" ){				
+				decIndex --;
+			}
+				while(decIndex>=0 && (asFileLines[decIndex].IndexOf(delimeter) == 0 || asFileLines[decIndex]=="")){
+				if(asFileLines[decIndex].IndexOf(tag)!= -1){
+					tagIndex = decIndex;
+					break;
+				}
+				decIndex --;
+			}
+			bool firstFlag = true;
+			while(tagIndex < elementIndex){
+				
+				if(!firstFlag && (asFileLines[tagIndex].IndexOf("*@")==0 || asFileLines[tagIndex].IndexOf("*/")!=-1 )) break;
+				else {
+				string text = removeCommentChars(asFileLines[tagIndex]);
+				if(text != ""){
+					
+					
+					
+				if(firstFlag) text = text.Substring(tag.Length);
+					 resultText +=  text.TrimStart(' ') +"<br/>";
+					firstFlag = false;
+				}
+				}
+				tagIndex ++;
+			}
+			
+			resultText = resultText.TrimEnd('\n');
+			resultText = resultText.TrimEnd('\r');
+			resultText = resultText.TrimEnd('\n');
+			}catch(Exception){
+				//SystemSvar += "\nLine #"+tagIndex+" \""+asFileLines[tagIndex]+"\"";
+				
+			}
+			
+			return resultText;
+		}		
+		
+		/// <summary>
+		/// Gets a number of standard tags
+		/// </summary>
+		/// <param name="asFileLines"></param>
+		/// <param name="elementIndex"></param>
+		/// <returns></returns>
+		public static string getStandAloneTags(string[] asFileLines,int elementIndex)
+		{
+			string[] tags = {"see","version","author","todo","langversion","keyword","playerversion","throws","exception","deprecated","sends","example","since"};
+			string resultText = "";
+			foreach(string tag in tags){
+				string[] tagDoc = getMultiDescription(asFileLines, elementIndex, tag);
+				foreach(string docString in tagDoc){
+					resultText += "<"+tag+"><![CDATA["+docString+"]]></"+tag+">\r\n";
+				}
+			}
+			
+			return resultText;
+		}
+		
 	}
 }
