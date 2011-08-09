@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 // you compile.
 
 [assembly: AssemblyTitle("Ortelius")]
-[assembly: AssemblyDescription("Ortelius is an application to generate html or flash documentation of your actionscript class files. This documentation makes it easier to share actionscript classes and to remember what methods and properties each class has.")]
+[assembly: AssemblyDescription("Ortelius is an application to generate html or flash documentation of your actionscript or javascript files. This documentation makes it easier to share actionscript or javascript and to remember what methods and properties each class has.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ortelius.marten.dk")]
 [assembly: AssemblyProduct("Ortelius")]
@@ -28,4 +28,4 @@ using System.Runtime.InteropServices;
 // You can specify all values by your own or you can build default build and revision
 // numbers with the '*' character (the default):
 
-[assembly: AssemblyVersion("1.2.4.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
