@@ -42,11 +42,11 @@ namespace Ortelius
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.filesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.newJSProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.newJSProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addClassFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,11 +86,11 @@ namespace Ortelius
 			this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.ForeColor = System.Drawing.Color.White;
-			this.button1.Location = new System.Drawing.Point(352, 564);
+			this.button1.Location = new System.Drawing.Point(351, 564);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(127, 22);
 			this.button1.TabIndex = 16;
-			this.button1.Text = "Add Class file";
+			this.button1.Text = "Add file";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.AddASFile);
 			// 
@@ -140,6 +140,14 @@ namespace Ortelius
 			this.newProjectToolStripMenuItem.Text = "New AS project";
 			this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject);
 			// 
+			// newJSProjectToolStripMenuItem
+			// 
+			this.newJSProjectToolStripMenuItem.Name = "newJSProjectToolStripMenuItem";
+			this.newJSProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+			this.newJSProjectToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.newJSProjectToolStripMenuItem.Text = "New JS project";
+			this.newJSProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject);
+			// 
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
@@ -170,14 +178,6 @@ namespace Ortelius
 			this.closeToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
 			this.closeToolStripMenuItem.Text = "Exit";
 			this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItemClick);
-			// 
-			// newJSProjectToolStripMenuItem
-			// 
-			this.newJSProjectToolStripMenuItem.Name = "newJSProjectToolStripMenuItem";
-			this.newJSProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-			this.newJSProjectToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-			this.newJSProjectToolStripMenuItem.Text = "New JS project";
-			this.newJSProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject);
 			// 
 			// buildToolStripMenuItem
 			// 
@@ -268,7 +268,7 @@ namespace Ortelius
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(157, 22);
 			this.button3.TabIndex = 8;
-			this.button3.Text = "Remove class file";
+			this.button3.Text = "Remove file";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.RemoveClass);
 			// 
@@ -323,7 +323,7 @@ namespace Ortelius
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(56, 19);
 			this.label2.TabIndex = 14;
-			this.label2.Text = "Class files";
+			this.label2.Text = "Files";
 			// 
 			// BuildButton
 			// 
@@ -336,7 +336,7 @@ namespace Ortelius
 			this.BuildButton.Name = "BuildButton";
 			this.BuildButton.Size = new System.Drawing.Size(402, 22);
 			this.BuildButton.TabIndex = 1;
-			this.BuildButton.Text = "Build actionscript documentation";
+			this.BuildButton.Text = "Build documentation";
 			this.BuildButton.UseVisualStyleBackColor = true;
 			this.BuildButton.Click += new System.EventHandler(this.BuildDocumentationToolStripMenuItemClick);
 			// 

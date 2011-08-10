@@ -3,11 +3,13 @@
 <xsl:output method="html" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" encoding="UTF-8" indent="yes"/>
 <xsl:output method="html" name="text"  encoding="UTF-8"  indent="yes"/>
 <xsl:variable name="basePath" select="docElements/basePath"/>
+<xsl:variable name="language" select="docElements/langauage"/>
 
 
 <xsl:template match="docElements">
 		
 <xsl:variable name="filename"><xsl:value-of select="$basePath" />/ortfiles/introText.html</xsl:variable>
+    
 <html>
 <head>
 <title><xsl:value-of disable-output-escaping="yes" select="introHeader"/> | Actionscript documentation</title>
@@ -976,10 +978,11 @@
 	
 
 <!-- THE BOTTOM EXPLANITION UNDER THE EACH LIST AF METHOD/PROPERTY - JAVASCRIPT -->
-<xsl:template name="Explanation">	
+<xsl:template name="Explanation">
     <xsl:param name="type"/>	
     <xsl:param name="inhLength"/>
-	
+    
+    <xsl:if test="$language = 'AS'">
     <div class="toggleInherited">
     	<xsl:attribute name="id"><xsl:value-of select="$type"/></xsl:attribute>
     	<xsl:if test="$inhLength &gt; 0">
@@ -988,14 +991,14 @@
     		<xsl:attribute name="onclick">toggleIsInherited('<xsl:value-of select="$type"/>');return false;</xsl:attribute>
     		Hide inherited elements
     		</a>
-	</xsl:if>
+	    </xsl:if>
 	</div>
 
 	<div class="modifierExplanation">
      <img src="OrteliusAjax/staticmodifier.gif"/>=static | <img src="OrteliusAjax/overridemodifier.gif"/>=overridden | <img src="OrteliusAjax/dynamicmodifier.gif"/>=dynamic | <img src="OrteliusAjax/finalmodifier.gif"/>=final | <img border="0" src="OrteliusAjax/inheritedmodifier.gif" title="inherited"/>=inherited
 	</div>
-
-	
+    </xsl:if>
+    
 </xsl:template>
 
 <xsl:template name="ElementStart">	
