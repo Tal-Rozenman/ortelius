@@ -52,6 +52,7 @@ namespace Ortelius
 		
 		public XmlNodeList AddFile(string[] _asFileLines,DateTime modifiedTime)
 		{
+			openClassTag = false;
 			string classXml = "";
 			modifiedXml = "<modified ticks=\""+modifiedTime.Ticks+"\">"+String.Format("{0:d/M yyyy}", modifiedTime)+"</modified>\r\n";
 			asFileLines = Utils.cleanUpLines(_asFileLines,false);
@@ -69,8 +70,11 @@ namespace Ortelius
 				}
 			}
 			
+			if(openClassTag){
+				classXml += endClassNode();
+			}
 			XmlDocument xml = new XmlDocument();
-			xml.LoadXml("<nodes>"+classXml+endClassNode()+"</nodes>");
+			xml.LoadXml("<nodes>"+classXml+"</nodes>");
 			XmlNodeList classes = xml.SelectNodes("/nodes/class");
 
 			return classes;
@@ -146,9 +150,15 @@ namespace Ortelius
 		{
 			string accesString = "public";	
 			string resultText = "<property access=\""+accesString+"\">\r\n";
-			resultText += "<name>"+Utils.getOneLineMultiDescription(asFileLines,endIndex,"property")+"</name>\r\n";
+			
+			string paramData = Utils.getOneLineMultiDescription(asFileLines,endIndex,"property");
+			string type = Utils.stripElement(paramData,@"\s*{",@"}.*");
+			string pName = Utils.stripElement(paramData,@"\s*{.*} ",@" .*");
+					
+			resultText += "<name>"+pName+"</name>\r\n";
+			resultText += "<type>"+type+"</type>\r\n";
 			resultText += generelStuff();
-			resultText += "<codeLine/>\r\n";
+			resultText += "<codeLine>"+pName+"</codeLine>\r\n";
 			resultText += "<summary><![CDATA["+Utils.getSummery(asFileLines,nameLine)+"]]></summary>\r\n";
 			resultText += Utils.getStandAloneTags(asFileLines,endIndex);
 			resultText += "</property>\r\n";			
@@ -176,7 +186,7 @@ namespace Ortelius
 		
 		private void getNamespaceData(int endIndex)
 		{
-			namespaceXml = "<package>"+Utils.getMultiDescription(asFileLines,endIndex,"namespace")+"</package>";
+			namespaceXml = "<package>"+Utils.getOneLineMultiDescription(asFileLines,endIndex,"namespace")+"</package>";
 		}
 		
 		private string generelStuff()

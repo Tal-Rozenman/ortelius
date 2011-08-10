@@ -279,14 +279,18 @@ namespace Ortelius
 			contentNode.AppendChild(createdNode);
 			
 			
+			XmlElement languageNode = allDocXml.CreateElement("language");
 			switch((CodeLanguage) projSettings.Language){
 				case CodeLanguage.Actionscript:
 				asDocumentation = new DocumentationBuilder();
+				languageNode.InnerText = "AS";
 				break;
 				case CodeLanguage.Javascript:
 				asDocumentation = new JSDocumentationBuilder();
+				languageNode.InnerText = "JS";
 				break;
 			}
+			contentNode.AppendChild(languageNode);
 			
 			
 			
@@ -302,16 +306,21 @@ namespace Ortelius
 				XmlNodeList classXml = asDocumentation.AddFile(File.ReadAllLines(filNavn, Encoding.Default),modifiedTime);
 				
 				try{
+					if(classXml.Count > 0){
 					foreach (XmlNode classNode in classXml){
 						if(classNode.InnerXml != ""){
 							allDataTypes.AddDataType(classNode.SelectSingleNode("name").InnerText,classNode.SelectSingleNode("package").InnerText,null);//,classNode.SelectSingleNode("fid").InnerText
 							
 							contentNode.AppendChild(allDocXml.ImportNode(classNode,true ));
 						}else{
+							systemSvar += "Empty class in: "+filNavn+"\r\n\r\n";
+							asDocumentation.SystemSvar = "";
+						}
+					}
+					}else{
 							systemSvar += "File not added (no content): "+filNavn+"\r\n\r\n";
 							asDocumentation.SystemSvar = "";
 						}
-					}				
 				}
 				catch(Exception e){
 					systemSvar +="Exception error in: "+filNavn+"\r\n"+e.ToString()+"\r\n\r\n" ;
