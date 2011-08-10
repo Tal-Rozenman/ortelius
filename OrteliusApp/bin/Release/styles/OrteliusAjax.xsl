@@ -675,11 +675,12 @@
 		</xsl:with-param>
     </xsl:call-template>
 
-  
+<xsl:if test="defaultValue"> 
 <div class="detailHeader">Default value</div>
 <xsl:value-of disable-output-escaping="yes" select="defaultValue"/>
+</xsl:if>
+    
 <xsl:call-template name="backButton"/>
-
 </div>
 
 
