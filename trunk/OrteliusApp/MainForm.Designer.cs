@@ -136,15 +136,16 @@ namespace Ortelius
 			// 
 			this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
 			this.newProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.newProjectToolStripMenuItem.Text = "New AS project";
 			this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject);
 			// 
 			// newJSProjectToolStripMenuItem
 			// 
 			this.newJSProjectToolStripMenuItem.Name = "newJSProjectToolStripMenuItem";
-			this.newJSProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-			this.newJSProjectToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.newJSProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+									| System.Windows.Forms.Keys.N)));
+			this.newJSProjectToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.newJSProjectToolStripMenuItem.Text = "New JS project";
 			this.newJSProjectToolStripMenuItem.Click += new System.EventHandler(this.NewProject);
 			// 
@@ -152,14 +153,16 @@ namespace Ortelius
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
 			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
 			// 
 			// saveProjectToolStripMenuItem
 			// 
 			this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-			this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.saveProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+									| System.Windows.Forms.Keys.S)));
+			this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.saveProjectToolStripMenuItem.Text = "Save project as...";
 			this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItemClick);
 			// 
@@ -167,7 +170,7 @@ namespace Ortelius
 			// 
 			this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
 			this.loadProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.loadProjectToolStripMenuItem.Text = "Open project";
 			this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProjectToolStripMenuItemClick);
 			// 
@@ -175,7 +178,7 @@ namespace Ortelius
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
 			this.closeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.closeToolStripMenuItem.Text = "Exit";
 			this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItemClick);
 			// 
@@ -195,14 +198,14 @@ namespace Ortelius
 			// 
 			this.addClassFileToolStripMenuItem.Name = "addClassFileToolStripMenuItem";
 			this.addClassFileToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-			this.addClassFileToolStripMenuItem.Text = "Add Class file";
+			this.addClassFileToolStripMenuItem.Text = "Add file";
 			this.addClassFileToolStripMenuItem.Click += new System.EventHandler(this.AddASFile);
 			// 
 			// addFolderToolStripMenuItem
 			// 
 			this.addFolderToolStripMenuItem.Name = "addFolderToolStripMenuItem";
 			this.addFolderToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-			this.addFolderToolStripMenuItem.Text = "Add folder with class files";
+			this.addFolderToolStripMenuItem.Text = "Add files in folder";
 			this.addFolderToolStripMenuItem.Click += new System.EventHandler(this.AddFolder);
 			// 
 			// chooseDestinationToolStripMenuItem
