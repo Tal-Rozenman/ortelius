@@ -3,7 +3,7 @@
 <xsl:output method="html" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" encoding="UTF-8" indent="yes"/>
 <xsl:output method="html" name="text"  encoding="UTF-8"  indent="yes"/>
 <xsl:variable name="basePath" select="docElements/basePath"/>
-<xsl:variable name="language" select="docElements/langauage"/>
+<xsl:variable name="language" select="docElements/language"/>
 
 
 <xsl:template match="docElements">
