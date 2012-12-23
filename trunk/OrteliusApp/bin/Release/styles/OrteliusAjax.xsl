@@ -303,6 +303,9 @@
 </xsl:if>
 
 	
+
+	
+	
 	
 	
 <!--	PROPERTIES-->
@@ -469,6 +472,8 @@
 </div>
 
 <br />
+	
+	
 
 <xsl:call-template name="toggleDetailsHeader">
 <xsl:with-param name="name">methoddetails</xsl:with-param>
@@ -508,7 +513,13 @@
 </xsl:if>
 </div>
 
-
+<xsl:if test="example">
+<xsl:call-template name="toggleDetailsHeader">
+	<xsl:with-param name="name">example</xsl:with-param>
+	<xsl:with-param name="text">Example code</xsl:with-param>
+</xsl:call-template>
+<div id="div|example" class="hiddenElement"><div class="detailElement"><code><xsl:value-of disable-output-escaping="yes" select="example"/></code></div></div>
+</xsl:if>
 
 
 <xsl:if test="param">
@@ -561,21 +572,6 @@
 </div>
 </xsl:if>
 
-
-  <xsl:if test="example">
-  	<xsl:call-template name="toggleDetailsHeader">
-<xsl:with-param name="name">example</xsl:with-param>
-<xsl:with-param name="text">Example code</xsl:with-param>
-</xsl:call-template>
-
-    <div id="div|example" class="hiddenElement">
-      <div class="detailElement">
-        <code>
-          <xsl:value-of disable-output-escaping="yes" select="example"/>
-        </code>
-      </div>
-    </div>
-  </xsl:if>
 
 <xsl:call-template name="backButton"/>
 

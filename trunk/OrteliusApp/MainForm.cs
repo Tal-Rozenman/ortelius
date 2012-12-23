@@ -117,11 +117,12 @@ namespace Ortelius
 		private void AddASFile(object sender, System.EventArgs e)
 		{
 			
-			string fileName = "";
+			//string fileName = "";
 			string fileExt = "";
 			OpenFileDialog openFileDialog1 = new OpenFileDialog();
 			if( projSettings.LastFolderName=="")openFileDialog1.InitialDirectory = "Desktop" ;
 			else openFileDialog1.InitialDirectory = projSettings.LastFolderName;
+			openFileDialog1.Multiselect = true;
 			switch((CodeLanguage) projSettings.Language){
 				case CodeLanguage.Actionscript:
 				openFileDialog1.Filter = "ActionScript files(*.as)|*.as" ;
@@ -139,13 +140,14 @@ namespace Ortelius
 			
 			if(openFileDialog1.ShowDialog() == DialogResult.OK){
 				projSettings.LastFolderName = Path.GetDirectoryName(openFileDialog1.FileName);
-				if(openFileDialog1.FileName!= null){
-					fileName = openFileDialog1.FileName;
+				if(openFileDialog1.FileNames!= null){
+					foreach(string fileName in openFileDialog1.FileNames){
 					if(projSettings.AddAsFile(fileName)){
 						changeFlag = true;
 						renderList();
 					}
-					else if (Path.GetExtension(fileName) != fileExt) MessageBox.Show("Wrong file format");
+					else if (Path.GetExtension(fileName) != fileExt) MessageBox.Show("Wrong file format: "+fileName);
+					}
 				}
 			}
 		}
@@ -303,7 +305,7 @@ namespace Ortelius
 				progressBar1.Refresh();
 				DateTime modifiedTime = File.GetLastWriteTime(filNavn);
 				
-				XmlNodeList classXml = asDocumentation.AddFile(File.ReadAllLines(filNavn, Encoding.Default),modifiedTime);
+				XmlNodeList classXml = asDocumentation.AddFile(File.ReadAllLines(filNavn, Encoding.Default),modifiedTime,filNavn);
 				
 				try{
 					if(classXml.Count > 0){

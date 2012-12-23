@@ -99,7 +99,7 @@ namespace Ortelius
 				return;
 			}
 			
-			XmlNodeList elements = superClassNode.SelectNodes("method | property");
+			XmlNodeList elements = superClassNode.SelectNodes("method[access = 'public'] | method[access = 'protected'] | method[access = 'internal'] | property[access = 'public'] | property[access = 'protected'] | property[access = 'internal']");
 			
 			inHieraNode.SetAttribute("fullPath",superClassName);
 			inHieraNode.InnerText = superClassName.Substring(superClassName.LastIndexOf(".")+1);

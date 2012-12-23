@@ -3,6 +3,7 @@
 <xsl:output method="html" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" encoding="UTF-8" indent="yes"/>
 <xsl:output method="html" name="text"  encoding="UTF-8"  indent="yes"/>
 <xsl:variable name="basePath" select="docElements/basePath"/>
+<xsl:variable name="language" select="docElements/language"/>
 
 
 <xsl:template match="docElements">
@@ -238,6 +239,7 @@
 </xsl:if>
 	
 	
+	
 <xsl:if test="method[@access = 'protected']">
 	<xsl:call-template name="toggleDetailsHeader">
 <xsl:with-param name="name">protectedmethod</xsl:with-param>
@@ -265,6 +267,7 @@
 </div>
 </xsl:if>
 
+	
 	
 <xsl:if test="method[@access = 'internal']">
 <xsl:call-template name="toggleDetailsHeader">
@@ -487,7 +490,20 @@
 </div>
 
 
+<xsl:if test="example">
+  	<xsl:call-template name="toggleDetailsHeader">
+<xsl:with-param name="name">example</xsl:with-param>
+<xsl:with-param name="text">Example code</xsl:with-param>
+</xsl:call-template>
 
+    <div id="div|example" class="hiddenElement">
+      <div class="detailElement">
+        <code>
+          <xsl:value-of disable-output-escaping="yes" select="example"/>
+        </code>
+      </div>
+    </div>
+  </xsl:if>
 
 <xsl:if test="param">
 	
@@ -540,20 +556,7 @@
 </xsl:if>
 
 
-  <xsl:if test="example">
-  	<xsl:call-template name="toggleDetailsHeader">
-<xsl:with-param name="name">example</xsl:with-param>
-<xsl:with-param name="text">Example code</xsl:with-param>
-</xsl:call-template>
-
-    <div id="div|example" class="hiddenElement">
-      <div class="detailElement">
-        <code>
-          <xsl:value-of disable-output-escaping="yes" select="example"/>
-        </code>
-      </div>
-    </div>
-  </xsl:if>
+  
 
 <xsl:call-template name="backButton"/>
 
@@ -950,6 +953,7 @@
     <xsl:param name="type"/>	
     <xsl:param name="inhLength"/>
 	
+    <xsl:if test="$language = 'AS'">
     <div class="toggleInherited">
     	
 	</div>
@@ -957,8 +961,8 @@
 	<div class="modifierExplanation">
      <img src="../OrteliusFrame/staticmodifier.gif"/>=static | <img src="../OrteliusFrame/overridemodifier.gif"/>=overridden | <img src="../OrteliusFrame/dynamicmodifier.gif"/>=dynamic | <img src="../OrteliusFrame/finalmodifier.gif"/>=final | <img border="0" src="../OrteliusFrame/inheritedmodifier.gif" title="inherited"/>=inherited
 	</div>
+    </xsl:if>
 </xsl:template>
-
 
 	
 <xsl:template name="ElementStart">

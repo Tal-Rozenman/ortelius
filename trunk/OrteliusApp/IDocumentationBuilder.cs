@@ -17,7 +17,7 @@ namespace Ortelius
 	public interface IDocumentationBuilder
 	{
 		
-		XmlNodeList AddFile(string[] asFileLines,DateTime modifiedTime);
+		XmlNodeList AddFile(string[] asFileLines,DateTime modifiedTime, string filename);
 		
 		string SystemSvar{
 		  get;

@@ -116,7 +116,7 @@ namespace Ortelius
 			}
 		}
 		
-		private int language = 0;
+		private int language = 1;
 		public int Language {
 			get{
 				return language;

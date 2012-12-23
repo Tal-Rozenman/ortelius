@@ -39,13 +39,14 @@ namespace Ortelius
 		private string classType = "";
 		private string currentPackages = "";
 		
-//		private int idCounter = 1;
 		
 		private Regex accessPublicTest = new Regex(".*public.*");
 		private Regex accessProtectedTest = new Regex(".*protected.*");
 		private Regex accessInternalTest = new Regex(".*internal.*");
-		private Regex accessPublicAndProtectedTest = new Regex(".*(public|protected|internal).*");
-		private Regex commentPublicAndProtectedTest = new Regex(@".*(//|/\*|\*).*(public|protected|internal)");
+		private Regex accessPrivateTest = new Regex(".*private.*");
+		private string accessString = "protected|public|internal|private";
+		private Regex accessPublicAndProtectedTest;
+		private Regex commentPublicAndProtectedTest;
 		private Regex lastWhiteSpace = new Regex(@"[\t| ]*$");
 		private Regex packageTest = new Regex(@"^[\t| ]*package");		
 		
@@ -58,30 +59,19 @@ namespace Ortelius
 		
 		private string[] modifiers;
 		
-		//private XmlDocument resultXml;
 		
 		
 		public DocumentationBuilder()
-		{
-//			resultXml = new XmlDocument();
-//			XmlDeclaration dec = resultXml.CreateXmlDeclaration("1.0", null, null);
-//			resultXml.AppendChild(dec);
-//			addToXml("docElements").InnerText = "HEJ";
-			
+		{			
+			accessPublicAndProtectedTest = new Regex(".*("+accessString+").*");
+			commentPublicAndProtectedTest = new Regex(@".*(//|/\*|\*).*("+accessString+")");
 			modifiers = new string[]{"override","dynamic","static","final","abstract","virtual"};
 		}
 
-//		private XmlElement addToXml(string nodeName){
-//			XmlElement newNode = resultXml.CreateElement(nodeName);
-//			resultXml.AppendChild(newNode);
-//			return newNode;
 		
-//		}
-		
-		public XmlNodeList AddFile(string[] asFileLines,DateTime modifiedTime)
+		public XmlNodeList AddFile(string[] asFileLines,DateTime modifiedTime, string filename)
 		{
 			currentPackages = "";
-//			idCounter = 1;
 			string classXml = "<modified ticks=\""+modifiedTime.Ticks+"\">"+String.Format("{0:d/M yyyy}", modifiedTime)+"</modified>";
 			asFileLines = Utils.cleanUpLines(asFileLines,true);
 			classXml += getImportInfo(asFileLines);
@@ -141,8 +131,6 @@ namespace Ortelius
 			for(int i = 0; i<asFileLines.Length;i++ ){
 				string fileLine = asFileLines[i];
 				if(packageTest.IsMatch(fileLine)) packageName = stripElement(fileLine,@"package *",@" +|{ *");
-				//lav også som regexp
-				//interfaceTest.IsMatch(fileLine)
 				
 				if(publicClassTest.IsMatch(fileLine)){
 					resultText += "<inheritanceHierarchy/>\r\n";
@@ -226,7 +214,7 @@ namespace Ortelius
 				
 				resultText += "<method access=\""+getAccessString(fileLine)+"\">\r\n";
 				
-				resultText += "<name>"+stripElement(fileLine,@" *"+modifierRegExpString+"((protected|public|internal) +)?"+modifierRegExpString+"(function +)",@"\(.*")+"</name>\r\n";
+				resultText += "<name>"+stripElement(fileLine,@" *"+modifierRegExpString+"(("+accessString+") +)?"+modifierRegExpString+"(function +)",@"\(.*")+"</name>\r\n";
 				resultText += Utils.getId();
 				resultText += "<summary><![CDATA["+Utils.getSummery(asFileLines,lineIndex)+"]]></summary>\r\n";
 				
@@ -259,10 +247,7 @@ namespace Ortelius
 					systemSvar += "\r\nLine #"+lineIndex+": \""+ asFileLines[lineIndex]+"\"";
 				}
 				
-					
-					
-					
-		Regex returnParamTest = new Regex(@".*\) *:");
+				Regex returnParamTest = new Regex(@".*\) *:");
 		
 		
 					if(returnParamTest.IsMatch(fileLine)){
@@ -272,7 +257,7 @@ namespace Ortelius
 						resultText += "</returns>\r\n";
 					}
 					
-				 resultText += Utils.getStandAloneTags(asFileLines,lineIndex);
+				 	resultText += Utils.getStandAloneTags(asFileLines,lineIndex);
 					
 					resultText += "</method>\r\n";
 					
@@ -281,7 +266,7 @@ namespace Ortelius
 			else if(fileLine.IndexOf("function get ") != -1){
 				resultText += "<property access=\""+getAccessString(fileLine)+"\" readWrite=\"Read\">\r\n";
 				
-				resultText += "<name>"+stripElement(fileLine,@" *"+modifierRegExpString+"((protected|public|internal) +)?"+modifierRegExpString+"(function +get +)",@"\(.*")+"</name>\r\n";
+				resultText += "<name>"+stripElement(fileLine,@" *"+modifierRegExpString+"(("+accessString+") +)?"+modifierRegExpString+"(function +get +)",@"\(.*")+"</name>\r\n";
 				resultText += Utils.getId();
 				if(fileLine.IndexOf("):") != -1){
 					string typeName =stripElement(fileLine,@".*\) *: *",@" *{.*");
@@ -297,7 +282,7 @@ namespace Ortelius
 				
 				resultText += "<property access=\""+getAccessString(fileLine)+"\" readWrite=\"Write\">\r\n";
 				
-				string pName = stripElement(fileLine,@" *"+modifierRegExpString+"((protected|public|internal) +)?"+modifierRegExpString+"(function +set +)",@"\(.*");
+				string pName = stripElement(fileLine,@" *"+modifierRegExpString+"(("+accessString+") +)?"+modifierRegExpString+"(function +set +)",@"\(.*");
 				resultText += "<name>"+pName+"</name>\r\n";	
 				resultText += Utils.getId();
 				string typeName = stripElement(fileLine,@".*\(.*[^\)]:",@" *\).*");
@@ -314,7 +299,7 @@ namespace Ortelius
 				
 				resultText += "<property access=\""+getAccessString(fileLine)+"\" readWrite=\"ReadWrite\">\r\n";
 				
-				string propName = stripElement(fileLine,@" *"+modifierRegExpString+"((protected|public|internal) +)?"+modifierRegExpString+"((const|var) +)",@" *[:| |=|;].*");
+				string propName = stripElement(fileLine,@" *"+modifierRegExpString+"(("+accessString+") +)?"+modifierRegExpString+"((const|var) +)",@" *[:| |=|;].*");
 				resultText += "<name>"+propName+"</name>\r\n";
 				resultText += Utils.getId();
 				resultText += "<modifiers>\r\n"+getModifiers(fileLine)+"</modifiers>\r\n";	
@@ -336,6 +321,7 @@ namespace Ortelius
 			if(accessPublicTest.IsMatch(fileLine))return "public";
 			else if(accessProtectedTest.IsMatch(fileLine))return "protected";
 			else if(accessInternalTest.IsMatch(fileLine))return "internal";
+			else if(accessPrivateTest.IsMatch(fileLine))return "private";
 			else return "protected";
 		}
 		
@@ -406,164 +392,6 @@ namespace Ortelius
 			return result;
 		}
 		
-		
-		///<summary>
-		///Getting the clas summary - getSummery, getDescription & getMultiLineDescription looks very alike
-		///</summary>
-//		private string getSummery(string[] asFileLines,int elementIndex)
-//		{	
-//			
-//			char[] trimChar = {'\n','\r','\t',' '};
-//			string resultText = "";
-//			int decIndex = elementIndex-1;
-//			int tagIndex = elementIndex;
-//			
-//			//skip empty line
-//			while(decIndex>0 && asFileLines[decIndex].TrimEnd(trimChar)=="" ){				
-//				decIndex --;
-//			}
-//			//find the first line of the documentation
-//			while(decIndex>=0 && (asFileLines[decIndex].IndexOf(delimeter) == 0 || asFileLines[decIndex].IndexOf(startTag) == 0)){
-//				if(asFileLines[decIndex].IndexOf(startTag)!= -1){
-//					tagIndex = decIndex+1;
-//					break;
-//				}
-//				decIndex --;
-//			}
-//			
-//			while(tagIndex < elementIndex){
-//				
-//				if(asFileLines[tagIndex].IndexOf("*@")==0 || asFileLines[tagIndex].IndexOf("*/")!=-1 ) break;
-//				else {
-//				string text = removeCommentChars(asFileLines[tagIndex]);
-//				if(text != "") resultText +=  text +"<br/>";
-//				}
-//				tagIndex ++;
-//			}
-//			
-//			resultText = resultText.TrimEnd('\r');
-//			resultText = resultText.TrimEnd('\n');
-//			resultText = resultText.TrimEnd('\r');
-//			return resultText;
-//		}
-//		
-		
-		///<summary>
-		///getSummery, getDescription & getMultiDescription looks very alike
-		///</summary>
-//		private string getDescription(string[] asFileLines,int elementIndex,string tag)
-//		{
-//			
-//			char[] trimChar = {'\n','\r'};
-//			string resultText = "";
-//			int decIndex = elementIndex-1;
-//			int tagIndex = elementIndex;
-//			try{
-//						//skip empty line
-//			while(decIndex>0 && asFileLines[decIndex].TrimEnd(trimChar)=="" ){				
-//				decIndex --;
-//			}
-//				while(decIndex>=0 && (asFileLines[decIndex].IndexOf(delimeter) == 0 || asFileLines[decIndex]=="")){
-//				if(asFileLines[decIndex].IndexOf(tag)!= -1){
-//					tagIndex = decIndex;
-//					break;
-//				}
-//				decIndex --;
-//			}
-//			bool firstFlag = true;
-//			while(tagIndex < elementIndex){
-//				
-//				if(!firstFlag && (asFileLines[tagIndex].IndexOf("*@")==0 || asFileLines[tagIndex].IndexOf("*/")!=-1 )) break;
-//				else {
-//				string text = removeCommentChars(asFileLines[tagIndex]);
-//				if(text != ""){
-//					
-//					
-//					
-//				if(firstFlag) text = text.Substring(tag.Length);
-//					 resultText +=  text.TrimStart(' ') +"<br/>";
-//					firstFlag = false;
-//				}
-//				}
-//				tagIndex ++;
-//			}
-//			
-//			resultText = resultText.TrimEnd('\n');
-//			resultText = resultText.TrimEnd('\r');
-//			resultText = resultText.TrimEnd('\n');
-//			}catch(Exception){
-//				SystemSvar += "\nLine #"+tagIndex+" \""+asFileLines[tagIndex]+"\"";
-//				
-//			}
-//			
-//			return resultText;
-//		}
-		
-		///<summary>
-		///Gets the description of more than one occurence of a tag - getSummery, getDescription & getMultiDescription looks very alike
-		///</summary>
-//		private string[] getMultiDescription(string[] asFileLines,int elementIndex,string tag){
-//			
-//			if(elementIndex<=0) return new string[]{};
-//			string resultText="";
-//			ArrayList allResults = new ArrayList();
-//			char[] trimChar = {'\n','\r'};
-//			
-//			int index = elementIndex-1;
-//			int tagIndex = elementIndex;
-//			
-//			//skip empty line
-//			while(index>0 && asFileLines[index].TrimEnd(trimChar)=="" ){				
-//				index --;
-//			}
-//			//find line where doc starts
-//			while(index>0 && asFileLines[index].IndexOf(delimeter) == 0 ){
-//				index --;
-//			}
-//			
-//			try{
-//			bool recordFlag = false;
-//			while(index <= elementIndex){
-//				string asLine = removeCommentChars(asFileLines[index]);
-//				if((asFileLines[index].IndexOf("*/")== 0 ||  asLine.IndexOf("@")== 0 || index == elementIndex) && recordFlag){
-//					//stop recording
-//					resultText = resultText.TrimEnd(trimChar);
-//					allResults.Add(resultText);
-//					recordFlag = false;
-//				}
-//				if(asLine.IndexOf("@"+tag)== 0){
-//					//start recording
-//					string text = removeCommentChars(asFileLines[index]);
-//					
-//					text = text.Substring(tag.Length+1);
-//					
-//					resultText =  text.TrimStart(' ') +"<br/>";
-//					recordFlag = true;
-//				} else if(recordFlag){					
-//					resultText +=asLine+"<br/>";					
-//				}			
-//				index ++;
-//			}
-//			
-//			}catch(Exception){
-//				SystemSvar +=  "\nLine #"+tagIndex+" \""+asFileLines[tagIndex]+"\"";
-//			}
-//			return (string[])allResults.ToArray(typeof(string));
-//		}
-		
-//		private string getStandAloneTags(string[] asFileLines,int elementIndex)
-//		{
-//			string[] tags = {"see","version","author","todo","langversion","keyword","playerversion","throws","exception","deprecated","sends","example","since"};
-//			string resultText = "";
-//			foreach(string tag in tags){
-//				string[] tagDoc = getMultiDescription(asFileLines, elementIndex, tag);
-//				foreach(string docString in tagDoc){
-//					resultText += "<"+tag+"><![CDATA["+docString+"]]></"+tag+">\r\n";
-//				}
-//			}
-//			
-//			return resultText;
-//		}
 		
 		private string getEventTags(string[] asFileLines,int elementIndex)
 		{

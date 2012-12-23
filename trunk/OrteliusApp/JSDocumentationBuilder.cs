@@ -45,13 +45,15 @@ namespace Ortelius
 		private string modifiedXml = "";
 		private string[] asFileLines;
 		
+		private string filename;
 		
 		public JSDocumentationBuilder()
 		{
 		}
 		
-		public XmlNodeList AddFile(string[] _asFileLines,DateTime modifiedTime)
+		public XmlNodeList AddFile(string[] _asFileLines,DateTime modifiedTime, string filename)
 		{
+			this.filename = filename;
 			openClassTag = false;
 			string classXml = "";
 			modifiedXml = "<modified ticks=\""+modifiedTime.Ticks+"\">"+String.Format("{0:d/M yyyy}", modifiedTime)+"</modified>\r\n";
@@ -89,9 +91,11 @@ namespace Ortelius
 			//find the name and type (class property or method)
 			for(int i = startIndex; i < endIndex;i++ ){				
 					if(methodPattern.IsMatch(asFileLines[i])){
+						if(!openClassTag) startFilenameClassNode();
 						resultText += createMethodNode(startIndex,endIndex,i);
 					}
-					else if(propertyPattern.IsMatch(asFileLines[i])){						
+					else if(propertyPattern.IsMatch(asFileLines[i])){
+						if(!openClassTag) startFilenameClassNode();						
 						resultText += createPropertyNode(endIndex,i);
 					}
 					else if(namespacePattern.IsMatch(asFileLines[i])){						
@@ -129,7 +133,7 @@ namespace Ortelius
 					resultText += "</param>\r\n";
 					codeline += " "+pName+",";
 				}else if(asFileLines[i].IndexOf("@return") != -1){
-					string paramData = asFileLines[i].Substring(asFileLines[i].IndexOf("@return")+8);
+					string paramData = asFileLines[i].Substring(asFileLines[i].IndexOf("@return")+7).TrimStart(' ');
 					string type = Utils.stripElement(paramData,@"\s*{",@"}.*");
 					
 					resultText += "<returns>\r\n";
@@ -174,6 +178,18 @@ namespace Ortelius
 			resultText += namespaceXml;
 			resultText += "<name>"+Utils.getOneLineMultiDescription(asFileLines,endIndex,"class")+"</name>\r\n";
 			resultText += "<summary><![CDATA["+Utils.getSummery(asFileLines,nameLine)+"]]></summary>\r\n";
+			resultText += Utils.getId();
+			resultText += Utils.getStandAloneTags(asFileLines,endIndex);
+			return resultText;
+		}
+		
+		private string startFilenameClassNode()
+		{
+			openClassTag = true;
+			string resultText = "<class>"+"\r\n"+modifiedXml+"\r\n";
+			resultText += namespaceXml;
+			resultText += "<name>"+filename+"</name>\r\n";
+			resultText += "<summary><![CDATA[]]></summary>\r\n";
 			resultText += Utils.getId();
 			return resultText;
 		}
