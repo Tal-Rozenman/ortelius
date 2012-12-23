@@ -3,11 +3,11 @@
 	<Fragment>		
 		<DirectoryRef Id="TARGETDIR">
 			<Directory Id="ProgramFilesFolder" Name="PFiles">
-				<Directory Id="INSTALLDIR" Name="Ortelius 1.2">
+				<Directory Id="INSTALLDIR" Name="Ortelius 2.0">
 					<Component Guid="90464C33-C812-4F04-8829-492465E22529" Id="OrteliusMain" DiskId="1">
 						<File Source="..\OrteliusApp\bin\Release\Ortelius.exe" Name="Ortelius.exe" Id="Ortelius.exe" KeyPath="yes">
-						<Shortcut Id="startOrtelius" Directory="ProgramMenuDir" Name="Ortelius 1.2" WorkingDirectory='INSTALLDIR' Icon="Ortelius.exe" IconIndex="0" Advertise="yes" />
-						<Shortcut Id="orteliusDeskShortCut" Icon="Ortelius.exe" Directory="DesktopFolder" Name="Ortelius 1.2" WorkingDirectory="INSTALLDIR" Advertise="yes" />
+						<Shortcut Id="startOrtelius" Directory="ProgramMenuDir" Name="Ortelius 2.0" WorkingDirectory='INSTALLDIR' Icon="Ortelius.exe" IconIndex="0" Advertise="yes" />
+						<Shortcut Id="orteliusDeskShortCut" Icon="Ortelius.exe" Directory="DesktopFolder" Name="Ortelius 2.0" WorkingDirectory="INSTALLDIR" Advertise="yes" />
 						</File>
 						<ProgId Id="Ortelius.orp" Description="Ortelius project file">
 							<Extension Id="orp" ContentType="application/orp">
@@ -146,14 +146,6 @@
 </Directory>
 
 				
-				
-				
-				
-				
-				
-				
-				
-				
 				</Directory>
 				<Directory Id="ProgramMenuFolder" Name="Programs">
 			        <Directory Id="ProgramMenuDir" Name="Ortelius">
@@ -165,18 +157,6 @@
 			      </Directory>
 			
 			     <Directory Id="DesktopFolder" Name="Desktop" />
-						
-				
-				
-				
-		
-				
-
-			
-			
-			
-			
-			
 			
 			</Directory>
 		</DirectoryRef>

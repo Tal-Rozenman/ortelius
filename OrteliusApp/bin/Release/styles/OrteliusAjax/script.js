@@ -19,10 +19,12 @@ window.onload = function(){
     shownHiddenDetails = [
     { "name": "showInherited_publicmethod", "show": true }, 
     { "name": "showInherited_protectedmethod", "show": true }, 
-    { "name": "showInherited_internalmethod", "show": true }, 
+    { "name": "showInherited_internalmethod", "show": true },  
+    { "name": "showInherited_privatemethod", "show": true }, 
     { "name": "showInherited_publicproperties", "show": true }, 
     { "name": "showInherited_protectedproperties", "show": true }, 
-    { "name": "showInherited_internalproperties", "show": true },     
+    { "name": "showInherited_internalproperties", "show": true },  
+    { "name": "showInherited_privateproperties", "show": true },     
     { "name": "div|see", "show": false }, 
     { "name": "div|details", "show": false }, 
     { "name": "div|example", "show": false }, 
@@ -35,7 +37,9 @@ window.onload = function(){
     { "name": "div|protectedmethod", "show": false }, 
     { "name": "div|protectedproperties", "show": false },
     { "name": "div|internalmethod", "show": false }, 
-    { "name": "div|internalproperties", "show": false }  ];
+    { "name": "div|internalproperties", "show": false },
+    { "name": "div|privatemethod", "show": false }, 
+    { "name": "div|privateproperties", "show": false }   ];
 }
 
 
