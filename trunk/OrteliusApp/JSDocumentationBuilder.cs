@@ -102,7 +102,7 @@ namespace Ortelius
 						getNamespaceData(endIndex);
 					}
 					else if(classPattern.IsMatch(asFileLines[i])){
-						if(openClassTag) endClassNode();
+						if(openClassTag) resultText += endClassNode();
 						resultText += startClassNode(endIndex,i);
 					}
 			}
