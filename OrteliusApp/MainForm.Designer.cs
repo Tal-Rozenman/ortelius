@@ -87,11 +87,11 @@ namespace Ortelius
 			this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.ForeColor = System.Drawing.Color.White;
-			this.button1.Location = new System.Drawing.Point(351, 564);
+			this.button1.Location = new System.Drawing.Point(420, 564);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(127, 22);
+			this.button1.Size = new System.Drawing.Size(158, 22);
 			this.button1.TabIndex = 16;
-			this.button1.Text = "Add file";
+			this.button1.Text = "Add file(s)";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.AddASFile);
 			// 
@@ -100,7 +100,7 @@ namespace Ortelius
 			this.progressBar1.Enabled = false;
 			this.progressBar1.Location = new System.Drawing.Point(75, 679);
 			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(400, 10);
+			this.progressBar1.Size = new System.Drawing.Size(500, 10);
 			this.progressBar1.Step = 1;
 			this.progressBar1.TabIndex = 2;
 			// 
@@ -259,7 +259,7 @@ namespace Ortelius
 			this.listBox1.Location = new System.Drawing.Point(74, 235);
 			this.listBox1.Name = "listBox1";
 			this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			this.listBox1.Size = new System.Drawing.Size(404, 329);
+			this.listBox1.Size = new System.Drawing.Size(504, 329);
 			this.listBox1.TabIndex = 7;
 			this.listBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ClassList_KeyDown);
 			// 
@@ -272,9 +272,9 @@ namespace Ortelius
 			this.button3.ForeColor = System.Drawing.Color.White;
 			this.button3.Location = new System.Drawing.Point(74, 564);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(157, 22);
+			this.button3.Size = new System.Drawing.Size(183, 22);
 			this.button3.TabIndex = 8;
-			this.button3.Text = "Remove file";
+			this.button3.Text = "Remove file(s)";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.RemoveClass);
 			// 
@@ -284,7 +284,7 @@ namespace Ortelius
 			this.xmlPath.Location = new System.Drawing.Point(183, 592);
 			this.xmlPath.Name = "xmlPath";
 			this.xmlPath.ReadOnly = true;
-			this.xmlPath.Size = new System.Drawing.Size(292, 20);
+			this.xmlPath.Size = new System.Drawing.Size(392, 20);
 			this.xmlPath.TabIndex = 10;
 			// 
 			// button4
@@ -294,9 +294,9 @@ namespace Ortelius
 			this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button4.ForeColor = System.Drawing.Color.White;
-			this.button4.Location = new System.Drawing.Point(228, 564);
+			this.button4.Location = new System.Drawing.Point(257, 564);
 			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(125, 22);
+			this.button4.Size = new System.Drawing.Size(163, 22);
 			this.button4.TabIndex = 11;
 			this.button4.Text = "Add folder";
 			this.button4.UseVisualStyleBackColor = true;
@@ -341,7 +341,7 @@ namespace Ortelius
 			this.BuildButton.ForeColor = System.Drawing.Color.White;
 			this.BuildButton.Location = new System.Drawing.Point(74, 650);
 			this.BuildButton.Name = "BuildButton";
-			this.BuildButton.Size = new System.Drawing.Size(402, 22);
+			this.BuildButton.Size = new System.Drawing.Size(502, 22);
 			this.BuildButton.TabIndex = 1;
 			this.BuildButton.Text = "Build documentation";
 			this.BuildButton.UseVisualStyleBackColor = true;
@@ -352,7 +352,7 @@ namespace Ortelius
 			this.titleText.BackColor = System.Drawing.Color.Transparent;
 			this.titleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.titleText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.titleText.Location = new System.Drawing.Point(39, 5);
+			this.titleText.Location = new System.Drawing.Point(80, 5);
 			this.titleText.Margin = new System.Windows.Forms.Padding(0);
 			this.titleText.Name = "titleText";
 			this.titleText.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
@@ -368,7 +368,7 @@ namespace Ortelius
 			// 
 			this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-			this.pictureBox1.Location = new System.Drawing.Point(462, 7);
+			this.pictureBox1.Location = new System.Drawing.Point(556, 7);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(16, 16);
 			this.pictureBox1.TabIndex = 18;
@@ -380,7 +380,7 @@ namespace Ortelius
 			this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-			this.pictureBox2.Location = new System.Drawing.Point(437, 7);
+			this.pictureBox2.Location = new System.Drawing.Point(531, 7);
 			this.pictureBox2.Name = "pictureBox2";
 			this.pictureBox2.Size = new System.Drawing.Size(16, 16);
 			this.pictureBox2.TabIndex = 19;
@@ -415,7 +415,7 @@ namespace Ortelius
 			this.introText.Multiline = true;
 			this.introText.Name = "introText";
 			this.introText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.introText.Size = new System.Drawing.Size(404, 140);
+			this.introText.Size = new System.Drawing.Size(504, 140);
 			this.introText.TabIndex = 21;
 			this.introText.TextChanged += new System.EventHandler(this.IntroTextTextChanged);
 			// 
@@ -433,14 +433,14 @@ namespace Ortelius
 			// 
 			this.introHeader.Location = new System.Drawing.Point(74, 63);
 			this.introHeader.Name = "introHeader";
-			this.introHeader.Size = new System.Drawing.Size(404, 20);
+			this.introHeader.Size = new System.Drawing.Size(504, 20);
 			this.introHeader.TabIndex = 23;
 			this.introHeader.TextChanged += new System.EventHandler(this.IntroHeaderTextChanged);
 			// 
 			// showAfterBuildCB
 			// 
 			this.showAfterBuildCB.BackColor = System.Drawing.Color.Transparent;
-			this.showAfterBuildCB.Location = new System.Drawing.Point(299, 621);
+			this.showAfterBuildCB.Location = new System.Drawing.Point(399, 621);
 			this.showAfterBuildCB.Name = "showAfterBuildCB";
 			this.showAfterBuildCB.Size = new System.Drawing.Size(181, 24);
 			this.showAfterBuildCB.TabIndex = 25;
@@ -453,7 +453,7 @@ namespace Ortelius
 			this.newVersion.BackColor = System.Drawing.Color.Transparent;
 			this.newVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.newVersion.ForeColor = System.Drawing.Color.DarkRed;
-			this.newVersion.Location = new System.Drawing.Point(228, 25);
+			this.newVersion.Location = new System.Drawing.Point(322, 25);
 			this.newVersion.Margin = new System.Windows.Forms.Padding(0);
 			this.newVersion.Name = "newVersion";
 			this.newVersion.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
@@ -469,7 +469,7 @@ namespace Ortelius
 			this.versionLabel.BackColor = System.Drawing.Color.Transparent;
 			this.versionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.versionLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.versionLabel.Location = new System.Drawing.Point(267, 5);
+			this.versionLabel.Location = new System.Drawing.Point(308, 5);
 			this.versionLabel.Margin = new System.Windows.Forms.Padding(0);
 			this.versionLabel.Name = "versionLabel";
 			this.versionLabel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
@@ -487,7 +487,7 @@ namespace Ortelius
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.ClientSize = new System.Drawing.Size(500, 700);
+			this.ClientSize = new System.Drawing.Size(600, 700);
 			this.Controls.Add(this.versionLabel);
 			this.Controls.Add(this.newVersion);
 			this.Controls.Add(this.showAfterBuildCB);
@@ -516,7 +516,7 @@ namespace Ortelius
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.MaximizeBox = false;
-			this.MaximumSize = new System.Drawing.Size(500, 700);
+			this.MaximumSize = new System.Drawing.Size(600, 700);
 			this.MinimumSize = new System.Drawing.Size(500, 700);
 			this.Name = "MainForm";
 			this.Text = "Ortelius";

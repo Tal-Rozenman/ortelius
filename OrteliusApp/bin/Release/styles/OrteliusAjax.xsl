@@ -167,20 +167,37 @@
 	</xsl:if>
 
     <xsl:if test="see">
-    	<xsl:call-template name="toggleDetailsHeader">
-<xsl:with-param name="name">see</xsl:with-param>
-<xsl:with-param name="text">See</xsl:with-param>
-</xsl:call-template>
+        <xsl:call-template name="toggleDetailsHeader">
+            <xsl:with-param name="name">see</xsl:with-param>
+            <xsl:with-param name="text">See</xsl:with-param>
+        </xsl:call-template>
 
 
         <div id="div|see" class="hiddenElement">
-            <xsl:for-each select="see"> 
- <xsl:if test="not(contains(.,'&lt;a '))">■ </xsl:if>           	
-               <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=15/&gt; &lt;a ')"/>
+            <xsl:for-each select="see">
+                <xsl:if test="not(contains(.,'&lt;a '))">■ </xsl:if>
+                <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=15/&gt; &lt;a ')"/>
                 <br />
             </xsl:for-each>
         </div>
     </xsl:if>
+
+    <xsl:if test="dependency">
+        <xsl:call-template name="toggleDetailsHeader">
+            <xsl:with-param name="name">dependency</xsl:with-param>
+            <xsl:with-param name="text">Dependency</xsl:with-param>
+        </xsl:call-template>
+
+
+        <div id="div|dependency" class="hiddenElement">
+            <xsl:for-each select="dependency">
+                <xsl:if test="not(contains(.,'&lt;a '))">■ </xsl:if>
+                <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=15/&gt; &lt;a ')"/>
+                <br />
+            </xsl:for-each>
+        </div>
+    </xsl:if>
+    
 	
 	<xsl:variable name="inhLength" select="string-length(inheritanceHierarchy)"/>
 	
@@ -491,13 +508,7 @@
 	</div>
 </xsl:if>
 
-<xsl:if test="see">
-<div class="detailElement"><b>See: </b>
-<xsl:for-each select="see">
-<xsl:copy-of select="."/>
-</xsl:for-each>
-</div>
-</xsl:if>
+
 
 <xsl:if test="todo">
 <div class="detailElement"><b>To be done: </b><br />
@@ -521,37 +532,54 @@
 <div id="div|example" class="hiddenElement"><div class="detailElement"><code><xsl:value-of disable-output-escaping="yes" select="example"/></code></div></div>
 </xsl:if>
 
+    <xsl:if test="see">
+        <xsl:call-template name="toggleDetailsHeader">
+            <xsl:with-param name="name">see</xsl:with-param>
+            <xsl:with-param name="text">See</xsl:with-param>
+        </xsl:call-template>
 
-<xsl:if test="param">
-	
-<xsl:call-template name="toggleDetailsHeader">
-<xsl:with-param name="name">parameters</xsl:with-param>
-<xsl:with-param name="text">Parameters</xsl:with-param>
-</xsl:call-template>
+        <div id="div|see" class="hiddenElement">
+            <xsl:for-each select="see">
+                <xsl:if test="not(contains(.,'&lt;a '))">■ </xsl:if>
+                <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=15/&gt; &lt;a ')"/>
+                <br />
+            </xsl:for-each>
+        </div>
+    </xsl:if>
+    
 
-<div id="div|parameters" class="detailsVisible">
 
-<xsl:for-each select="param">
-<div class="detailElement"><b><xsl:value-of disable-output-escaping="yes" select="name"/></b> : 
-		<xsl:call-template name="simplePageLink">
-        <xsl:with-param name="href" select="type/@fullPath"/>
-        <xsl:with-param name="text">
-        	<span class="codeLine">
-  	   			<xsl:value-of disable-output-escaping="yes" select="type"/>
- 		   </span>
-		</xsl:with-param>
-    </xsl:call-template>
-</div>
-<div class="summary">
-<xsl:call-template name="PreserveLineBreaks">
-<xsl:with-param name="text" select="summary"/>
-</xsl:call-template>
-</div>
-<br />
-</xsl:for-each>
+    <xsl:if test="param">
+        <xsl:call-template name="toggleDetailsHeader">
+            <xsl:with-param name="name">parameters</xsl:with-param>
+            <xsl:with-param name="text">Parameters</xsl:with-param>
+        </xsl:call-template>
 
-</div>
-</xsl:if>
+        <div id="div|parameters" class="detailsVisible">
+
+            <xsl:for-each select="param">
+                <div class="detailElement">
+                    <b>
+                        <xsl:value-of disable-output-escaping="yes" select="name"/>
+                    </b> :
+                    <xsl:call-template name="simplePageLink">
+                        <xsl:with-param name="href" select="type/@fullPath"/>
+                        <xsl:with-param name="text">
+                            <span class="codeLine">
+                                <xsl:value-of disable-output-escaping="yes" select="type"/>
+                            </span>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                </div>
+                <div class="summary">
+                    <xsl:call-template name="PreserveLineBreaks">
+                        <xsl:with-param name="text" select="summary"/>
+                    </xsl:call-template>
+                </div>
+                <br />
+            </xsl:for-each>
+        </div>
+    </xsl:if>
 
 
 

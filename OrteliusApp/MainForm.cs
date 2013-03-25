@@ -137,6 +137,7 @@ namespace Ortelius
 			}
 			openFileDialog1.FilterIndex = 1 ;
 			openFileDialog1.RestoreDirectory = true ;
+			openFileDialog1.Multiselect = true;
 			
 			if(openFileDialog1.ShowDialog() == DialogResult.OK){
 				projSettings.LastFolderName = Path.GetDirectoryName(openFileDialog1.FileName);
@@ -723,7 +724,6 @@ namespace Ortelius
 			
 			if( projSettings.LastFolderName=="")folderDialog.SelectedPath = "Desktop";
 			else folderDialog.SelectedPath = projSettings.LastFolderName;
-			
 			
 			if(folderDialog.ShowDialog() == DialogResult.OK)
 			{
