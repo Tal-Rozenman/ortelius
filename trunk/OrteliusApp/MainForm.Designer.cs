@@ -309,7 +309,7 @@ namespace Ortelius
 			this.styleCB.FormattingEnabled = true;
 			this.styleCB.Location = new System.Drawing.Point(76, 621);
 			this.styleCB.Name = "styleCB";
-			this.styleCB.Size = new System.Drawing.Size(205, 21);
+			this.styleCB.Size = new System.Drawing.Size(137, 21);
 			this.styleCB.TabIndex = 12;
 			this.styleCB.SelectedIndexChanged += new System.EventHandler(this.StyleCBSelectedIndexChanged);
 			// 
