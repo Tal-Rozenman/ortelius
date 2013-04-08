@@ -65,7 +65,9 @@ intellisense.annotate(<xsl:value-of disable-output-escaping="yes" select="name"/
 <!-- method list content-->
 <xsl:template match="method" mode="DoMethodDetails"><xsl:value-of disable-output-escaping="yes" select="name"/> : function () {
 ///&lt;signature&gt;
-  ///&lt;summary&gt;<xsl:value-of disable-output-escaping="yes" select="summary"/>&lt;/summary&gt;<xsl:for-each select="param">
+  ///&lt;summary&gt;<xsl:call-template name="RemoveLineBreaks">
+  <xsl:with-param name="text" select="summary"/>
+</xsl:call-template>&lt;/summary&gt;<xsl:for-each select="param">
   ///&lt;param name="<xsl:value-of disable-output-escaping="yes" select="name"/>" type="<xsl:value-of disable-output-escaping="yes" select="type"/>"&gt;
     ///<xsl:call-template name="RemoveLineBreaks">
                         <xsl:with-param name="text" select="summary"/>
