@@ -40,10 +40,9 @@ intellisense.annotate(<xsl:value-of disable-output-escaping="yes" select="name"/
 			<xsl:apply-templates select="property[@access = 'public']" mode="DoPropDetails">
 				<xsl:sort select="name"/>
             </xsl:apply-templates> 
-</xsl:if>
-toString: function () {
+</xsl:if>toString: function () {
 ///&lt;signature&gt;
-  ///&lt;summary>Test beskrivelse&lt;/summary&gt;
+  ///&lt;summary&gt;Test beskrivelse&lt;/summary&gt;
   ///&lt;returns type="string" /&gt;
 ///&lt;/signature&gt;
 }
@@ -55,22 +54,18 @@ toString: function () {
 
 
 <!-- property list content-->
-<xsl:template match="property" mode="DoPropDetails">
-    <xsl:param name="packageName"/>	
-    <xsl:param name="className"/>
-    <xsl:param name="type"/>	
-//<xsl:call-template name="RemoveLineBreaks">
+<xsl:template match="property" mode="DoPropDetails">//<xsl:call-template name="RemoveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
 </xsl:call-template><xsl:text>
 </xsl:text>
-<xsl:value-of disable-output-escaping="yes" select="name"/>:undefined,</xsl:template>
+<xsl:value-of disable-output-escaping="yes" select="name"/>:undefined,
+</xsl:template>
   
   
 <!-- method list content-->
-<xsl:template match="method" mode="DoMethodDetails">
-	  <xsl:value-of disable-output-escaping="yes" select="name"/> : function () {
+<xsl:template match="method" mode="DoMethodDetails"><xsl:value-of disable-output-escaping="yes" select="name"/> : function () {
 ///&lt;signature&gt;
-  ///&lt;summary&lt;<xsl:value-of disable-output-escaping="yes" select="summary"/>&lt;/summary&gt;<xsl:for-each select="param">
+  ///&lt;summary&gt;<xsl:value-of disable-output-escaping="yes" select="summary"/>&lt;/summary&gt;<xsl:for-each select="param">
   ///&lt;param name="<xsl:value-of disable-output-escaping="yes" select="name"/>" type="<xsl:value-of disable-output-escaping="yes" select="type"/>"&gt;
     ///<xsl:call-template name="RemoveLineBreaks">
                         <xsl:with-param name="text" select="summary"/>
@@ -79,7 +74,8 @@ toString: function () {
   ///</xsl:text>&lt;/param&gt;</xsl:for-each><xsl:if test="returns">
     ///&lt;returns type="<xsl:value-of disable-output-escaping="yes" select="returns/type"/>"/&gt;</xsl:if>
 ///&lt;/signature&gt;
-},</xsl:template>
+},
+</xsl:template>
 
   
   
