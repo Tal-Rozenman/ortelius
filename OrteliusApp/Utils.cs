@@ -205,6 +205,44 @@ namespace Ortelius
 			return resultText;
 		}
 		
+		/// <summary>
+		/// Check if there is af tag with the given name in the javadoc block
+		/// </summary>
+		/// <param name="asFileLines">All the code lines</param>
+		/// <param name="elementIndex">The index after the javadoc section</param>
+		/// <param name="tag">The tag to look for</param>
+		/// <returns>True if the tag exists</returns>
+		public static bool tagExists(string[] asFileLines,int elementIndex,string tag){
+			
+			if(elementIndex<=0) return false;
+			
+			int index = elementIndex-1;
+			int tagIndex = elementIndex;			
+			char[] trimChar = {'\n','\r'};
+			
+			//skip empty line
+			while(index>0 && asFileLines[index].TrimEnd(trimChar)=="" ){				
+				index --;
+			}
+			//find line where doc starts
+			while(index>0 && asFileLines[index].IndexOf(delimeter) == 0 ){
+				index --;
+			}
+			
+			try{
+				while(index <= elementIndex){
+					string asLine = removeCommentChars(asFileLines[index]);
+					if(asLine.IndexOf("@"+tag)== 0){
+						return true;
+					} 
+					index ++;
+				}
+			
+			}catch(Exception){
+			}
+			return false;
+			
+		}
 		
 		public static string getOneLineMultiDescription(string[] asFileLines,int elementIndex,string tag){
 			string[] lines = getMultiDescription( asFileLines, elementIndex, tag);

@@ -91,6 +91,7 @@ namespace Ortelius
 			XmlNode inherHieraElement = classNode.SelectSingleNode("inheritanceHierarchy");
 			XmlElement inHieraNode = documentationXml.CreateElement("inheritanceClass");
 			
+			
 			if(!succes){
 				inHieraNode.SetAttribute("fullPath","#"+superClassName);
 				inHieraNode.InnerText = superClassName.Substring(superClassName.LastIndexOf(".")+1);
@@ -99,11 +100,11 @@ namespace Ortelius
 				return;
 			}
 			
-			XmlNodeList elements = superClassNode.SelectNodes("method[access = 'public'] | method[access = 'protected'] | method[access = 'internal'] | property[access = 'public'] | property[access = 'protected'] | property[access = 'internal']");
-			
 			inHieraNode.SetAttribute("fullPath",superClassName);
 			inHieraNode.InnerText = superClassName.Substring(superClassName.LastIndexOf(".")+1);
 			inherHieraElement.AppendChild(inHieraNode);
+			
+			XmlNodeList elements = superClassNode.SelectNodes("method[@access = 'public'] | method[@access = 'protected'] | method[@access = 'internal'] | property[@access = 'public'] | property[@access = 'protected'] | property[@access = 'internal']");
 
 			
 			foreach(XmlElement elementNode in elements){
