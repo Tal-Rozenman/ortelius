@@ -18,14 +18,30 @@
 <xsl:if test="name">
 <xsl:variable name="className" select="name"/>
 <xsl:variable name="packageName"><xsl:if test="package"><xsl:if test="string-length(package)!=0"><xsl:value-of select="translate(package,'.','/')"/>/</xsl:if></xsl:if></xsl:variable>
-<xsl:variable name="filename"><xsl:value-of select="$basePath" />/intellisense/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.intellisense.js</xsl:variable>  
+<xsl:variable name="filename"><xsl:value-of select="$basePath" />/intellisense/<xsl:value-of select="$packageName" /><xsl:value-of select="$className" />.intellisense.js</xsl:variable>
+
   <xsl:result-document href="{$filename}" format="text">intellisense.annotate(window, {
-//<xsl:call-template name="RemoveLineBreaks">
-<xsl:with-param name="text" select="summary"/>
-</xsl:call-template><xsl:text>
+    <xsl:choose>
+      <xsl:when test="modifier">
+        <xsl:value-of disable-output-escaping="yes" select="name"/>: function () {
+        ///&lt;signature&gt;
+        ///&lt;summary&gt;<xsl:call-template name="RemoveLineBreaks">
+        <xsl:with-param name="text" select="summary"/>
+      </xsl:call-template>&lt;/summary&gt;
+        ///&lt;/signature&gt;
+        }
+      </xsl:when>
+
+      <xsl:otherwise>
+        //<xsl:call-template name="RemoveLineBreaks">
+          <xsl:with-param name="text" select="summary"/>
+        </xsl:call-template><xsl:text>
 </xsl:text>
-<xsl:value-of disable-output-escaping="yes" select="name"/>: undefined
+        <xsl:value-of disable-output-escaping="yes" select="name"/>: undefined
+      </xsl:otherwise>
+    </xsl:choose>
 });
+
 intellisense.annotate(<xsl:value-of disable-output-escaping="yes" select="name"/>, {<xsl:text>
 </xsl:text>
 
