@@ -1007,7 +1007,7 @@
     <xsl:param name="type"/>	
     <xsl:param name="inhLength"/>
     
-    <xsl:if test="$language = 'AS'">
+
     <div class="toggleInherited">
     	<xsl:attribute name="id"><xsl:value-of select="$type"/></xsl:attribute>
     	<xsl:if test="$inhLength &gt; 0">
@@ -1020,9 +1020,12 @@
 	</div>
 
 	<div class="modifierExplanation">
-     <img src="OrteliusAjax/staticmodifier.gif"/>=static | <img src="OrteliusAjax/overridemodifier.gif"/>=overridden | <img src="OrteliusAjax/dynamicmodifier.gif"/>=dynamic | <img src="OrteliusAjax/finalmodifier.gif"/>=final | <img border="0" src="OrteliusAjax/inheritedmodifier.gif" title="inherited"/>=inherited
-	</div>
+    <xsl:if test="$language = 'AS'">
+     <img src="OrteliusAjax/staticmodifier.gif"/>=static | <img src="OrteliusAjax/overridemodifier.gif"/>=overridden | <img src="OrteliusAjax/dynamicmodifier.gif"/>=dynamic | <img src="OrteliusAjax/finalmodifier.gif"/>=final |
     </xsl:if>
+    <img border="0" src="OrteliusAjax/inheritedmodifier.gif" title="inherited"/>= inherited
+	</div>
+   
     
 </xsl:template>
 
