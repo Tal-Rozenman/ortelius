@@ -112,8 +112,9 @@ namespace Ortelius
 		private string createMethodNode(int startIndex,int endIndex,int nameLine)
 		{
 			string accesString = "public";	
+			if(Utils.tagExists(asFileLines,endIndex,"private")) accesString = "private";
 			string resultText = "<method access=\""+accesString+"\">\r\n";
-			string mName = Utils.getOneLineMultiDescription(asFileLines,endIndex,"method");
+			string mName = Utils.getOneLineMultiDescription(asFileLines,endIndex,"method").Replace("<br/>","");
 			resultText += "<name>"+mName+"</name>\r\n";
 			resultText += generelStuff();
 			resultText += "<summary><![CDATA["+Utils.getSummery(asFileLines,nameLine)+"]]></summary>\r\n";
@@ -124,7 +125,7 @@ namespace Ortelius
 				if(asFileLines[i].IndexOf("@param") != -1){
 					string paramData = asFileLines[i].Substring(asFileLines[i].IndexOf("@param")+7);
 					string type = Utils.stripElement(paramData,@"\s*{",@"}.*");
-					string pName = Utils.stripElement(paramData,@"\s*{.*} ",@" .*");
+					string pName = Utils.stripElement(paramData,@"\s*{.*} ",@" .*").Replace("<br/>","");
 					
 					resultText += "<param>\r\n";
 					resultText += "<type fullPath=\"#\">" +type +"</type>\r\n";
@@ -153,11 +154,12 @@ namespace Ortelius
 		private string createPropertyNode(int endIndex,int nameLine)
 		{
 			string accesString = "public";	
+			if(Utils.tagExists(asFileLines,endIndex,"private")) accesString = "private";
 			string resultText = "<property access=\""+accesString+"\">\r\n";
 			
 			string paramData = Utils.getOneLineMultiDescription(asFileLines,endIndex,"property");
 			string type = Utils.stripElement(paramData,@"\s*{",@"}.*");
-			string pName = Utils.stripElement(paramData,@"\s*{.*} ",@" .*");
+			string pName = Utils.stripElement(paramData,@"\s*{.*} ",@" .*").Replace("<br/>","");
 					
 			resultText += "<name>"+pName+"</name>\r\n";
 			resultText += "<type>"+type+"</type>\r\n";
@@ -176,8 +178,20 @@ namespace Ortelius
 			openClassTag = true;
 			string resultText = "<class>"+"\r\n"+modifiedXml+"\r\n";
 			resultText += namespaceXml;
-			resultText += "<name>"+Utils.getOneLineMultiDescription(asFileLines,endIndex,"class")+"</name>\r\n";
+			resultText += "<name>"+Utils.getOneLineMultiDescription(asFileLines,endIndex,"class").Replace("<br/>","")+"</name>\r\n";
 			resultText += "<summary><![CDATA["+Utils.getSummery(asFileLines,nameLine)+"]]></summary>\r\n";
+			
+			string superClass = Utils.getDescription(asFileLines,endIndex,"@extends").Replace("<br/>","");
+			if(superClass == "") superClass = Utils.getDescription(asFileLines,endIndex,"@super").Replace("<br/>","");
+			if(superClass != ""){
+				resultText += "<inheritanceHierarchy/>\r\n";
+				resultText += "<extends>"+superClass+"</extends>\r\n";
+			}
+			
+			
+//					if(fileLine.IndexOf("static ") != -1) resultText += "<modifier>static</modifier>\r\n";
+//					if(fileLine.IndexOf("dynamic ") != -1) resultText += "<modifier>dynamic</modifier>\r\n";
+					
 			resultText += Utils.getId();
 			resultText += Utils.getStandAloneTags(asFileLines,endIndex);
 			return resultText;
@@ -202,7 +216,7 @@ namespace Ortelius
 		
 		private void getNamespaceData(int endIndex)
 		{
-			namespaceXml = "<package>"+Utils.getOneLineMultiDescription(asFileLines,endIndex,"namespace")+"</package>";
+			namespaceXml = "<package>"+Utils.getOneLineMultiDescription(asFileLines,endIndex,"namespace").Replace("<br/>","")+"</package>";
 		}
 		
 		private string generelStuff()
