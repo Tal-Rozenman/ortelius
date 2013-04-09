@@ -188,9 +188,8 @@ namespace Ortelius
 				resultText += "<extends>"+superClass+"</extends>\r\n";
 			}
 			
-			
-//					if(fileLine.IndexOf("static ") != -1) resultText += "<modifier>static</modifier>\r\n";
-//					if(fileLine.IndexOf("dynamic ") != -1) resultText += "<modifier>dynamic</modifier>\r\n";
+			if(Utils.tagExists(asFileLines,endIndex,"static")) resultText += "<modifier>static_class</modifier>\r\n";
+			else if(Utils.tagExists(asFileLines,endIndex,"constructor")) resultText += "<modifier>non_static_class</modifier>\r\n";
 					
 			resultText += Utils.getId();
 			resultText += Utils.getStandAloneTags(asFileLines,endIndex);

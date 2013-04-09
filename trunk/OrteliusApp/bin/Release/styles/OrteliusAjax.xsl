@@ -12,7 +12,10 @@
     
 <html>
 <head>
-<title><xsl:value-of disable-output-escaping="yes" select="introHeader"/> | Actionscript documentation</title>
+<title><xsl:value-of disable-output-escaping="yes" select="introHeader"/> | <xsl:choose>
+  <xsl:when test="$language = 'AS'">Actionscript</xsl:when>
+  <xsl:when test="$language = 'JS'">Javascript</xsl:when>
+</xsl:choose>  documentation</title>
 <script language="JavaScript" type="text/javascript" src="OrteliusAjax/script.js"></script>
 <link rel="stylesheet" href="OrteliusAjax/style.css" type="text/css" media="screen"/>
 </head>
@@ -93,9 +96,22 @@
 <xsl:attribute name="ID">
 <xsl:value-of select="$packageName" /><xsl:value-of disable-output-escaping="yes" select="name"/>
 </xsl:attribute>
-<div class="classTitle"><xsl:value-of disable-output-escaping="yes" select="name"/></div>
+<div class="classTitle"><xsl:value-of disable-output-escaping="yes" select="name"/>
+
+</div>
 <div class="summary">
-<xsl:call-template name="PreserveLineBreaks">
+  <xsl:if test="$language = 'JS'">
+    <xsl:choose>
+      <xsl:when test="modifier = 'non_static_class'">
+        (use constructor)<br/>
+    </xsl:when>
+      <xsl:when test="modifier = 'static_class'">
+        (use as object)<br/>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:if>
+  
+  <xsl:call-template name="PreserveLineBreaks">
 <xsl:with-param name="text" select="summary"/>
 </xsl:call-template></div>
 
@@ -182,10 +198,10 @@
         </div>
     </xsl:if>
 
-    <xsl:if test="dependency">
+    <xsl:if test="dependency or uses">
         <xsl:call-template name="toggleDetailsHeader">
             <xsl:with-param name="name">dependency</xsl:with-param>
-            <xsl:with-param name="text">Dependency</xsl:with-param>
+            <xsl:with-param name="text">Using</xsl:with-param>
         </xsl:call-template>
 
 

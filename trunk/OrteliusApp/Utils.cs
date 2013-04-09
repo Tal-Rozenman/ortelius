@@ -364,7 +364,7 @@ namespace Ortelius
 		/// <returns></returns>
 		public static string getStandAloneTags(string[] asFileLines,int elementIndex)
 		{
-			string[] tags = {"see","version","author","todo","langversion","keyword","playerversion","throws","exception","deprecated","sends","example","since","dependency"};
+			string[] tags = {"see","version","author","todo","langversion","keyword","playerversion","throws","exception","deprecated","sends","example","since","dependency","uses"};
 			string resultText = "";
 			foreach(string tag in tags){
 				string[] tagDoc = getMultiDescription(asFileLines, elementIndex, tag);
