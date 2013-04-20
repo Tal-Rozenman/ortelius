@@ -364,12 +364,14 @@ namespace Ortelius
 		/// <returns></returns>
 		public static string getStandAloneTags(string[] asFileLines,int elementIndex)
 		{
-			string[] tags = {"see","version","author","todo","langversion","keyword","playerversion","throws","exception","deprecated","sends","example","since","dependency","uses"};
+			string[] tags = {"see","version","author","todo","langversion","keyword","playerversion","throws","exception","deprecated","sends","example","since","dependency","uses","using","readOnly","writeOnce","default"};
 			string resultText = "";
 			foreach(string tag in tags){
+				string tagName = tag;
+				if(tag=="dependency"|| tag=="uses" || tag=="using") tagName = "uses"; 
 				string[] tagDoc = getMultiDescription(asFileLines, elementIndex, tag);
 				foreach(string docString in tagDoc){
-					resultText += "<"+tag+"><![CDATA["+docString+"]]></"+tag+">\r\n";
+					resultText += "<"+tagName+"><![CDATA["+docString+"]]></"+tagName+">\r\n";
 				}
 			}
 			
