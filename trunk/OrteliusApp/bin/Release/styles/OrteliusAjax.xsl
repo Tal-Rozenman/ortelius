@@ -198,7 +198,7 @@
         </div>
     </xsl:if>
 
-    <xsl:if test="dependency or uses">
+    <xsl:if test="uses">
         <xsl:call-template name="toggleDetailsHeader">
             <xsl:with-param name="name">dependency</xsl:with-param>
             <xsl:with-param name="text">Using</xsl:with-param>
@@ -206,7 +206,7 @@
 
 
         <div id="div|dependency" class="hiddenElement">
-            <xsl:for-each select="dependency">
+            <xsl:for-each select="uses">
                 <xsl:if test="not(contains(.,'&lt;a '))">■ </xsl:if>
                 <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=15/&gt; &lt;a ')"/>
                 <br />
