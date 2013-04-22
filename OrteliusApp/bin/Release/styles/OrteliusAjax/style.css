@@ -1,3 +1,11 @@
+body {
+	margin:0 0 0 0;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 11px;
+	color: #333333;
+	background-color: #FFFFFF;
+}
+
 .classDetails {
 	position: absolute;
 	left: 0px;
@@ -24,14 +32,13 @@
     left:10px;
 }
 #content {
-	border: 1px solid #999999;
 	overflow: auto;
 	position: absolute;
 	left: 320px;
-	top: 32px;
-	right: 10px;
-	bottom: 10px;
-	scrollbar-arrow-color: #C50023;
+	top: 40px;
+	right: 0px;
+	bottom: 0px;
+	scrollbar-arrow-color: #ba6295;
 	scrollbar-face-color: #FFFFFF;
 	scrollbar-track-color: #FFFFFF;
 	scrollbar-highlight-color: #999999;
@@ -46,12 +53,11 @@
 	visibility: visible;
 	width: 280px;
 	min-height:100px;
-	left: 10px;
-	top: 63px;
-	bottom: 10px;
-	border: 1px solid #999999;
+	left: 0px;
+	top: 90px;
+	bottom: 0px;
 	padding: 10px;
-	scrollbar-arrow-color: #C50023;
+	scrollbar-arrow-color: #ba6295;
 	scrollbar-face-color: #F7F8F9;
 	scrollbar-track-color: #F7F8F9;
 	scrollbar-highlight-color: #999999;
@@ -66,15 +72,15 @@
 	}
 	
 #indexMenu {
-	background-color: #F7F8F9;
-	border: 1px solid #999999;
+	background-color: #F0F0F0;
 	position: absolute;
 	visibility: visible;
 	width: 280px;
-	height:10px;
-	left: 10px;
-	top: 32px;
+	height:30px;
+	left: 0px;
+	top: 40px;
 	padding: 10px;
+	padding-top: 20px;
 
 }
 
@@ -87,29 +93,38 @@
 }
 #topBar {
 	color: #000000;
-	background-color:#bbbbbb;
+	background-color:#ba6295;
 	position: absolute;
-	top:5px;
-	left: 10px;
-	right: 10px;
-	border: 1px solid #999999;
-	height:20px;
+	top:0px;
+	left: 0px;
+	right: 0px;
+	height:40px;
 	padding:0px;
-	background-image:url(topbg.gif);
 	overflow:hidden;
+    color:#FFF;
+    overflow:hidden;
 }
+#topBar a,
+#topBar {
+    color:#FFF;
+}
+
 #createdText {
-	top:3px;
+	bottom:3px;
 	position: absolute;
 	right:20px;
 	height:17px;
 }
 #topNavigation {
-	top:3px;
+	bottom:3px;
 	position: absolute;
 	left: 10px;
-	height:17px;
+    font-size:22px;
+    font-weight:normal;
+    font-style:normal;
 }
+
+
 .packageTreeVisible {
 	padding: 0px;
 	padding-left: 15px;
@@ -153,7 +168,6 @@
 	font-weight:bold;
 }
 .elementTitle {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	font-weight: bold;
 	margin-top: 20px;
@@ -190,7 +204,6 @@
 .methodPropertyLine {
 	padding-bottom:3px;
 	padding-top:3px;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 }
 .modifierExplanation{
@@ -198,7 +211,6 @@
 	position:absolute;
 }
 .classTitle {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	font-weight: bold;
 }
@@ -217,20 +229,12 @@ code {
 	margin-top: 30px;
 }
 
-#topNavigation .backButton {
-	margin-top: 0px;
-}
 .summary {
 	font-style: italic;
 }
-body {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 11px;
-	color: #333333;
-	background-color: #FFFFFF;
-}
+
 a {
-	cursor: hand;
+	cursor:pointer;
 	color: #333333;
 	text-decoration:none;
 }
