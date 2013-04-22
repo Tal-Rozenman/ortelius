@@ -16,27 +16,21 @@
   <xsl:when test="$language = 'AS'">Actionscript</xsl:when>
   <xsl:when test="$language = 'JS'">Javascript</xsl:when>
 </xsl:choose>  documentation</title>
-<script language="JavaScript" type="text/javascript" src="OrteliusAjax/script.js"></script>
+  <script language="JavaScript" type="text/javascript" src="OrteliusAjax/jquery-1.5.2.min.js"></script>
+  <script language="JavaScript" type="text/javascript" src="OrteliusAjax/jquery.address-1.5.min.js"></script>
+  <script language="JavaScript" type="text/javascript" src="OrteliusAjax/script.js"></script>
 <link rel="stylesheet" href="OrteliusAjax/style.css" type="text/css" media="screen"/>
 </head>
 <body>
 
 
 <div id="topBar"><div id="topNavigation">
- 
-	<xsl:call-template name="backButton"/>
+    	    <a onclick="Ortelius.showElement('introText')">
+					<xsl:value-of disable-output-escaping="yes" select="introHeader"/>
+            </a>  
 </div>
-    <div id="createdText">
-    	    <xsl:call-template name="arrowPageLink">
-                <xsl:with-param name="href">introText</xsl:with-param>
-                <xsl:with-param name="title">Intro</xsl:with-param>
-                <xsl:with-param name="text">
-					<b><xsl:value-of disable-output-escaping="yes" select="introHeader"/></b>
- 		     	</xsl:with-param>
-            </xsl:call-template> 
-    	
-    
-        was created <xsl:value-of disable-output-escaping="yes" select="created"/> with Ortelius - <a href="http://ortelius.marten.dk" target="_blank">ortelius.marten.dk</a></div></div>
+    <div id="createdText">    
+        Created <xsl:value-of disable-output-escaping="yes" select="created"/> with Ortelius - <a href="http://ortelius.marten.dk" target="_blank">ortelius.marten.dk</a></div></div>
 
 <xsl:apply-templates select="allpackages"/>
 
@@ -616,9 +610,6 @@
 </div>
 </xsl:if>
 
-
-<xsl:call-template name="backButton"/>
-
 </div>
 
 <xsl:call-template name="ElementSlut"/>
@@ -719,8 +710,6 @@
 <div class="detailHeader">Default value</div>
 <xsl:value-of disable-output-escaping="yes" select="defaultValue"/>
 </xsl:if>
-    
-<xsl:call-template name="backButton"/>
 </div>
 
 
@@ -757,7 +746,6 @@
 <xsl:with-param name="text" select="summary"/>
 </xsl:call-template>
 </div>
-<xsl:call-template name="backButton"/>
 
 </div>
 <xsl:call-template name="ElementSlut"/>
@@ -920,7 +908,7 @@
 <xsl:template match="packagelevel">
 <div class="treeBranch">
 <a href="#" class="nonChoosen">
-	<xsl:attribute name="onclick">toggleTreeElement('div|<xsl:value-of select="@fullname"/>');</xsl:attribute>
+	<xsl:attribute name="onclick">Ortelius.toggleTreeElement('div|<xsl:value-of select="@fullname"/>');</xsl:attribute>
 <xsl:attribute name="ID">a|<xsl:value-of select="@fullname"/></xsl:attribute>
 <img src="OrteliusAjax/foldind.gif" border="0" height="9" width="15"><xsl:attribute name="ID">img|<xsl:value-of select="@fullname"/></xsl:attribute></img>
 <xsl:value-of disable-output-escaping="yes" select="@name"/></a>
@@ -947,7 +935,8 @@
 
 <xsl:variable name="packageNameVar"><xsl:if test="@package"><xsl:if test="string-length(@package)!=0"><xsl:value-of disable-output-escaping="yes" select="@package"/>.</xsl:if></xsl:if></xsl:variable>
 
-<script language="JavaScript">allClasses.push('<xsl:value-of disable-output-escaping="yes" select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>')</script>
+<script language="JavaScript">
+  Ortelius.allClasses.push('<xsl:value-of disable-output-escaping="yes" select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/>')</script>
 				<xsl:call-template name="arrowPageLink">
                 <xsl:with-param name="href"><xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/></xsl:with-param>
                 <xsl:with-param name="title"><xsl:value-of select="$packageNameVar"/><xsl:value-of disable-output-escaping="yes" select="@class"/></xsl:with-param>
@@ -966,14 +955,7 @@
 
 <!-- THE APHABETIC LIST OF ALL CLASSES - JAVASCRIPT -->
 <xsl:template name="indexMenu">
-<div id="indexMenu"><a href="#" id="classListButton" onclick="changeIndex('classList')" class="choosen">Package tree</a> | <a href="#" id="indexByNameButton" onclick="changeIndex('indexByName')" class="nonChoosen">Sort by name</a> | <a href="#" id="indexByModifiedTimeButton" onclick="changeIndex('indexByModifiedTime')" class="nonChoosen">Sort by date</a></div>
-</xsl:template>
-
-
-
-<!-- THE BACK BUTTON - JAVASCRIPT -->
-<xsl:template name="backButton">
-<div class="backButton"><a href="#" onclick="goBack()"><img src="OrteliusAjax/arrowleft.gif" border="0" height="9" width="15"/> Back</a></div>
+<div id="indexMenu"><a href="#" id="classListButton" onclick="Ortelius.changeIndex('classList')" class="choosen">Package tree</a> | <a href="#" id="indexByNameButton" onclick="Ortelius.changeIndex('indexByName')" class="nonChoosen">Sort by name</a> | <a href="#" id="indexByModifiedTimeButton" onclick="Ortelius.changeIndex('indexByModifiedTime')" class="nonChoosen">Sort by date</a></div>
 </xsl:template>
 
 
@@ -983,7 +965,7 @@
     <xsl:param name="text"/>
 	<div class="detailHeader">
 		<a href="#">
-            <xsl:attribute name="onclick">toggleDetails('div|<xsl:value-of select="$name" />');return false;</xsl:attribute>
+            <xsl:attribute name="onclick">Ortelius.toggleDetails('div|<xsl:value-of select="$name" />');return false;</xsl:attribute>
 			<img src="OrteliusAjax/foldud.gif" border="0" height="9" width="15">
 				<xsl:attribute name="ID">img|<xsl:value-of select="$name" /></xsl:attribute>
 				</img>
@@ -1000,7 +982,7 @@
         <xsl:param name="text"/>
         <img src="OrteliusAjax/arrowright.gif" border="0" height="9" width="15"/>
         <a href="#">
-            <xsl:attribute name="onclick">showElement('<xsl:value-of select="$href" />');return false;</xsl:attribute>
+            <xsl:attribute name="onclick">Ortelius.showElement('<xsl:value-of select="$href" />');return false;</xsl:attribute>
             <xsl:attribute name="title"><xsl:value-of select="$title"/></xsl:attribute>
             <xsl:copy-of select="$text"/>
         </a>
@@ -1012,7 +994,7 @@
         <xsl:param name="href"/>
         <xsl:param name="text"/>
         <a href="#">
-            <xsl:attribute name="onclick">showElement('<xsl:value-of select="$href" />');return false;</xsl:attribute>
+            <xsl:attribute name="onclick">Ortelius.showElement('<xsl:value-of select="$href" />');return false;</xsl:attribute>
             <xsl:copy-of select="$text"/>
         </a>
     </xsl:template>
@@ -1029,7 +1011,7 @@
     	<xsl:if test="$inhLength &gt; 0">
     	<a href="#" class="toggleInheritedText">
     		<xsl:attribute name="id">btn_<xsl:value-of select="$type"/></xsl:attribute>
-    		<xsl:attribute name="onclick">toggleIsInherited('<xsl:value-of select="$type"/>');return false;</xsl:attribute>
+    		<xsl:attribute name="onclick">Ortelius.toggleIsInherited('<xsl:value-of select="$type"/>');return false;</xsl:attribute>
     		Hide inherited elements
     		</a>
 	    </xsl:if>

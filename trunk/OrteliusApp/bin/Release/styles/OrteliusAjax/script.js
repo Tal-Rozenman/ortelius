@@ -1,22 +1,45 @@
-var allClasses = new Array();
+/**
+*@namespace 
+*/
 
-var shownHiddenDetails;
 
-var currentElement;
-var currentPath= new Array();
+/**
+* 
+* 
+* @author Marten Ølgaard
+* @created 22/4/2013
+* @copyright Adnuvo
+* @todo 
+* @class Ortelius
+* @static
+*/
+var Ortelius = Ortelius || (function () {
 
-var winLoc = window.location;
+    var _r = new Object();
 
-var currentButtons = new Array(null,null,null);
-var layerHistory = new Array();
 
-var allIndexLists = new Array("classList","indexByName","indexByModifiedTime");
+    _r.allClasses = new Array();
 
-var origUrl = location.href
+    _r.shownHiddenDetails;
 
-window.onload = function(){
-    showElement("introText");
-    shownHiddenDetails = [
+    _r.currentElement;
+    _r.currentPath = new Array();
+
+    _r.winLoc = window.location;
+
+    _r.currentButtons = new Array(null, null, null);
+    _r.layerHistory = new Array();
+
+    _r.allIndexLists = new Array("classList", "indexByName", "indexByModifiedTime");
+
+    //_r.origUrl = location.href
+
+    _r.sideSkiftet = function (event) {
+        _r.showElement(event.value.replace("/", ""));
+    }
+
+    _r.init = function () {
+        _r.shownHiddenDetails = [
     { "name": "showInherited_publicmethod", "show": true }, 
     { "name": "showInherited_protectedmethod", "show": true }, 
     { "name": "showInherited_internalmethod", "show": true },  
@@ -40,14 +63,21 @@ window.onload = function(){
     { "name": "div|internalmethod", "show": false }, 
     { "name": "div|internalproperties", "show": false },
     { "name": "div|privatemethod", "show": false }, 
-    { "name": "div|privateproperties", "show": false }   ];
+    { "name": "div|privateproperties", "show": false }];
+
+
+    $.address.externalChange(_r.sideSkiftet);
+    var addr = $.address.value().replace("/", "");
+    if (addr == "") addr = "introText";
+    _r.showElement(addr);
+
 }
 
 
-function changeIndex(elementId){
-	for(var i=0;i<allIndexLists.length;i++){
-		document.getElementById(allIndexLists[i]).style.visibility = "hidden";
-		document.getElementById(allIndexLists[i]+"Button").className = "nonChoosen";
+_r.changeIndex = function (elementId){
+	for(var i=0;i<_r.allIndexLists.length;i++){
+		document.getElementById(_r.allIndexLists[i]).style.visibility = "hidden";
+		document.getElementById(_r.allIndexLists[i]+"Button").className = "nonChoosen";
 	}
 	document.getElementById(elementId).style.visibility = "visible";
 	document.getElementById(elementId+"Button").className = "choosen";
@@ -55,25 +85,16 @@ function changeIndex(elementId){
 }
 
 
-//window.setInterval(tjekUrl,100)
-function tjekUrl(){
-	//alert(window.location.hash)
-	if("#"+currentElement != winLoc.hash){
-		window.status = winLoc.hash;
-		//doBack()
-	}
-}
-
-function toggleDetails(elementId){
+_r.toggleDetails = function (elementId){
 	var imgElement = document.getElementById(elementId.replace("div|","img|"));
 	var element = document.getElementById(elementId);
 	
 	if(element.className == "detailsVisible"){
-		setDetailCookie(elementId,false);
+		_r.setDetailCookie(elementId,false);
 		element.className = "hiddenElement";
 		imgElement.src = "OrteliusAjax/foldud.gif";
 	}else{
-		setDetailCookie(elementId,true);
+		_r.setDetailCookie(elementId,true);
 		element.className = "detailsVisible";
 		imgElement.src = "OrteliusAjax/foldind.gif";
 	}
@@ -81,7 +102,7 @@ function toggleDetails(elementId){
 
 
 
-function toggleTreeElement(elementId){
+_r.toggleTreeElement = function (elementId){
 	
 	//change open / close ikon
 
@@ -98,24 +119,27 @@ function toggleTreeElement(elementId){
 	}
 	}
 	
-function showHideAllTreeElement(doShow){
+_r.showHideAllTreeElement = function (doShow){
 	
 	}
 
-	function showElement(elementId) {
+_r.showElement = function (elementId) {
+
+    $.address.value(elementId);
+
 	   // alert(elementId);
 	if(elementId.indexOf("#")==0){
 		var url = elementId.replace("#","");
-		window.open("http://www.google.com/search?q="+url+"+Actionscript");
+		window.open("http://www.google.com/search?q="+url+"+script");
 		return;
 	}
 	
 	
 	//remove highlights
-	for(var i=0;i<currentPath.length;i++){
-		document.getElementById(currentPath[i]).className = "nonChoosen";
+	for (var i = 0; i < _r.currentPath.length; i++) {
+	    document.getElementById(_r.currentPath[i]).className = "nonChoosen";
 	}
-	currentPath= new Array();
+	_r.currentPath = new Array();
 	
 	//highlight packagepath
 	var elementParts = elementId.split(".");
@@ -125,41 +149,33 @@ function showHideAllTreeElement(doShow){
 		
 		if(document.getElementById(elementIdTemp)){
 			document.getElementById(elementIdTemp).className = "choosen";
-			currentPath.push(elementIdTemp);	
+			_r.currentPath.push(elementIdTemp);	
 		}
 		
 		elementIdTemp+="_"
 	}
-	
-	//document.body.innerHTML += "<a name=\""+elementId+"\"></a>";
-	
-	winLoc.hash = "#"+elementId
-	
-	//alert(winLoc.hash)
-	
-	//window.event.returnValue=false;
-	//history.forward()
+
 		
 	if(elementId!=null){
-		getElement(elementId)
-		layerHistory.push(currentElement);
-		currentElement = elementId
+		_r.getElement(elementId)
+		_r.layerHistory.push(_r.currentElement);
+		_r.currentElement = elementId
 
 		//marker knap
 		if(document.getElementById(elementId+"Button")){			
-			if(currentButtons[0] !=null) document.getElementById(currentButtons[0]).className = "nonChoosen"
-			currentButtons[0] = elementId+"Button"
-			document.getElementById(currentButtons[0]).className = "choosen";
+			if(_r.currentButtons[0] !=null) document.getElementById(_r.currentButtons[0]).className = "nonChoosen"
+			_r.currentButtons[0] = elementId+"Button"
+			document.getElementById(_r.currentButtons[0]).className = "choosen";
 			//
 			
-			if(currentButtons[1] !=null) document.getElementById(currentButtons[1]).className = "nonChoosen"
-			currentButtons[1] = elementId+"ByName"
-			document.getElementById(currentButtons[1]).className = "choosen"
+			if(_r.currentButtons[1] !=null) document.getElementById(_r.currentButtons[1]).className = "nonChoosen"
+			_r.currentButtons[1] = elementId+"ByName"
+			document.getElementById(_r.currentButtons[1]).className = "choosen"
 			//
 			
-			if(currentButtons[2] !=null) document.getElementById(currentButtons[2]).className = "nonChoosen"
-			currentButtons[2] = elementId+"ByTime"
-			document.getElementById(currentButtons[2]).className = "choosen"
+			if(_r.currentButtons[2] !=null) document.getElementById(_r.currentButtons[2]).className = "nonChoosen"
+			_r.currentButtons[2] = elementId+"ByTime"
+			document.getElementById(_r.currentButtons[2]).className = "choosen"
 			}
 		}
 		
@@ -169,67 +185,68 @@ function showHideAllTreeElement(doShow){
 
 
 	
-	function goBack(){	
+_r.goBack = function (){	
 		//history.back();
-		elementId = layerHistory.pop();	
-		showElement(elementId);
-		layerHistory.pop();	
+		elementId = _r.layerHistory.pop();	
+		_r.showElement(elementId);
+		_r.layerHistory.pop();	
 	}
 	
 
 //COOKIE STUFF///////////////////////////////
 
-function setDetailCookie(elementId,isShowened){
+_r.setDetailCookie = function (elementId,isShowened){
 	
-for(var i=0;i<shownHiddenDetails.length;i++){
-		if(shownHiddenDetails[i].name == elementId)	shownHiddenDetails[i].show=isShowened;
+for(var i=0;i<_r.shownHiddenDetails.length;i++){
+		if(_r.shownHiddenDetails[i].name == elementId)	_r.shownHiddenDetails[i].show=isShowened;
 	}
 }
 
 
-function updateDetails(){
-	for(var i=0;i<shownHiddenDetails.length;i++){
-	    if (shownHiddenDetails[i].name.indexOf("showInherited")!=-1) {
-	        showHideInherited(shownHiddenDetails[i].show,shownHiddenDetails[i].name.replace("showInherited_",""));
+_r.updateDetails = function (){
+	for(var i=0;i<_r.shownHiddenDetails.length;i++){
+	    if (_r.shownHiddenDetails[i].name.indexOf("showInherited")!=-1) {
+	        _r.showHideInherited(_r.shownHiddenDetails[i].show,_r.shownHiddenDetails[i].name.replace("showInherited_",""));
          }
-        else if (document.getElementById(shownHiddenDetails[i].name)) {
-	        document.getElementById(shownHiddenDetails[i].name).className = (shownHiddenDetails[i].show) ? "detailsVisible" : "hiddenElement";
-	        document.getElementById(shownHiddenDetails[i].name.replace("div|", "img|")).src = (shownHiddenDetails[i].show) ? "OrteliusAjax/foldind.gif" : "OrteliusAjax/foldud.gif";
+        else if (document.getElementById(_r.shownHiddenDetails[i].name)) {
+	        document.getElementById(_r.shownHiddenDetails[i].name).className = (_r.shownHiddenDetails[i].show) ? "detailsVisible" : "hiddenElement";
+	        document.getElementById(_r.shownHiddenDetails[i].name.replace("div|", "img|")).src = (_r.shownHiddenDetails[i].show) ? "OrteliusAjax/foldind.gif" : "OrteliusAjax/foldud.gif";
 	    }
 	}	
 }
 
-
+_r.xmlHttp = null;
+_r.stateChanged = null;
 	
 //AJAX stuff ////////////////////////////////	
-function getElement(elementId)
+_r.getElement = function (elementId)
 {
 	
-xmlHttp=GetXmlHttpObject();
+    _r.xmlHttp = _r.GetXmlHttpObject();
 
-if (xmlHttp==null){
+if (_r.xmlHttp==null){
 return
 } 
 url="ortfiles/"+elementId+".html";//?sid="+Math.random()
 //alert(url)
-xmlHttp.onreadystatechange=stateChanged 
-xmlHttp.open("GET",url,true);
-xmlHttp.send(null);
+_r.xmlHttp.onreadystatechange = _r.stateChanged
+_r.xmlHttp.open("GET",url,true);
+_r.xmlHttp.send(null);
 }
 
 
-function stateChanged() {
+_r.stateChanged = function () {
 	
-	if(xmlHttp.readyState != 4) return
-	if(xmlHttp.responseText == null) return;
+	if(_r.xmlHttp.readyState != 4) return
+	if(_r.xmlHttp.responseText == null) return;
 
-var svar = xmlHttp.responseText;
+var svar = _r.xmlHttp.responseText;
 
 document.getElementById("content").innerHTML = svar;
-updateDetails();
+_r.updateDetails();
 } 
 
-function GetXmlHttpObject()
+_r.GetXmlHttpObject = function ()
 { 
 var objXMLHttp=null
 if (window.XMLHttpRequest)
@@ -243,20 +260,19 @@ objXMLHttp=new ActiveXObject("Microsoft.XMLHTTP")
 return objXMLHttp
 }
 
-function toggleIsInherited(type) {
-    for (var i = 0; i < shownHiddenDetails.length; i++) {
-        if (shownHiddenDetails[i].name == "showInherited_"+type) {
-            //alert(shownHiddenDetails[i].show==true)
-            showHideInherited(!shownHiddenDetails[i].show,type);
+_r.toggleIsInherited = function(type) {
+    for (var i = 0; i < _r.shownHiddenDetails.length; i++) {
+        if (_r.shownHiddenDetails[i].name == "showInherited_"+type) {
+            _r.showHideInherited(!_r.shownHiddenDetails[i].show,type);
         }
     }
 }
 
-function showHideInherited(show,type) {
+_r.showHideInherited = function(show,type) {
 if(type == undefined) return;
     selectorText = ".isInherited_"+type;
    // alert(selectorText)
-    setDetailCookie("showInherited_"+type, show);
+    _r.setDetailCookie("showInherited_"+type, show);
     var theRules = new Array();
     if (document.styleSheets[0].cssRules) {
         theRules = document.styleSheets[0].cssRules;
@@ -268,13 +284,18 @@ if(type == undefined) return;
             theRules[n].style.display = (show) ? 'table-row' : 'none';
         }
     }
-    changeToggleInheritedText(show,type);
+    _r.changeToggleInheritedText(show, type);
   }
 
 
-  function changeToggleInheritedText(show,type) { 
+_r.changeToggleInheritedText = function(show,type) { 
 	if(document.getElementById("btn_"+type)==undefined) return;
   document.getElementById("btn_"+type).innerHTML = (show) ? 'Hide inherited elements' : 'Show inherited elements';
   return;
   }
 
+
+  return _r;
+})();
+
+$(document).ready(Ortelius.init);
