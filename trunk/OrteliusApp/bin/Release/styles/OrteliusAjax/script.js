@@ -48,22 +48,22 @@ var Ortelius = Ortelius || (function () {
     { "name": "showInherited_protectedproperties", "show": true }, 
     { "name": "showInherited_internalproperties", "show": true },
     { "name": "showInherited_privateproperties", "show": true },
-    { "name": "div|dependency", "show": false },    
-    { "name": "div|see", "show": false }, 
-    { "name": "div|details", "show": false }, 
-    { "name": "div|example", "show": false }, 
-    { "name": "div|publicmethod", "show": true }, 
-    { "name": "div|import", "show": false }, 
-    { "name": "div|publicproperties", "show": true }, 
-    { "name": "div|parameters", "show": true }, 
-    { "name": "div|methoddetails", "show": false }, 
-    { "name": "div|propdetails", "show": false}, 
-    { "name": "div|protectedmethod", "show": false }, 
-    { "name": "div|protectedproperties", "show": false },
-    { "name": "div|internalmethod", "show": false }, 
-    { "name": "div|internalproperties", "show": false },
-    { "name": "div|privatemethod", "show": false }, 
-    { "name": "div|privateproperties", "show": false }];
+    { "name": "div_dependency", "show": false },    
+    { "name": "div_see", "show": false }, 
+    { "name": "div_details", "show": false }, 
+    { "name": "div_example", "show": false }, 
+    { "name": "div_publicmethod", "show": true }, 
+    { "name": "div_import", "show": false }, 
+    { "name": "div_publicproperties", "show": true }, 
+    { "name": "div_parameters", "show": true }, 
+    { "name": "div_methoddetails", "show": false }, 
+    { "name": "div_propdetails", "show": false}, 
+    { "name": "div_protectedmethod", "show": false }, 
+    { "name": "div_protectedproperties", "show": false },
+    { "name": "div_internalmethod", "show": false }, 
+    { "name": "div_internalproperties", "show": false },
+    { "name": "div_privatemethod", "show": false }, 
+    { "name": "div_privateproperties", "show": false }];
 
 
     $.address.externalChange(_r.sideSkiftet);
@@ -86,7 +86,7 @@ _r.changeIndex = function (elementId){
 
 
 _r.toggleDetails = function (elementId){
-	var imgElement = document.getElementById(elementId.replace("div|","img|"));
+	var imgElement = document.getElementById(elementId.replace("div_","img|"));
 	var element = document.getElementById(elementId);
 	
 	if(element.className == "detailsVisible"){
@@ -106,7 +106,7 @@ _r.toggleTreeElement = function (elementId){
 	
 	//change open / close ikon
 
-	var imgElement = document.getElementById(elementId.replace("div|","img|"));
+	var imgElement = document.getElementById(elementId.replace("div_","img|"));
 	
 	element = document.getElementById(elementId);
 	if(element.className == "packageTreeVisible"){
@@ -210,7 +210,7 @@ _r.updateDetails = function (){
          }
         else if (document.getElementById(_r.shownHiddenDetails[i].name)) {
 	        document.getElementById(_r.shownHiddenDetails[i].name).className = (_r.shownHiddenDetails[i].show) ? "detailsVisible" : "hiddenElement";
-	        document.getElementById(_r.shownHiddenDetails[i].name.replace("div|", "img|")).src = (_r.shownHiddenDetails[i].show) ? "OrteliusAjax/foldind.gif" : "OrteliusAjax/foldud.gif";
+	        document.getElementById(_r.shownHiddenDetails[i].name.replace("div_", "img|")).src = (_r.shownHiddenDetails[i].show) ? "OrteliusAjax/foldind.gif" : "OrteliusAjax/foldud.gif";
 	    }
 	}	
 }

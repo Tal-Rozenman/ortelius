@@ -12,8 +12,11 @@ body {
 	top: 0px;
 	right: 30px;
 	padding: 10px;
-	padding-top: 15px;
+	padding-top: 20px;
 	width:94%;
+    max-width:650px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .toggleInheritedText
@@ -54,7 +57,7 @@ body {
 	width: 280px;
 	min-height:100px;
 	left: 0px;
-	top: 90px;
+	top: 80px;
 	bottom: 0px;
 	padding: 10px;
 	scrollbar-arrow-color: #ba6295;
@@ -76,7 +79,7 @@ body {
 	position: absolute;
 	visibility: visible;
 	width: 280px;
-	height:30px;
+	height:10px;
 	left: 0px;
 	top: 40px;
 	padding: 10px;
@@ -137,20 +140,34 @@ body {
 .detailsVisible {
 	display:block;
 	margin:0px;
-	margin-bottom:30px;
+	margin-bottom:0px;
 	padding: 0px;
 	display:block;
-	border-top-width: 1px;
-	border-top-style: solid;
-	border-right-style: none;
-	border-bottom-style: none;
-	border-left-style: none;
-	border-top-color: #666;
 }
+
+
+#div_publicmethod,
+#div_publicproperties,
+#div_protectedmethod,
+#div_protectedproperties,
+#div_internalmethod,
+#div_internalproperties,
+#div_privatemethod,
+#div_privateproperties {
+	margin-bottom:50px;
+}
+
 .detailHeader {
-	margin-top:10px;
-	font-size:13px;
-	font-weight:bold;
+    padding-bottom:2px;
+	margin-top:15px;
+	margin-bottom:5px;
+	font-size:14px;
+    color:#000;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999999;
+	border-right-style: none;
+	border-left-style: none;
 }
 .detailElement {
 	font-size:11px;
@@ -211,7 +228,7 @@ body {
 	position:absolute;
 }
 .classTitle {
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: bold;
 }
 code {

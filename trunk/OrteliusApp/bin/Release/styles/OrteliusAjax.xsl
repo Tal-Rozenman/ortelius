@@ -42,6 +42,15 @@
 
 <div id="content"/>
 
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-10820418-9');
+    ga('send', 'pageview');
+  </script>
 </body>
 </html>
 
@@ -114,7 +123,7 @@
 <xsl:with-param name="text">Details</xsl:with-param>
 </xsl:call-template>
 
-<div id="div|details" class="hiddenElement">
+<div id="div_details" class="hiddenElement">
 <div class="detailElement"><b>Package: </b> <xsl:value-of select="package "/></div>
 <div class="detailElement"><b>File modified: </b> <xsl:value-of select="modified "/></div>
 <xsl:if test="author"><div class="detailElement"><b>Author: </b> <xsl:value-of disable-output-escaping="yes" select="author"/></div></xsl:if>
@@ -152,7 +161,7 @@
 <xsl:with-param name="text">Imported packages</xsl:with-param>
 </xsl:call-template>
 
-        <div id="div|import" class="hiddenElement">
+        <div id="div_import" class="hiddenElement">
             <xsl:for-each select="import">
                 <xsl:sort select="packageName"/>
                 <div class="detailElement">
@@ -173,7 +182,7 @@
 <xsl:with-param name="text">Example code</xsl:with-param>
 </xsl:call-template>
 	
-	<div id="div|example" class="hiddenElement"><div class="detailElement"><code><xsl:value-of disable-output-escaping="yes" select="example"/></code></div></div>
+	<div id="div_example" class="hiddenElement"><div class="detailElement"><code><xsl:value-of disable-output-escaping="yes" select="example"/></code></div></div>
 	</xsl:if>
 
     <xsl:if test="see">
@@ -183,10 +192,10 @@
         </xsl:call-template>
 
 
-        <div id="div|see" class="hiddenElement">
+        <div id="div_see" class="hiddenElement">
             <xsl:for-each select="see">
                 <xsl:if test="not(contains(.,'&lt;a '))">■ </xsl:if>
-                <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=15/&gt; &lt;a ')"/>
+                <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=10/&gt; &lt;a ')"/>
                 <br />
             </xsl:for-each>
         </div>
@@ -199,10 +208,10 @@
         </xsl:call-template>
 
 
-        <div id="div|dependency" class="hiddenElement">
+        <div id="div_dependency" class="hiddenElement">
             <xsl:for-each select="uses">
                 <xsl:if test="not(contains(.,'&lt;a '))">■ </xsl:if>
-                <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=15/&gt; &lt;a ')"/>
+                <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=10/&gt; &lt;a ')"/>
                 <br />
             </xsl:for-each>
         </div>
@@ -219,7 +228,7 @@
 </xsl:call-template>
 	
 <!--	CONSTRUCTOR-->
-<div id="div|publicmethod" class="detailsVisible">
+<div id="div_publicmethod" class="detailsVisible">
 	
 			<xsl:variable name="type">publicmethod</xsl:variable>
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
@@ -275,7 +284,7 @@
 </xsl:call-template>
 
 <div class="hiddenElement">
-<xsl:attribute name="ID">div|<xsl:value-of select="$type"/></xsl:attribute>
+<xsl:attribute name="ID">div_<xsl:value-of select="$type"/></xsl:attribute>
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
 	
 			<xsl:apply-templates select="method[name != $className and @access = 'protected']" mode="DoMethodDetails">
@@ -307,7 +316,7 @@
 </xsl:call-template>
 	
 <div class="hiddenElement">
-<xsl:attribute name="ID">div|<xsl:value-of select="$type"/></xsl:attribute>
+<xsl:attribute name="ID">div_<xsl:value-of select="$type"/></xsl:attribute>
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
 
 			<xsl:apply-templates select="method[name != $className and @access = 'internal']" mode="DoMethodDetails">
@@ -346,7 +355,7 @@
 </xsl:call-template>
 
 <div class="hiddenElement">
-<xsl:attribute name="ID">div|<xsl:value-of select="$type"/></xsl:attribute>
+<xsl:attribute name="ID">div_<xsl:value-of select="$type"/></xsl:attribute>
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
 			<xsl:apply-templates select="property[@access = 'public']" mode="DoPropDetails">
 				<xsl:sort select="name"/>
@@ -376,7 +385,7 @@
 </xsl:call-template>
 	
 <div class="hiddenElement">
-<xsl:attribute name="ID">div|<xsl:value-of select="$type"/></xsl:attribute>
+<xsl:attribute name="ID">div_<xsl:value-of select="$type"/></xsl:attribute>
 	
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
 	
@@ -411,7 +420,7 @@
 </xsl:call-template>
 
 <div class="hiddenElement">
-<xsl:attribute name="ID">div|<xsl:value-of select="$type"/></xsl:attribute>
+<xsl:attribute name="ID">div_<xsl:value-of select="$type"/></xsl:attribute>
 <table border="0" cellpadding="0" cellspacing="0" class="methodPropertyTabel">
 	
 			<xsl:apply-templates select="property[@access = 'internal']" mode="DoPropDetails">
@@ -507,7 +516,7 @@
 <xsl:with-param name="text">Details</xsl:with-param>
 </xsl:call-template>
 
-<div id="div|methoddetails" class="hiddenElement">
+<div id="div_methoddetails" class="hiddenElement">
 <div class="codeLine"><xsl:value-of select="codeLine"/></div>
 <xsl:if test="@inheritedFrom">
 <div class="detailElement"><b>Inherited from: </b>
@@ -539,7 +548,7 @@
 	<xsl:with-param name="name">example</xsl:with-param>
 	<xsl:with-param name="text">Example code</xsl:with-param>
 </xsl:call-template>
-<div id="div|example" class="hiddenElement"><div class="detailElement"><code><xsl:value-of disable-output-escaping="yes" select="example"/></code></div></div>
+<div id="div_example" class="hiddenElement"><div class="detailElement"><code><xsl:value-of disable-output-escaping="yes" select="example"/></code></div></div>
 </xsl:if>
 
     <xsl:if test="see">
@@ -548,10 +557,10 @@
             <xsl:with-param name="text">See</xsl:with-param>
         </xsl:call-template>
 
-        <div id="div|see" class="hiddenElement">
+        <div id="div_see" class="hiddenElement">
             <xsl:for-each select="see">
                 <xsl:if test="not(contains(.,'&lt;a '))">■ </xsl:if>
-                <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=15/&gt; &lt;a ')"/>
+                <xsl:value-of disable-output-escaping="yes" select="replace(., '&lt;a ', '&lt;img src=OrteliusAjax/arrowright.gif height=9 width=10/&gt; &lt;a ')"/>
                 <br />
             </xsl:for-each>
         </div>
@@ -565,7 +574,7 @@
             <xsl:with-param name="text">Parameters</xsl:with-param>
         </xsl:call-template>
 
-        <div id="div|parameters" class="detailsVisible">
+        <div id="div_parameters" class="detailsVisible">
 
             <xsl:for-each select="param">
                 <div class="detailElement">
@@ -596,7 +605,7 @@
 <xsl:if test="returns">
 <div class="detailHeader">Return value</div>
 	
-<div id="div|parameters" class="detailsVisible">
+<div id="div_parameters" class="detailsVisible">
 	<xsl:call-template name="simplePageLink">
         <xsl:with-param name="href" select="returns/type/@fullPath"/>
         <xsl:with-param name="text">
@@ -655,7 +664,7 @@
 <xsl:with-param name="text">Details</xsl:with-param>
 </xsl:call-template>
 
-<div id="div|propdetails" class="hiddenElement">
+<div id="div_propdetails" class="hiddenElement">
 <div class="codeLine"><xsl:value-of disable-output-escaping="yes" select="codeLine"/></div>
 <xsl:if test="@inheritedFrom">
 <div class="detailElement"><b>Inherited from: </b>
@@ -908,13 +917,13 @@
 <xsl:template match="packagelevel">
 <div class="treeBranch">
 <a href="#" class="nonChoosen">
-	<xsl:attribute name="onclick">Ortelius.toggleTreeElement('div|<xsl:value-of select="@fullname"/>');</xsl:attribute>
+	<xsl:attribute name="onclick">Ortelius.toggleTreeElement('div_<xsl:value-of select="@fullname"/>');</xsl:attribute>
 <xsl:attribute name="ID">a|<xsl:value-of select="@fullname"/></xsl:attribute>
 <img src="OrteliusAjax/foldind.gif" border="0" height="9" width="15"><xsl:attribute name="ID">img|<xsl:value-of select="@fullname"/></xsl:attribute></img>
 <xsl:value-of disable-output-escaping="yes" select="@name"/></a>
 </div>
 <div class="packageTreeVisible">
-<xsl:attribute name="ID">div|<xsl:value-of select="@fullname"/></xsl:attribute>
+<xsl:attribute name="ID">div_<xsl:value-of select="@fullname"/></xsl:attribute>
 
 <xsl:apply-templates select="packageClass">
 <xsl:sort select="@package"/>
@@ -965,7 +974,7 @@
     <xsl:param name="text"/>
 	<div class="detailHeader">
 		<a href="#">
-            <xsl:attribute name="onclick">Ortelius.toggleDetails('div|<xsl:value-of select="$name" />');return false;</xsl:attribute>
+            <xsl:attribute name="onclick">Ortelius.toggleDetails('div_<xsl:value-of select="$name" />');return false;</xsl:attribute>
 			<img src="OrteliusAjax/foldud.gif" border="0" height="9" width="15">
 				<xsl:attribute name="ID">img|<xsl:value-of select="$name" /></xsl:attribute>
 				</img>
@@ -980,7 +989,7 @@
         <xsl:param name="href"/>
         <xsl:param name="title"/>
         <xsl:param name="text"/>
-        <img src="OrteliusAjax/arrowright.gif" border="0" height="9" width="15"/>
+        <img src="OrteliusAjax/arrowright.gif" border="0" height="9" width="10"/>
         <a href="#">
             <xsl:attribute name="onclick">Ortelius.showElement('<xsl:value-of select="$href" />');return false;</xsl:attribute>
             <xsl:attribute name="title"><xsl:value-of select="$title"/></xsl:attribute>
