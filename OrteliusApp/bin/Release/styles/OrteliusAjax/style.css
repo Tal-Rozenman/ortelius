@@ -38,10 +38,10 @@ body {
 	overflow: auto;
 	position: absolute;
 	left: 320px;
-	top: 40px;
+	top: 48px;
 	right: 0px;
 	bottom: 0px;
-	scrollbar-arrow-color: #ba6295;
+	scrollbar-arrow-color: #c62c30;
 	scrollbar-face-color: #FFFFFF;
 	scrollbar-track-color: #FFFFFF;
 	scrollbar-highlight-color: #999999;
@@ -51,22 +51,22 @@ body {
 }
 #classList,#indexByName,#indexByModifiedTime {
 	position: absolute;
-	background-color: #F7F8F9;
+	background-color: #f6f6f6;
 	overflow:auto;
 	visibility: visible;
 	width: 280px;
 	min-height:100px;
 	left: 0px;
-	top: 80px;
+	top: 88px;
 	bottom: 0px;
 	padding: 10px;
-	scrollbar-arrow-color: #ba6295;
-	scrollbar-face-color: #F7F8F9;
-	scrollbar-track-color: #F7F8F9;
+	scrollbar-arrow-color: #c62c30;
+	scrollbar-face-color: #f6f6f6;
+	scrollbar-track-color: #f6f6f6;
 	scrollbar-highlight-color: #999999;
 	scrollbar-shadow-color:#999999;
-	scrollbar-3dlight-color:  #F7F8F9;
-	scrollbar-darkshadow-color: #F7F8F9;
+	scrollbar-3dlight-color:  #f6f6f6;
+	scrollbar-darkshadow-color: #f6f6f6;
 }
 
 #indexByName,#indexByModifiedTime {
@@ -75,13 +75,13 @@ body {
 	}
 	
 #indexMenu {
-	background-color: #F0F0F0;
+	background-color: #eaeaea;
 	position: absolute;
 	visibility: visible;
 	width: 280px;
 	height:10px;
 	left: 0px;
-	top: 40px;
+	top: 48px;
 	padding: 10px;
 	padding-top: 20px;
 
@@ -96,12 +96,12 @@ body {
 }
 #topBar {
 	color: #000000;
-	background-color:#ba6295;
+	background-color:#c62c30;
 	position: absolute;
 	top:0px;
 	left: 0px;
 	right: 0px;
-	height:40px;
+	height:48px;
 	padding:0px;
 	overflow:hidden;
     color:#FFF;
@@ -158,7 +158,7 @@ body {
 }
 
 .detailHeader {
-    padding-bottom:2px;
+    padding-bottom:1px;
 	margin-top:15px;
 	margin-bottom:5px;
 	font-size:14px;
@@ -220,7 +220,7 @@ body {
 }
 .methodPropertyLine {
 	padding-bottom:3px;
-	padding-top:3px;
+	padding-top:5px;
 	font-size: 11px;
 }
 .modifierExplanation{
@@ -247,7 +247,6 @@ code {
 }
 
 .summary {
-	font-style: italic;
 }
 
 a {

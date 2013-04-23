@@ -16,8 +16,6 @@
   <xsl:when test="$language = 'AS'">Actionscript</xsl:when>
   <xsl:when test="$language = 'JS'">Javascript</xsl:when>
 </xsl:choose>  documentation</title>
-  <script language="JavaScript" type="text/javascript" src="OrteliusAjax/jquery-1.5.2.min.js"></script>
-  <script language="JavaScript" type="text/javascript" src="OrteliusAjax/jquery.address-1.5.min.js"></script>
   <script language="JavaScript" type="text/javascript" src="OrteliusAjax/script.js"></script>
 <link rel="stylesheet" href="OrteliusAjax/style.css" type="text/css" media="screen"/>
 </head>
