@@ -962,7 +962,7 @@
 
 <!-- THE APHABETIC LIST OF ALL CLASSES - JAVASCRIPT -->
 <xsl:template name="indexMenu">
-<div id="indexMenu"><a href="#" id="classListButton" onclick="Ortelius.changeIndex('classList')" class="choosen">Package tree</a> | <a href="#" id="indexByNameButton" onclick="Ortelius.changeIndex('indexByName')" class="nonChoosen">Sort by name</a> | <a href="#" id="indexByModifiedTimeButton" onclick="Ortelius.changeIndex('indexByModifiedTime')" class="nonChoosen">Sort by date</a></div>
+<div id="indexMenu"><a href="#" id="classListButton" onclick="Ortelius.changeIndex('classList');return false;" class="choosen">Package tree</a> | <a href="#" id="indexByNameButton" onclick="Ortelius.changeIndex('indexByName');return false;" class="nonChoosen">Sort by name</a> | <a href="#" id="indexByModifiedTimeButton" onclick="Ortelius.changeIndex('indexByModifiedTime');return false;" class="nonChoosen">Sort by date</a></div>
 </xsl:template>
 
 
