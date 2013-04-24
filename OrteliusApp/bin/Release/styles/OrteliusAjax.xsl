@@ -915,7 +915,7 @@
 <xsl:template match="packagelevel">
 <div class="treeBranch">
 <a href="#" class="nonChoosen">
-	<xsl:attribute name="onclick">Ortelius.toggleTreeElement('div_<xsl:value-of select="@fullname"/>');</xsl:attribute>
+	<xsl:attribute name="onclick">Ortelius.toggleTreeElement('div_<xsl:value-of select="@fullname"/>');return false;</xsl:attribute>
 <xsl:attribute name="ID">a|<xsl:value-of select="@fullname"/></xsl:attribute>
 <img src="OrteliusAjax/foldind.gif" border="0" height="9" width="15"><xsl:attribute name="ID">img|<xsl:value-of select="@fullname"/></xsl:attribute></img>
 <xsl:value-of disable-output-escaping="yes" select="@name"/></a>
